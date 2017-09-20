@@ -36,7 +36,7 @@ public class TataiGUI extends JFrame {
 	}
 	
 	public TataiGUI() {
-		super("Tātai");
+		super("TÄ�tai");
 		setSize(450, 300);
 		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		setResizable(false);
@@ -44,7 +44,7 @@ public class TataiGUI extends JFrame {
 		getContentPane().setLayout(null);
 		
 		
-		welcomeLabel = new JLabel("Welcome to Tātai!");
+		welcomeLabel = new JLabel("Welcome to TÄ�tai!");
 		welcomeLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
 		welcomeLabel.setVerticalAlignment(SwingConstants.TOP);
 		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -59,7 +59,7 @@ public class TataiGUI extends JFrame {
 		getContentPane().add(descriptionLabel1);
 		
 		
-		descriptionLabel2 = new JLabel("Māori number pronounciation");
+		descriptionLabel2 = new JLabel("MÄ�ori number pronounciation");
 		descriptionLabel2.setVerticalAlignment(SwingConstants.TOP);
 		descriptionLabel2.setHorizontalAlignment(SwingConstants.CENTER);
 		descriptionLabel2.setBounds(102, 101, 250, 37);
@@ -99,7 +99,8 @@ public class TataiGUI extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+			JFrame HelpPanel = new JFrame();
+			new HelpPanel();
 			
 		}
 		
