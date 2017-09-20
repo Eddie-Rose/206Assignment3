@@ -90,6 +90,8 @@ public class TataiGUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			JFrame frame = new JFrame("Help");
+			HelpPanel help = new HelpPanel();
 			
 		}
 		
@@ -99,8 +101,7 @@ public class TataiGUI extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JFrame HelpPanel = new JFrame();
-			new HelpPanel();
+			// TODO Auto-generated method stub
 			
 		}
 		
