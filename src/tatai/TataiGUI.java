@@ -1,5 +1,6 @@
 package tatai;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -40,6 +41,7 @@ public class TataiGUI extends JFrame {
 		setSize(450, 300);
 		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		setResizable(false);
+		getContentPane().setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
@@ -111,6 +113,7 @@ public class TataiGUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			Beginner beginnerWindow = new Beginner();
 			
 		}
 		

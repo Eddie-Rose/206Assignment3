@@ -16,27 +16,14 @@ public class Beginner extends JFrame {
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Beginner frame = new Beginner();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public Beginner() {
+		setTitle("Beginner Level");
+		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -59,7 +46,7 @@ public class Beginner extends JFrame {
 		JButton btnRecord = new JButton("record");
 		btnRecord.setForeground(Color.BLACK);
 		btnRecord.setBackground(Color.WHITE);
-		btnRecord.setBounds(145, 110, 117, 25);
+		btnRecord.setBounds(173, 120, 48, 25);
 		btnRecord.setBorder(null);
 		contentPane.add(btnRecord);
 	}
