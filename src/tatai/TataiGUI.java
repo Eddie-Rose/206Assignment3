@@ -102,7 +102,7 @@ public class TataiGUI extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+			Advanced beginnerWindow = new Advanced();
 			
 		}
 		
