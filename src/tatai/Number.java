@@ -53,7 +53,7 @@ public class Number {
 				
 			}
 			else {
-				maoriNumber = maori[tens - 1]  + maoriTen;
+				maoriNumber = maori[tens - 1]  + " " + maoriTen;
 				return maoriNumber;
 			}
 		}
@@ -65,7 +65,7 @@ public class Number {
 		}
 		
 		else {
-			maoriNumber = maori[tens - 1] + maoriTen + " " + connecter + " " + maori[ones - 1];
+			maoriNumber = maori[tens - 1] + " " + maoriTen + " " + connecter + " " + maori[ones - 1];
 			return maoriNumber;
 		}
 	}

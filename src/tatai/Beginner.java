@@ -135,7 +135,7 @@ public class Beginner extends JFrame {
 								found = !found;
 							}
 							if(found == true && !line.equals("sil")) {
-								if(wordCount > 1) {
+								if(wordCount > 0) {
 									saidNumber = saidNumber + " " + line;
 								} else {
 
