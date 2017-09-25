@@ -5,7 +5,11 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+
+import tatai.Advanced.AdvancedTest;
+
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
@@ -18,7 +22,9 @@ import java.awt.event.ActionEvent;
 public class Beginner extends JFrame {
 
 	private JPanel contentPane;
-
+	JButton btnBegin = new JButton("Start");
+	JButton btnRecord = new JButton("record");
+	
 	/**
 	 * Create the frame.
 	 */
@@ -36,23 +42,57 @@ public class Beginner extends JFrame {
 		
 		int random = (int )(Math.random() * 2 + 1);
 		Number moariNumber = new Number(random);
+		
+		JLabel BeginnerLevel = new JLabel("Beginner Level");
+		BeginnerLevel.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
+		BeginnerLevel.setBounds(128, 40, 192, 18);
+		getContentPane().add(BeginnerLevel);
+		
+		JTextArea txtrWelcomeToThe = new JTextArea();
+		txtrWelcomeToThe.setEnabled(false);
+		txtrWelcomeToThe.setEditable(false);
+		txtrWelcomeToThe.setFont(new Font("Dialog", Font.PLAIN, 14));
+		txtrWelcomeToThe.setText("Welcome to the beginner level,\nNumbers asked are from 1 to 9,\nPress \"Start\" to begin.");
+		txtrWelcomeToThe.setBounds(103, 94, 264, 69);
+		getContentPane().add(txtrWelcomeToThe);
 
 		JLabel lblLabel = new JLabel(""+random);
+		lblLabel.setVisible(false);
 		lblLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 30));
 		lblLabel.setBounds(187, 66, 48, 64);
 		contentPane.add(lblLabel);
 		
+		btnBegin.setBounds(158, 190, 117, 25);
+		getContentPane().add(btnBegin);
+		
+		btnBegin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				if (btnBegin.getText().equals("Start")) {
+					btnBegin.setVisible(false);
+					txtrWelcomeToThe.setVisible(false);
+					lblLabel.setVisible(true);
+					btnRecord.setVisible(true);
+					
+				}
+			}
+		});
+		
 		JLabel lblDfasf = new JLabel("Score:");
+		lblDfasf.setVisible(false);
 		lblDfasf.setBounds(27, 214, 70, 15);
 		contentPane.add(lblDfasf);
 		
 		JLabel label = new JLabel("0/10");
+		label.setVisible(false);
 		label.setBounds(90, 214, 70, 15);
 		contentPane.add(label);
 		
-		JButton btnRecord = new JButton("record");
+		
+		btnRecord.setVisible(false);
 		btnRecord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				btnRecord.setVisible(false);
 				try {
 					String command = "cd MaoriNumbers ; ./Go";
 					ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
@@ -77,9 +117,10 @@ public class Beginner extends JFrame {
 								if(wordCount > 1) {
 									saidNumber = saidNumber + " " + line;
 								} else {
-								saidNumber = saidNumber + line;
-								wordCount++;
+									saidNumber = saidNumber + line;
+
 								}
+								wordCount++;
 							}
 							
 						}
@@ -106,6 +147,7 @@ public class Beginner extends JFrame {
 				} catch (Exception g) {
 					g.printStackTrace();
 				}
+				btnRecord.setVisible(true);
 			}
 		});
 		btnRecord.setForeground(Color.BLACK);
