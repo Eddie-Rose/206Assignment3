@@ -78,8 +78,8 @@ public class Beginner extends JFrame {
 									saidNumber = saidNumber + " " + line;
 								} else {
 								saidNumber = saidNumber + line;
-								wordCount++;
 								}
+								wordCount++;
 							}
 							
 						}
