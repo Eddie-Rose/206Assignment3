@@ -20,6 +20,17 @@ public class Number {
 			
 	}
 	
+	public Number () {
+		
+		this.number = 0;
+		
+	}
+	
+	public void setNumber(int number) {
+		
+		this.number = number;
+	}
+	
 	public void splitNumber() {
 		
 		tens = number/10;
