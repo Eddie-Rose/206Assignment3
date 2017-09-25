@@ -24,6 +24,7 @@ public class Beginner extends JFrame {
 	private JPanel contentPane;
 	JButton btnBegin = new JButton("Start");
 	JButton btnRecord = new JButton("record");
+	JLabel lblYouAreCorrect = new JLabel("You are Correct!");
 	
 	/**
 	 * Create the frame.
@@ -68,11 +69,16 @@ public class Beginner extends JFrame {
 		btnBegin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
-				if (btnBegin.getText().equals("Start")) {
+				if (btnBegin.getText().equals("Start") || btnBegin.getText().equals("Try Again")) {
+					btnBegin.setVisible(false);
+					lblYouAreCorrect.setVisible(false);
+					
 					btnBegin.setVisible(false);
 					txtrWelcomeToThe.setVisible(false);
+					
 					lblLabel.setVisible(true);
 					btnRecord.setVisible(true);
+					BeginnerLevel.setVisible(true);
 					
 				}
 			}
@@ -83,6 +89,10 @@ public class Beginner extends JFrame {
 		lblDfasf.setBounds(27, 214, 70, 15);
 		contentPane.add(lblDfasf);
 		
+		lblYouAreCorrect.setBounds(158, 95, 128, 15);
+		lblYouAreCorrect.setVisible(false);
+		contentPane.add(lblYouAreCorrect);
+		
 		JLabel label = new JLabel("0/10");
 		label.setVisible(false);
 		label.setBounds(90, 214, 70, 15);
@@ -92,7 +102,6 @@ public class Beginner extends JFrame {
 		btnRecord.setVisible(false);
 		btnRecord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btnRecord.setVisible(false);
 				try {
 					String command = "cd MaoriNumbers ; ./Go";
 					ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
@@ -133,10 +142,30 @@ public class Beginner extends JFrame {
 							 * make button saying next appear
 							 * button press would make current things disappear and past things appear
 							 */
+							btnRecord.setVisible(false);
+							lblLabel.setVisible(false);
+							BeginnerLevel.setVisible(false);
+							
+							btnBegin.setVisible(true);
+							lblYouAreCorrect.setVisible(true);
+							
+							lblYouAreCorrect.setText("You are correct!");
+							btnBegin.setText("Next");
+							
 						} else if(saidNumber.equals("")) {
 							System.out.println("No number found");
 						} else {
 							System.out.println("wrong");
+							btnRecord.setVisible(false);
+							lblLabel.setVisible(false);
+							BeginnerLevel.setVisible(false);
+							
+							
+							btnBegin.setVisible(true);
+							lblYouAreCorrect.setVisible(true);
+							lblYouAreCorrect.setText("That's wrong!");
+							btnBegin.setText("Try Again");
+							
 						}
 					} else {
 						String line;
@@ -148,7 +177,7 @@ public class Beginner extends JFrame {
 				} catch (Exception g) {
 					g.printStackTrace();
 				}
-				btnRecord.setVisible(true);
+				
 			}
 		});
 		btnRecord.setForeground(Color.BLACK);
@@ -156,5 +185,6 @@ public class Beginner extends JFrame {
 		btnRecord.setBounds(173, 120, 48, 25);
 		btnRecord.setBorder(null);
 		contentPane.add(btnRecord);
+		
 	}
 }
