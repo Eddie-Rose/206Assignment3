@@ -117,7 +117,8 @@ public class Beginner extends JFrame {
 								if(wordCount > 1) {
 									saidNumber = saidNumber + " " + line;
 								} else {
-									saidNumber = saidNumber + line;
+
+								saidNumber = saidNumber + line;
 
 								}
 								wordCount++;
