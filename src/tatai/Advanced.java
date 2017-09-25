@@ -24,7 +24,7 @@ public class Advanced extends JFrame {
 		setVisible(true);
 		getContentPane().setBackground(Color.WHITE);
 		setBounds(100, 100, 450, 300);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
 		JLabel lblAdvancedLevel = new JLabel("Advanced Level");
