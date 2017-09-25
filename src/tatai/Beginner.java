@@ -85,7 +85,7 @@ public class Beginner extends JFrame {
 						lblYouAreCorrect.setText("You scored "+ rightAttempt + "/10");
 						finalDisplay();
 					} else {
-					random = (int )(Math.random() * 2 + 1);
+					random = (int )(Math.random() * 9 + 1);
 					moariNumber = new Number(random);
 					lblLabel.setText(""+random);
 					
