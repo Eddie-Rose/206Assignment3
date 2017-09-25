@@ -10,6 +10,10 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.awt.event.ActionEvent;
 
 public class Beginner extends JFrame {
 
@@ -30,7 +34,10 @@ public class Beginner extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblLabel = new JLabel("1");
+		int random = (int )(Math.random() * 2 + 1);
+		Number moariNumber = new Number(random);
+
+		JLabel lblLabel = new JLabel(""+random);
 		lblLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 30));
 		lblLabel.setBounds(187, 66, 48, 64);
 		contentPane.add(lblLabel);
@@ -44,6 +51,63 @@ public class Beginner extends JFrame {
 		contentPane.add(label);
 		
 		JButton btnRecord = new JButton("record");
+		btnRecord.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String command = "cd MaoriNumbers ; ./Go";
+					ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+
+					Process process = pb.start();
+
+					BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+					BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+					int exitStatus = process.waitFor();
+
+					if (exitStatus == 0) {
+						String line;
+						boolean found = false;
+						String saidNumber = "";
+						int wordCount = 0;
+						while ((line = stdout.readLine()) != null) {
+							if(line.equals("sil")) {
+								found = !found;
+							}
+							if(found == true && !line.equals("sil")) {
+								if(wordCount > 1) {
+									saidNumber = saidNumber + " " + line;
+								} else {
+								saidNumber = saidNumber + line;
+								wordCount++;
+								}
+							}
+							
+						}
+						if(saidNumber.equals(moariNumber.outputMaoriNumber())) {
+							System.out.println("correct");
+							/*
+							 * make label of number and button disappear
+							 * make label saying correct or wrong appear 
+							 * make button saying next appear
+							 * button press would make current things disappear and past things appear
+							 */
+						} else if(saidNumber.equals("")) {
+							System.out.println("No number found");
+						} else {
+							System.out.println("wrong");
+						}
+					} else {
+						String line;
+						while ((line = stderr.readLine()) != null) {
+							System.err.println(line);
+						}
+					}
+
+				} catch (Exception g) {
+					g.printStackTrace();
+				}
+			}
+		});
 		btnRecord.setForeground(Color.BLACK);
 		btnRecord.setBackground(Color.WHITE);
 		btnRecord.setBounds(173, 120, 48, 25);
