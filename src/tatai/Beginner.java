@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-import tatai.Advanced.AdvancedTest;
+
 
 import javax.swing.JLabel;
 import java.awt.Color;
@@ -146,6 +146,9 @@ public class Beginner extends JFrame {
 							}
 							
 						}
+						
+						
+						
 						if(saidNumber.equals(moariNumber.outputMaoriNumber())) {
 							System.out.println("correct");
 							/*
@@ -202,6 +205,7 @@ public class Beginner extends JFrame {
 				} catch (Exception g) {
 					g.printStackTrace();
 				}
+				
 				
 			}
 		});

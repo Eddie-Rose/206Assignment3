@@ -1,7 +1,9 @@
 package tatai;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -13,8 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import javax.swing.SwingWorker;
-import javax.swing.border.LineBorder;
 
 
 
@@ -23,18 +23,24 @@ public class Advanced extends JFrame {
 	JButton btnBegin = new JButton("Start");
 	JButton btnRecord = new JButton("Record");
 	JLabel lblNewLabel = new JLabel();
-	JLabel correct = new JLabel("You are correct");
+	JLabel correct = new JLabel();
 	JTextArea txtrWelcomeToThe = new JTextArea();
+	JButton mainMenu = new JButton("Main Menu");
 	
-	int correctAnswers = 0;
+	
 	int attempts = 0;
+	int correctAttempt = 0;
+	int totalAttempts = 0;
 	Number maoriNumber = new Number();
+	Random r = new Random();
+	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 	
 	public Advanced() {
 		
 		setVisible(true);
 		getContentPane().setBackground(Color.WHITE);
 		setBounds(100, 100, 450, 300);
+		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
@@ -54,6 +60,10 @@ public class Advanced extends JFrame {
 		btnBegin.setBounds(158, 190, 117, 25);
 		getContentPane().add(btnBegin);
 		
+		mainMenu.setVisible(false);
+		mainMenu.setBounds(158, 190, 117, 25);
+		getContentPane().add(mainMenu);
+		
 		btnRecord.setVisible(false);
 		btnRecord.setBounds(158, 190, 117, 25);
 		getContentPane().add(btnRecord);
@@ -61,39 +71,57 @@ public class Advanced extends JFrame {
 		lblNewLabel.setVisible(false);
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblNewLabel.setBounds(205, 120, 150, 15);
-		lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		getContentPane().add(lblNewLabel);
+		
+		int testNumber = r.nextInt(89) + 10;
+		maoriNumber.setNumber(testNumber);
+		lblNewLabel.setText("" + testNumber);
+		
+		correct.setVisible(false);
+		correct.setFont(new Font("Dialog", Font.PLAIN, 14));
+		correct.setBounds(50, 120, 350, 15);
+		correct.setHorizontalAlignment(SwingConstants.CENTER);
+		getContentPane().add(correct);
 		
 		
 		btnBegin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 
-				btnBegin.setVisible(false);
-				txtrWelcomeToThe.setVisible(false);
+				if (btnBegin.getText().equals("Start") || btnBegin.getText().equals("Try Again")) {
 
-				Random r = new Random();
-
-
-
-				int testNumber = r.nextInt(89) + 10;
-				maoriNumber.setNumber(testNumber);
-				lblNewLabel.setText("" + testNumber);
-				lblNewLabel.setVisible(true);
-				btnRecord.setVisible(true);
-				
-
-
-
-
-
+					QuestionDisplay();
+				}
+				else if(btnBegin.getText().equals("Next") || btnBegin.getText().equals("Continue")) {
+					if(totalAttempts == 2) {
+						correct.setText("You scored "+ correctAttempt + "/10");
+						finalDisplay();
+					} else {
+						int testNumber = r.nextInt(89) + 10;
+						maoriNumber.setNumber(testNumber);
+						lblNewLabel.setText("" + testNumber);
+					
+					QuestionDisplay();
+					}
+					
+				}
 			}
 		});
 		
-		btnRecord.addActionListener(new ActionListener() {
+		mainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+			dispose();
 				
+			}
+		});
+		
+	
+
+		btnRecord.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+
 				btnRecord.setEnabled(false);
 				try {
 					String command = "cd MaoriNumbers ; ./Go";
@@ -126,6 +154,8 @@ public class Advanced extends JFrame {
 							}
 							
 						}
+						System.out.println(saidNumber);
+						System.out.println(maoriNumber.outputMaoriNumber());
 						if(saidNumber.equals(maoriNumber.outputMaoriNumber())) {
 							System.out.println("correct");
 							/*
@@ -134,29 +164,48 @@ public class Advanced extends JFrame {
 							 * make button saying next appear
 							 * button press would make current things disappear and past things appear
 							 */
+							
+							AttemptDisplay();
+							btnBegin.setText("Next");
+							correct.setText("You are correct");
+							totalAttempts++;
+							correctAttempt++;
+							
+							
 						} else if(saidNumber.equals("")) {
 							System.out.println("No number found");
 							if (attempts == 1) {
-								btnRecord.setVisible(false);
-								lblNewLabel.setText("Incorrect, try next number");
+								
+								AttemptDisplay();
+								correct.setText("No recording found, try next number");
 								btnBegin.setText("Continue");
+								attempts= 0;
 								btnBegin.setVisible(true);
 							}
 							else {
-								lblNewLabel.setText("No recording heard, one more try.");
+								AttemptDisplay();
+								correct.setText("No recording heard, one more try.");
+								btnBegin.setText("Try Again");
 								attempts++;
+								totalAttempts++;
 								
 							}
 						} else {
 							System.out.println("wrong");
 							if (attempts == 1) {
-								btnRecord.setVisible(false);
-								lblNewLabel.setText("");
+								
+								AttemptDisplay();
+								totalAttempts++;
+								correct.setText("Wrong again");
+								correct.setHorizontalTextPosition(SwingConstants.CENTER);
+								attempts = 0;
 								btnBegin.setText("Continue");
-								btnBegin.setVisible(true);
+								
 							}
 							else {
-								lblNewLabel.setText("Wrong pronounciation, one more chance");
+								AttemptDisplay();
+								correct.setText("Wrong pronounciation, one more chance");
+								btnBegin.setText("Try Again");
 								attempts++;
 								
 							}
@@ -179,22 +228,33 @@ public class Advanced extends JFrame {
 	}
 
 	
-	public class AdvancedTest extends SwingWorker<Void, Void> {
-
-		@Override
-		protected Void doInBackground() throws Exception {
-			
-			
+	public void QuestionDisplay() {
+		btnBegin.setVisible(false);
+		txtrWelcomeToThe.setVisible(false);
+		correct.setVisible(false);
 		
-				
-			
-
-			
-			
-			return null;
-		}
+		lblNewLabel.setVisible(true);
+		btnRecord.setVisible(true);
 		
 		
+	}
+	
+	public void AttemptDisplay() {
+		btnRecord.setVisible(false);
+		lblNewLabel.setVisible(false);
+		
+		btnBegin.setVisible(true);
+		correct.setVisible(true);
+		
+	}
+	
+	public void finalDisplay() {
+		btnRecord.setVisible(false);
+		lblNewLabel.setVisible(false);
+		btnBegin.setVisible(false);
+		
+		correct.setVisible(true);
+		mainMenu.setVisible(true);
 	}
 }
 
