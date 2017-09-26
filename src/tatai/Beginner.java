@@ -1,8 +1,5 @@
 package tatai;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -15,8 +12,7 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.util.concurrent.ExecutionException;
 import java.awt.event.ActionEvent;
 
 public class Beginner extends JFrame {
@@ -110,107 +106,74 @@ public class Beginner extends JFrame {
 		label.setBounds(90, 214, 70, 15);
 		contentPane.add(label);
 		
-		
+
 		btnRecord.setVisible(false);
 		btnRecord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				GameHandler handler = new GameHandler();
+				handler.execute();
+				String saidNumber = "";
+
 				try {
-					String command = "cd MaoriNumbers ; ./Go";
-					ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+					saidNumber = handler.get();
+				} catch (InterruptedException | ExecutionException e1) {
+					e1.printStackTrace();
+				}
 
-					Process process = pb.start();
 
-					BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
-					BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+				if(saidNumber.equals(moariNumber.outputMaoriNumber())) {
+					System.out.println("correct");
+					/*
+					 * make label of number and button disappear
+					 * make label saying correct or wrong appear 
+					 * make button saying next appear
+					 * button press would make current things disappear and past things appear
+					 */
+					AttemptDisplay();
 
-					int exitStatus = process.waitFor();
+					lblYouAreCorrect.setText("You are correct!");
+					btnBegin.setText("Next");
+					rightAttempt++;
+					totalAttempt++;
+				} else if(saidNumber.equals("")) {
+					System.out.println("No number found");
 
-					if (exitStatus == 0) {
-						String line;
-						boolean found = false;
-						String saidNumber = "";
-						int wordCount = 0;
-						while ((line = stdout.readLine()) != null) {
-							if(line.equals("sil")) {
-								found = !found;
-							}
-							if(found == true && !line.equals("sil")) {
-								if(wordCount > 0) {
-									saidNumber = saidNumber + " " + line;
-								} else {
+					AttemptDisplay();
+					if(wrongAttempt > 0) {
+						lblYouAreCorrect.setText("Wrong Again!");
+						btnBegin.setText("Continue");
+						wrongAttempt = 0;
+						totalAttempt++;
 
-								saidNumber = saidNumber + line;
-
-								}
-								wordCount++;
-							}
-							
-						}
-						
-						
-						
-						if(saidNumber.equals(moariNumber.outputMaoriNumber())) {
-							System.out.println("correct");
-							/*
-							 * make label of number and button disappear
-							 * make label saying correct or wrong appear 
-							 * make button saying next appear
-							 * button press would make current things disappear and past things appear
-							 */
-							AttemptDisplay();
-							
-							lblYouAreCorrect.setText("You are correct!");
-							btnBegin.setText("Next");
-							rightAttempt++;
-							totalAttempt++;
-						} else if(saidNumber.equals("")) {
-							System.out.println("No number found");
-							
-							AttemptDisplay();
-							if(wrongAttempt > 0) {
-								lblYouAreCorrect.setText("Wrong Again!");
-								btnBegin.setText("Continue");
-								wrongAttempt = 0;
-								totalAttempt++;
-								
-							} else {
-								lblYouAreCorrect.setText("No number heard!");
-								btnBegin.setText("Try Again");
-								wrongAttempt++;
-							}
-						} else {
-							System.out.println("wrong");
-							AttemptDisplay();
-							if(wrongAttempt > 0) {
-								lblYouAreCorrect.setText("Wrong Again!");
-								btnBegin.setText("Continue");
-								wrongAttempt = 0;
-								totalAttempt++;
-								
-							} else {
-								lblYouAreCorrect.setText("That's wrong!");
-								btnBegin.setText("Try Again");
-								wrongAttempt++;
-								
-							}
-							
-						}
 					} else {
-						String line;
-						while ((line = stderr.readLine()) != null) {
-							System.err.println(line);
-						}
+						lblYouAreCorrect.setText("No number heard!");
+						btnBegin.setText("Try Again");
+						wrongAttempt++;
+					}
+				} else {
+					System.out.println("wrong");
+					AttemptDisplay();
+					if(wrongAttempt > 0) {
+						lblYouAreCorrect.setText("Wrong Again!");
+						btnBegin.setText("Continue");
+						wrongAttempt = 0;
+						totalAttempt++;
+
+					} else {
+						lblYouAreCorrect.setText("That's wrong!");
+						btnBegin.setText("Try Again");
+						wrongAttempt++;
+
 					}
 
-				} catch (Exception g) {
-					g.printStackTrace();
 				}
-				
-				
+
+
+
 			}
 		});
-		btnRecord.setForeground(Color.BLACK);
-		btnRecord.setBackground(Color.WHITE);
+		
 		btnRecord.setBounds(173, 120, 48, 25);
 		btnRecord.setBorder(null);
 		contentPane.add(btnRecord);

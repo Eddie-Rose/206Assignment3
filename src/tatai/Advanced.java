@@ -9,12 +9,14 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.SwingWorker;
 
 
 
@@ -83,6 +85,22 @@ public class Advanced extends JFrame {
 		correct.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(correct);
 		
+		JButton j = new JButton ("try");
+		j.setBounds(50,100,50,50);
+		getContentPane().add(j);
+		
+		j.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (j.getBackground() == Color.BLUE) {
+					j.setBackground(Color.GRAY);
+				}
+				else {
+					j.setBackground(Color.BLUE);
+				}
+			}
+		});
+		
+		
 		
 		btnBegin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -93,7 +111,7 @@ public class Advanced extends JFrame {
 					QuestionDisplay();
 				}
 				else if(btnBegin.getText().equals("Next") || btnBegin.getText().equals("Continue")) {
-					if(totalAttempts == 2) {
+					if(totalAttempts == 1) {
 						correct.setText("You scored "+ correctAttempt + "/10");
 						finalDisplay();
 					} else {
@@ -122,109 +140,19 @@ public class Advanced extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 
-				btnRecord.setEnabled(false);
-				try {
-					String command = "cd MaoriNumbers ; ./Go";
-					ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+				
+				Worker handler = new Worker();
+				handler.execute();
+				
+		
+				
 
-					Process process = pb.start();
 
-					BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
-					BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+				
 
-					int exitStatus = process.waitFor();
-
-					if (exitStatus == 0) {
-						String line;
-						boolean found = false;
-						String saidNumber = "";
-						int wordCount = 0;
-						while ((line = stdout.readLine()) != null) {
-							if(line.equals("sil")) {
-								found = !found;
-							}
-							if(found == true && !line.equals("sil")) {
-								if(wordCount > 0) {
-									saidNumber = saidNumber + " " + line;
-								} else {
-									saidNumber = saidNumber + line;
-
-								}
-								wordCount++;
-							}
-							
-						}
-						System.out.println(saidNumber);
-						System.out.println(maoriNumber.outputMaoriNumber());
-						if(saidNumber.equals(maoriNumber.outputMaoriNumber())) {
-							System.out.println("correct");
-							/*
-							 * make label of number and button disappear
-							 * make label saying correct or wrong appear 
-							 * make button saying next appear
-							 * button press would make current things disappear and past things appear
-							 */
-							
-							AttemptDisplay();
-							btnBegin.setText("Next");
-							correct.setText("You are correct");
-							totalAttempts++;
-							correctAttempt++;
-							
-							
-						} else if(saidNumber.equals("")) {
-							System.out.println("No number found");
-							if (attempts == 1) {
-								
-								AttemptDisplay();
-								correct.setText("No recording found, try next number");
-								btnBegin.setText("Continue");
-								attempts= 0;
-								btnBegin.setVisible(true);
-							}
-							else {
-								AttemptDisplay();
-								correct.setText("No recording heard, one more try.");
-								btnBegin.setText("Try Again");
-								attempts++;
-								totalAttempts++;
-								
-							}
-						} else {
-							System.out.println("wrong");
-							if (attempts == 1) {
-								
-								AttemptDisplay();
-								totalAttempts++;
-								correct.setText("Wrong again");
-								correct.setHorizontalTextPosition(SwingConstants.CENTER);
-								attempts = 0;
-								btnBegin.setText("Continue");
-								
-							}
-							else {
-								AttemptDisplay();
-								correct.setText("Wrong pronounciation, one more chance");
-								btnBegin.setText("Try Again");
-								attempts++;
-								
-							}
-						}
-					} else {
-						String line;
-						while ((line = stderr.readLine()) != null) {
-							System.err.println(line);
-						}
-					}
-
-				} catch (Exception g) {
-					g.printStackTrace();
-				}
-				btnRecord.setEnabled(true);
-			
 			}
 		});
-		
+
 	}
 
 	
@@ -255,6 +183,82 @@ public class Advanced extends JFrame {
 		
 		correct.setVisible(true);
 		mainMenu.setVisible(true);
+	}
+	
+	public class Worker extends SwingWorker<Void, Void> {
+		
+		protected void done() {
+			btnRecord.setEnabled(true);
+		}
+		 
+		protected Void doInBackground() throws Exception {
+			
+			btnRecord.setEnabled(false);
+			BashCommands commands = BashCommands.getInstance();
+			String saidNumber = commands.excecuteGoScript();
+			
+			System.out.println(saidNumber);
+			System.out.println(maoriNumber.outputMaoriNumber());
+			if(saidNumber.equals(maoriNumber.outputMaoriNumber())) {
+				System.out.println("correct");
+				/*
+				 * make label of number and button disappear
+				 * make label saying correct or wrong appear 
+				 * make button saying next appear
+				 * button press would make current things disappear and past things appear
+				 */
+
+				AttemptDisplay();
+				btnBegin.setText("Next");
+				correct.setText("You are correct");
+				totalAttempts++;
+				correctAttempt++;
+
+
+			} else if(saidNumber.equals("")) {
+				System.out.println("No number found");
+				if (attempts == 1) {
+
+					AttemptDisplay();
+					totalAttempts++;
+					correct.setText("No recording found, try next number");
+					btnBegin.setText("Continue");
+					attempts= 0;
+					btnBegin.setVisible(true);
+				}
+				else {
+					AttemptDisplay();
+					correct.setText("No recording heard, one more try.");
+					btnBegin.setText("Try Again");
+					attempts++;
+					
+
+				}
+			} else {
+				System.out.println("wrong");
+				if (attempts == 1) {
+
+					AttemptDisplay();
+					totalAttempts++;
+					correct.setText("Wrong again");
+					correct.setHorizontalTextPosition(SwingConstants.CENTER);
+					attempts = 0;
+					btnBegin.setText("Continue");
+
+				}
+				else {
+					AttemptDisplay();
+					correct.setText("Wrong pronounciation, one more chance");
+					btnBegin.setText("Try Again");
+					attempts++;
+
+				}
+			}
+			
+			done();
+			return null;
+			
+		}
 	}
 }
 
