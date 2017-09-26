@@ -81,6 +81,64 @@ public class BashCommands {
 
 
 	}
+	
+	public void playback() {
+		try {
+			String command = "cd MaoriNumbers ; aplay foo.wav";
+			ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+
+			Process process = pb.start();
+
+			BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+			int exitStatus = process.waitFor();
+
+			if (exitStatus == 0) {
+				String line;
+				while ((line = stdout.readLine()) != null) {
+					System.out.println(line);
+				}
+			} else {
+				String line;
+				while ((line = stderr.readLine()) != null) {
+					System.err.println(line);
+				}
+			}
+
+		} catch (Exception f) {
+			f.printStackTrace();
+		}
+	}
+	
+	public void remove() {
+		try {
+			String command = "cd MaoriNumbers ; rm foo.wav";
+			ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+
+			Process process = pb.start();
+
+			BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+			int exitStatus = process.waitFor();
+
+			if (exitStatus == 0) {
+				String line;
+				while ((line = stdout.readLine()) != null) {
+					System.out.println(line);
+				}
+			} else {
+				String line;
+				while ((line = stderr.readLine()) != null) {
+					System.err.println(line);
+				}
+			}
+
+		} catch (Exception f) {
+			f.printStackTrace();
+		}
+	}
 
 
 

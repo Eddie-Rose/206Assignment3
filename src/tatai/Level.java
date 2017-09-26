@@ -21,13 +21,14 @@ import tatai.Level.Worker;
 
 
 public abstract class Level extends JFrame {
-
-	
 		
 	JButton btnBegin = new JButton("Start");
 	JButton btnRecord = new JButton("Record");
 	JLabel lblNewLabel = new JLabel();
 	JLabel correct = new JLabel();
+	JLabel lblHearPreviousRecording;
+	JLabel lblScore;
+	JButton btnPlay;
 	JTextArea txtrWelcomeToThe = new JTextArea();
 	JButton mainMenu = new JButton("Main Menu");
 	
@@ -80,13 +81,26 @@ public abstract class Level extends JFrame {
 		maoriNumber.setNumber(testNumber);
 		lblNewLabel.setText("" + testNumber);
 		
+		lblScore = new JLabel("Score: "+correctAttempt+"/10");
+		lblScore.setVisible(false);
+		lblScore.setBounds(349, 12, 89, 15);
+		getContentPane().add(lblScore);
+		
 		correct.setVisible(false);
 		correct.setFont(new Font("Dialog", Font.PLAIN, 14));
 		correct.setBounds(50, 120, 350, 15);
 		correct.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(correct);
 		
+		btnPlay = new JButton("Play");
+		btnPlay.setBounds(250, 240, 117, 25);
+		getContentPane().add(btnPlay);
+		btnPlay.setVisible(false);
 		
+		lblHearPreviousRecording = new JLabel("Hear previous recording:");
+		lblHearPreviousRecording.setBounds(60, 245, 176, 15);
+		getContentPane().add(lblHearPreviousRecording);
+		lblHearPreviousRecording.setVisible(false);
 		
 		
 		
@@ -94,7 +108,7 @@ public abstract class Level extends JFrame {
 		btnBegin.addActionListener(new ButtonBeginListener());
 		mainMenu.addActionListener(new ButtonMenuListener());
 		btnRecord.addActionListener(new ButtonRecordListener());
-			
+		btnPlay.addActionListener(new ButtonPlayListener());	
 		
 
 	}
@@ -107,10 +121,12 @@ public abstract class Level extends JFrame {
 		btnBegin.setVisible(false);
 		txtrWelcomeToThe.setVisible(false);
 		correct.setVisible(false);
+		btnPlay.setVisible(false);
+		lblHearPreviousRecording.setVisible(false);
 		
 		lblNewLabel.setVisible(true);
 		btnRecord.setVisible(true);
-		
+		lblScore.setVisible(true);
 		
 	}
 	
@@ -118,15 +134,21 @@ public abstract class Level extends JFrame {
 		btnRecord.setVisible(false);
 		lblNewLabel.setVisible(false);
 		
+		btnPlay.setVisible(true);
+		lblHearPreviousRecording.setVisible(true);
+		
 		btnBegin.setVisible(true);
 		correct.setVisible(true);
-		
+		lblScore.setVisible(true);
 	}
 	
 	public void finalDisplay() {
 		btnRecord.setVisible(false);
 		lblNewLabel.setVisible(false);
 		btnBegin.setVisible(false);
+		btnPlay.setVisible(false);
+		lblHearPreviousRecording.setVisible(false);
+		lblScore.setVisible(false);
 		
 		correct.setVisible(true);
 		mainMenu.setVisible(true);
@@ -157,7 +179,7 @@ public abstract class Level extends JFrame {
 				correct.setText("You are correct");
 				totalAttempts++;
 				correctAttempt++;
-
+				lblScore.setText("Score: "+correctAttempt+"/10");
 
 			} else if(saidNumber.equals("")) {
 				System.out.println("No number found");
@@ -195,7 +217,6 @@ public abstract class Level extends JFrame {
 					correct.setText("Wrong pronounciation, one more chance");
 					btnBegin.setText("Try Again");
 					attempts++;
-
 				}
 			}
 		}
@@ -218,9 +239,16 @@ public abstract class Level extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 
 
-			if (btnBegin.getText().equals("Start") || btnBegin.getText().equals("Try Again")) {
+			if (btnBegin.getText().equals("Start")) {
 
 				QuestionDisplay();
+				
+			} else if(btnBegin.getText().equals("Try Again")) {
+				
+				QuestionDisplay();
+				
+				BashCommands commands = BashCommands.getInstance();
+				commands.remove();
 			}
 			else if(btnBegin.getText().equals("Next") || btnBegin.getText().equals("Continue")) {
 				if(totalAttempts == 10) {
@@ -233,7 +261,9 @@ public abstract class Level extends JFrame {
 
 					QuestionDisplay();
 				}
-
+				
+				BashCommands commands = BashCommands.getInstance();
+				commands.remove();
 			}
 		}
 
@@ -261,7 +291,15 @@ public abstract class Level extends JFrame {
 		}
 	}
 		
-	
+	public class ButtonPlayListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+
+			BashCommands commands = BashCommands.getInstance();
+			commands.playback();
+			
+
+		}
+	}
 	
 	
 	
