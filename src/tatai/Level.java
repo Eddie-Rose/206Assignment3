@@ -56,7 +56,7 @@ public abstract class Level extends JFrame {
 		txtrWelcomeToThe.setEnabled(false);
 		txtrWelcomeToThe.setEditable(false);
 		txtrWelcomeToThe.setFont(new Font("Dialog", Font.PLAIN, 14));
-		txtrWelcomeToThe.setText("Welcome to the advanced level,\nNumbers asked are from "+ minNum+" to "+ maxNum + " ,\nPress \"Start\" to begin.");
+		txtrWelcomeToThe.setText("Welcome to the "+name+" level,\nNumbers asked are from "+ minNum+" to "+ maxNum + " ,\nPress \"Start\" to begin.");
 		txtrWelcomeToThe.setBounds(103, 94, 264, 69);
 		getContentPane().add(txtrWelcomeToThe);
 		
@@ -223,7 +223,7 @@ public abstract class Level extends JFrame {
 				QuestionDisplay();
 			}
 			else if(btnBegin.getText().equals("Next") || btnBegin.getText().equals("Continue")) {
-				if(totalAttempts == 1) {
+				if(totalAttempts == 10) {
 					correct.setText("You scored "+ correctAttempt + "/10");
 					finalDisplay();
 				} else {
