@@ -50,7 +50,7 @@ public abstract class Level extends JFrame {
 		
 		JLabel lblAdvancedLevel = new JLabel(name);
 		lblAdvancedLevel.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
-		lblAdvancedLevel.setBounds(150, 40, 192, 18);
+		lblAdvancedLevel.setBounds(160, 40, 192, 18);
 		getContentPane().add(lblAdvancedLevel);
 		
 		
@@ -168,12 +168,8 @@ public abstract class Level extends JFrame {
 				e.printStackTrace();
 			}
 			
-			System.out.println(saidNumber);
-			System.out.println(maoriNumber.outputMaoriNumber());
 			if(saidNumber.equals(maoriNumber.outputMaoriNumber())) {
-				System.out.println("correct");
 				
-
 				AttemptDisplay();
 				btnBegin.setText("Next");
 				correct.setText("You are correct");
@@ -182,7 +178,7 @@ public abstract class Level extends JFrame {
 				lblScore.setText("Score: "+correctAttempt+"/10");
 
 			} else if(saidNumber.equals("")) {
-				System.out.println("No number found");
+				
 				if (attempts == 1) {
 
 					AttemptDisplay();
@@ -201,12 +197,11 @@ public abstract class Level extends JFrame {
 
 				}
 			} else {
-				System.out.println("wrong");
 				if (attempts == 1) {
 
 					AttemptDisplay();
 					totalAttempts++;
-					correct.setText("Wrong again");
+					correct.setText("Wrong again, you said "+saidNumber);
 					correct.setHorizontalTextPosition(SwingConstants.CENTER);
 					attempts = 0;
 					btnBegin.setText("Continue");
@@ -214,7 +209,7 @@ public abstract class Level extends JFrame {
 				}
 				else {
 					AttemptDisplay();
-					correct.setText("Wrong pronounciation, one more chance");
+					correct.setText("Wrong, you said "+saidNumber+", one more chance");
 					btnBegin.setText("Try Again");
 					attempts++;
 				}
