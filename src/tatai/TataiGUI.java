@@ -102,7 +102,7 @@ public class TataiGUI extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Advanced beginnerWindow = new Advanced();
+			Level beginnerWindow = new Advanced("Advanced", 10, 99);
 			
 		}
 		
