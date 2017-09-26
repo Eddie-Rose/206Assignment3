@@ -16,6 +16,8 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 
+import tatai.Level.Worker;
+
 
 
 public abstract class Level extends JFrame {
@@ -47,7 +49,7 @@ public abstract class Level extends JFrame {
 		
 		JLabel lblAdvancedLevel = new JLabel(name);
 		lblAdvancedLevel.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
-		lblAdvancedLevel.setBounds(128, 40, 192, 18);
+		lblAdvancedLevel.setBounds(150, 40, 192, 18);
 		getContentPane().add(lblAdvancedLevel);
 		
 		
@@ -89,60 +91,15 @@ public abstract class Level extends JFrame {
 		
 		
 		
+		btnBegin.addActionListener(new ButtonBeginListener());
+		mainMenu.addActionListener(new ButtonMenuListener());
+		btnRecord.addActionListener(new ButtonRecordListener());
+			
 		
-		btnBegin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-
-				if (btnBegin.getText().equals("Start") || btnBegin.getText().equals("Try Again")) {
-
-					QuestionDisplay();
-				}
-				else if(btnBegin.getText().equals("Next") || btnBegin.getText().equals("Continue")) {
-					if(totalAttempts == 1) {
-						correct.setText("You scored "+ correctAttempt + "/10");
-						finalDisplay();
-					} else {
-						int testNumber = setNum();
-						maoriNumber.setNumber(testNumber);
-						lblNewLabel.setText("" + testNumber);
-					
-					QuestionDisplay();
-					}
-					
-				}
-			}
-		});
-		
-		mainMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			dispose();
-				
-			}
-		});
-		
-	
-
-		btnRecord.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-
-				
-				Worker handler = new Worker();
-				handler.execute();
-				
-		
-				
-
-
-				
-
-			}
-		});
 
 	}
 	
+
 	public abstract int setNum();
 
 	
@@ -193,12 +150,7 @@ public abstract class Level extends JFrame {
 			System.out.println(maoriNumber.outputMaoriNumber());
 			if(saidNumber.equals(maoriNumber.outputMaoriNumber())) {
 				System.out.println("correct");
-				/*
-				 * make label of number and button disappear
-				 * make label saying correct or wrong appear 
-				 * make button saying next appear
-				 * button press would make current things disappear and past things appear
-				 */
+				
 
 				AttemptDisplay();
 				btnBegin.setText("Next");
@@ -256,10 +208,68 @@ public abstract class Level extends JFrame {
 			
 			
 			
-			done();
 			return saidNumber;
 			
 		}
 	}
+	
+	public class ButtonBeginListener implements ActionListener{
+
+		public void actionPerformed(ActionEvent e) {
+
+
+			if (btnBegin.getText().equals("Start") || btnBegin.getText().equals("Try Again")) {
+
+				QuestionDisplay();
+			}
+			else if(btnBegin.getText().equals("Next") || btnBegin.getText().equals("Continue")) {
+				if(totalAttempts == 1) {
+					correct.setText("You scored "+ correctAttempt + "/10");
+					finalDisplay();
+				} else {
+					int testNumber = setNum();
+					maoriNumber.setNumber(testNumber);
+					lblNewLabel.setText("" + testNumber);
+
+					QuestionDisplay();
+				}
+
+			}
+		}
+
+	}
+	
+	public class ButtonMenuListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			
+			dispose();
+				
+			}
+		}
+	
+	public class ButtonRecordListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+
+
+			
+			Worker handler = new Worker();
+			handler.execute();
+			
+
+			
+
+		}
+	}
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

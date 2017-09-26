@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Advanced extends Level {
 
-	Random r = new Random();
+	
 	
 	public Advanced(String name, int minNum, int maxNum) {
 		super(name, minNum, maxNum);
@@ -15,13 +15,19 @@ public class Advanced extends Level {
 
 	@Override
 	public int setNum() {
-		return r.nextInt(89) +10;
-		
-		
+		Random r = new Random();
+		int random = r.nextInt(89) + 10;
+		return random;
+
+
 	}
 	
 	
 	
+	
+	
+
+
 }
 
 

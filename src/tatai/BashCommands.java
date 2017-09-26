@@ -41,7 +41,8 @@ public class BashCommands {
 			BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
 			int exitStatus = process.waitFor();
-
+			
+			
 			if (exitStatus == 0) {
 				String line;
 				boolean found = false;
@@ -62,10 +63,12 @@ public class BashCommands {
 					}
 
 				}
+
 			} else {
 				String line;
 				while ((line = stderr.readLine()) != null) {
 					System.err.println(line);
+					
 				}
 			}
 
