@@ -85,20 +85,9 @@ public class Advanced extends JFrame {
 		correct.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(correct);
 		
-		JButton j = new JButton ("try");
-		j.setBounds(50,100,50,50);
-		getContentPane().add(j);
 		
-		j.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (j.getBackground() == Color.BLUE) {
-					j.setBackground(Color.GRAY);
-				}
-				else {
-					j.setBackground(Color.BLUE);
-				}
-			}
-		});
+		
+		
 		
 		
 		
