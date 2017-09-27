@@ -58,7 +58,7 @@ public abstract class Level extends JFrame {
 		
 		JLabel lblAdvancedLevel = new JLabel(name);
 		lblAdvancedLevel.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
-		lblAdvancedLevel.setBounds(160, 40, 192, 18);
+		lblAdvancedLevel.setBounds(160, 40, 192, 25);
 		getContentPane().add(lblAdvancedLevel);
 		
 		
@@ -96,7 +96,7 @@ public abstract class Level extends JFrame {
 		
 		correct.setVisible(false);
 		correct.setFont(new Font("Dialog", Font.PLAIN, 14));
-		correct.setBounds(50, 120, 350, 15);
+		correct.setBounds(50, 100, 350, 50);
 		correct.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(correct);
 		
@@ -213,7 +213,7 @@ public abstract class Level extends JFrame {
 
 					AttemptDisplay();
 					totalAttempts++;
-					correct.setText("Wrong again, you said "+saidNumber);
+					correct.setText("<html>Wrong again, you said "+saidNumber+"</html>");
 					correct.setHorizontalTextPosition(SwingConstants.CENTER);
 					attempts = 0;
 					btnBegin.setText("Continue");
@@ -221,7 +221,7 @@ public abstract class Level extends JFrame {
 				}
 				else {
 					AttemptDisplay();
-					correct.setText("Wrong, you said "+saidNumber+", one more chance");
+					correct.setText("<html>Wrong, you said "+saidNumber+", one more chance</html>");
 					btnBegin.setText("Try Again");
 					attempts++;
 				}
