@@ -23,7 +23,9 @@ import tatai.Level.Worker;
 public abstract class Level extends JFrame {
 	
 	
-
+	String name;
+	int minNum;
+	int maxNum;
 	JButton btnBegin = new JButton("Start");
 	JButton btnRecord = new JButton("Record");
 	JLabel lblNewLabel = new JLabel();
@@ -41,8 +43,11 @@ public abstract class Level extends JFrame {
 	Number maoriNumber = new Number();
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 	
-	public Level(String name, int minNum, int maxNum) {
+	public Level(String lvlName, int minimumNum, int maximumNum) {
 		
+		name = lvlName;
+		minNum = minimumNum;
+		maxNum = maximumNum;
 		setResizable(false);
 		setVisible(true);
 		getContentPane().setBackground(Color.WHITE);
@@ -117,7 +122,11 @@ public abstract class Level extends JFrame {
 	}
 	
 
-	public abstract int setNum();
+	public int setNum() {
+		int random = (int )(Math.random() * maxNum + minNum);
+		return random;
+
+	}
 
 	
 	public void QuestionDisplay() {
