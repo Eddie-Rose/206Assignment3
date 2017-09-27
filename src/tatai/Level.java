@@ -21,7 +21,9 @@ import tatai.Level.Worker;
 
 
 public abstract class Level extends JFrame {
-		
+	
+	
+
 	JButton btnBegin = new JButton("Start");
 	JButton btnRecord = new JButton("Record");
 	JLabel lblNewLabel = new JLabel();
@@ -41,6 +43,7 @@ public abstract class Level extends JFrame {
 	
 	public Level(String name, int minNum, int maxNum) {
 		
+		setResizable(false);
 		setVisible(true);
 		getContentPane().setBackground(Color.WHITE);
 		setBounds(100, 100, 450, 300);
@@ -288,12 +291,33 @@ public abstract class Level extends JFrame {
 		
 	public class ButtonPlayListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-
-			BashCommands commands = BashCommands.getInstance();
-			commands.playback();
+			
+			btnBegin.setEnabled(false);
+			btnPlay.setEnabled(false);
+			PlayWorker player = new PlayWorker();
+			player.execute();
+			
 			
 
 		}
+	}
+	
+	public class PlayWorker extends SwingWorker<Void, Void> {
+
+		@Override
+		protected Void doInBackground() throws Exception {
+			
+			BashCommands commands = BashCommands.getInstance();
+			commands.playback();
+			return null;
+		}
+		
+		@Override 
+		protected void done() {
+			btnBegin.setEnabled(true);
+			btnPlay.setEnabled(true);
+		}
+
 	}
 	
 	
