@@ -1,11 +1,16 @@
 package tatai;
 
+import javax.swing.JLabel;
+
 public class Beginner extends Level {
 
 	
 	
 	public Beginner(String name, int minNum, int maxNum) {
 		super(name, minNum, maxNum);
+		JLabel finish = new JLabel("Advanced");
+		getContentPane().add(finish);
+		finish.setVisible(false);
 	
 	}
 
@@ -16,6 +21,8 @@ public class Beginner extends Level {
 
 
 	}	
+	
+	
 
 }
 
