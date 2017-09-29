@@ -6,7 +6,11 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -44,27 +48,34 @@ public class TataiGUI extends JFrame {
 		getContentPane().setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
+		try {
+            setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("/afs/ec.auckland.ac.nz/users/e/r/eroe303/unixhome/206Assignment3/src/tatai/background.png")))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 		
+	
 		
 		welcomeLabel = new JLabel("Welcome to Tātai!");
-		welcomeLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
+		welcomeLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 25));
 		welcomeLabel.setVerticalAlignment(SwingConstants.TOP);
 		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		welcomeLabel.setBounds(119, 48, 216, 57);
+		welcomeLabel.setBounds(80, 48, 280, 57);
+		welcomeLabel.setBackground(Color.WHITE);
 		getContentPane().add(welcomeLabel);
 		
 		
 		descriptionLabel1 = new JLabel("An interactive application which helps develop your ");
 		descriptionLabel1.setVerticalAlignment(SwingConstants.TOP);
 		descriptionLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-		descriptionLabel1.setBounds(12, 84, 426, 44);
+		descriptionLabel1.setBounds(12, 99, 426, 44);
 		getContentPane().add(descriptionLabel1);
 		
 		
 		descriptionLabel2 = new JLabel("Māori number pronounciation");
 		descriptionLabel2.setVerticalAlignment(SwingConstants.TOP);
 		descriptionLabel2.setHorizontalAlignment(SwingConstants.CENTER);
-		descriptionLabel2.setBounds(102, 101, 250, 37);
+		descriptionLabel2.setBounds(102, 116, 250, 37);
 		getContentPane().add(descriptionLabel2);
 		
 		
