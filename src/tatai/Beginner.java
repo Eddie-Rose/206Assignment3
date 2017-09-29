@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingWorker;
 
 import tatai.Level.ButtonBeginListener;
+import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class Beginner extends Level {
 
@@ -68,10 +70,6 @@ public class Beginner extends Level {
 
 		}
 	}
-	
-	
-	
-
 }
 
 

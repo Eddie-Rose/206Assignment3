@@ -33,7 +33,7 @@ public abstract class Level extends JFrame {
 	JLabel lblHearPreviousRecording;
 	JLabel lblScore;
 	JButton btnPlay;
-	JTextArea txtrWelcomeToThe = new JTextArea();
+	JLabel txtrWelcomeToThe = new JLabel();
 	JButton mainMenu = new JButton("Main Menu");
 	
 	
@@ -62,10 +62,8 @@ public abstract class Level extends JFrame {
 		getContentPane().add(lblAdvancedLevel);
 		
 		
-		txtrWelcomeToThe.setEnabled(false);
-		txtrWelcomeToThe.setEditable(false);
 		txtrWelcomeToThe.setFont(new Font("Dialog", Font.PLAIN, 14));
-		txtrWelcomeToThe.setText("Welcome to the "+name+" level,\nNumbers asked are from "+ minNum+" to "+ maxNum + " ,\nPress \"Start\" to begin.");
+		txtrWelcomeToThe.setText("<html>Welcome to the "+name+" level,\nNumbers asked are from "+ minNum+" to "+ maxNum + " ,\nPress \"Start\" to begin.</html>");
 		txtrWelcomeToThe.setBounds(103, 94, 264, 69);
 		getContentPane().add(txtrWelcomeToThe);
 		
