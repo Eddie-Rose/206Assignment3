@@ -49,7 +49,7 @@ public class TataiGUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		try {
-            setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("/afs/ec.auckland.ac.nz/users/e/r/eroe303/unixhome/206Assignment3/src/tatai/background.png")))));
+            setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("./tatai/background.png")))));
         } catch (IOException e) {
             e.printStackTrace();
         }
