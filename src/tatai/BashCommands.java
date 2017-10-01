@@ -139,6 +139,64 @@ public class BashCommands {
 			f.printStackTrace();
 		}
 	}
+		
+		public void addStats(int score) {
+			try {
+				String command = "echo -e \"$((`cat stats.txt | wc -l`/2 + 1))) $(date)  Score: "+score+"/10\\n\" >> stats.txt";
+				ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+
+				Process process = pb.start();
+
+				BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+				BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+				int exitStatus = process.waitFor();
+
+				if (exitStatus == 0) {
+					String line;
+					while ((line = stdout.readLine()) != null) {
+						System.out.println(line);
+					}
+				} else {
+					String line;
+					while ((line = stderr.readLine()) != null) {
+						System.err.println(line);
+					}
+				}
+
+			} catch (Exception f) {
+				f.printStackTrace();
+			}
+	}
+		
+		public void clearStats() {
+			try {
+				String command = "> stats.txt";
+				ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+
+				Process process = pb.start();
+
+				BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+				BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+				int exitStatus = process.waitFor();
+
+				if (exitStatus == 0) {
+					String line;
+					while ((line = stdout.readLine()) != null) {
+						System.out.println(line);
+					}
+				} else {
+					String line;
+					while ((line = stderr.readLine()) != null) {
+						System.err.println(line);
+					}
+				}
+
+			} catch (Exception f) {
+				f.printStackTrace();
+			}
+	}
 
 
 

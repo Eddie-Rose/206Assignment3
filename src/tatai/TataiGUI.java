@@ -106,7 +106,7 @@ public class TataiGUI extends JFrame {
 		
 		btnStatistics = new JButton("Statistics");
 		btnStatistics.setBounds(172, 174, 110, 25);
-		btnStatistics.addActionListener(new HelpListener());
+		btnStatistics.addActionListener(new StatisticsListener());
 		getContentPane().add(btnStatistics);
 		
 	}
@@ -139,8 +139,18 @@ public class TataiGUI extends JFrame {
 			Level beginnerWindow = new Beginner("Beginner", 1, 9);
 			
 		}
+	}
+		
+		public class StatisticsListener implements ActionListener {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				StatsPanel help = new StatsPanel();
+				
+			}
 		
 	}
+	
 	
 
 }

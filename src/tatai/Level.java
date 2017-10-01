@@ -37,9 +37,9 @@ public abstract class Level extends JFrame {
 	JLabel txtrWelcomeToThe = new JLabel();
 	JButton mainMenu = new JButton("Main Menu");
 	
-	int attempts = 0;
+	int wrongAttempt = 0;
 	int correctAttempt = 0;
-	int totalAttempts = 0;
+	int totalAttempts = 9;
 	int displayAttempts = totalAttempts+1;
 	Number maoriNumber = new Number();
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -194,35 +194,36 @@ public abstract class Level extends JFrame {
 				correct.setText("You are correct");
 				totalAttempts++;
 				correctAttempt++;
+				wrongAttempt= 0;
 				
 
 			} else if(saidNumber.equals("")) {
 				
-				if (attempts == 1) {
+				if (wrongAttempt == 1) {
 
 					AttemptDisplay();
 					totalAttempts++;
 					correct.setText("No recording found, try next number");
 					btnBegin.setText("Continue");
-					attempts= 0;
+					wrongAttempt= 0;
 					btnBegin.setVisible(true);
 				}
 				else {
 					AttemptDisplay();
 					correct.setText("No recording heard, one more try.");
 					btnBegin.setText("Try Again");
-					attempts++;
+					wrongAttempt++;
 					
 
 				}
 			} else {
-				if (attempts == 1) {
+				if (wrongAttempt == 1) {
 
 					AttemptDisplay();
 					totalAttempts++;
 					correct.setText("<html>Wrong again, you said "+saidNumber+"</html>");
 					correct.setHorizontalTextPosition(SwingConstants.CENTER);
-					attempts = 0;
+					wrongAttempt = 0;
 					btnBegin.setText("Continue");
 
 				}
@@ -230,7 +231,7 @@ public abstract class Level extends JFrame {
 					AttemptDisplay();
 					correct.setText("<html>Wrong, you said "+saidNumber+", one more chance</html>");
 					btnBegin.setText("Try Again");
-					attempts++;
+					wrongAttempt++;
 				}
 			}
 		}
@@ -266,6 +267,8 @@ public abstract class Level extends JFrame {
 			}
 			else if(btnBegin.getText().equals("Next") || btnBegin.getText().equals("Continue")) {
 				if(totalAttempts == 10) {
+					BashCommands commands = BashCommands.getInstance();
+					commands.addStats(correctAttempt);
 					correct.setText("You scored "+ correctAttempt + "/10");
 					lblAttempts.setVisible(false);
 					
