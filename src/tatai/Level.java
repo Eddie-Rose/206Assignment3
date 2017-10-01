@@ -32,14 +32,15 @@ public abstract class Level extends JFrame {
 	JLabel correct = new JLabel();
 	JLabel lblHearPreviousRecording;
 	JLabel lblScore;
+	JLabel lblAttempts;
 	JButton btnPlay;
 	JLabel txtrWelcomeToThe = new JLabel();
 	JButton mainMenu = new JButton("Main Menu");
 	
-	
 	int attempts = 0;
 	int correctAttempt = 0;
 	int totalAttempts = 0;
+	int displayAttempts = totalAttempts+1;
 	Number maoriNumber = new Number();
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 	
@@ -92,6 +93,11 @@ public abstract class Level extends JFrame {
 		lblScore.setBounds(349, 12, 89, 15);
 		getContentPane().add(lblScore);
 		
+		lblAttempts = new JLabel("Question:" + displayAttempts + "/10" );
+		lblAttempts.setVisible(false);
+		lblAttempts.setBounds(330, 30, 110, 15);
+		getContentPane().add(lblAttempts);
+		
 		correct.setVisible(false);
 		correct.setFont(new Font("Dialog", Font.PLAIN, 14));
 		correct.setBounds(50, 100, 350, 50);
@@ -137,6 +143,7 @@ public abstract class Level extends JFrame {
 		lblNewLabel.setVisible(true);
 		btnRecord.setVisible(true);
 		lblScore.setVisible(true);
+		lblAttempts.setVisible(true);
 		
 	}
 	
@@ -149,6 +156,7 @@ public abstract class Level extends JFrame {
 		
 		btnBegin.setVisible(true);
 		correct.setVisible(true);
+		lblAttempts.setVisible(true);
 		lblScore.setVisible(true);
 	}
 	
@@ -159,6 +167,7 @@ public abstract class Level extends JFrame {
 		btnPlay.setVisible(false);
 		lblHearPreviousRecording.setVisible(false);
 		lblScore.setVisible(false);
+		lblAttempts.setVisible(false);
 		
 		correct.setVisible(true);
 		mainMenu.setVisible(true);
@@ -185,7 +194,7 @@ public abstract class Level extends JFrame {
 				correct.setText("You are correct");
 				totalAttempts++;
 				correctAttempt++;
-				lblScore.setText("Score: "+correctAttempt+"/10");
+				
 
 			} else if(saidNumber.equals("")) {
 				
@@ -258,11 +267,16 @@ public abstract class Level extends JFrame {
 			else if(btnBegin.getText().equals("Next") || btnBegin.getText().equals("Continue")) {
 				if(totalAttempts == 10) {
 					correct.setText("You scored "+ correctAttempt + "/10");
+					lblAttempts.setVisible(false);
+					
 					finalDisplay();
 				} else {
 					int testNumber = setNum();
 					maoriNumber.setNumber(testNumber);
 					lblNewLabel.setText("" + testNumber);
+					displayAttempts = totalAttempts+1;
+					lblAttempts.setText("Question:" + displayAttempts + "/10");
+					lblScore.setText("Score: "+correctAttempt+"/10");
 
 					QuestionDisplay();
 				}
