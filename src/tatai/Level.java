@@ -80,8 +80,8 @@ public abstract class Level extends JFrame {
 		getContentPane().add(btnRecord);
 		
 		lblNewLabel.setVisible(false);
-		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 18));
-		lblNewLabel.setBounds(205, 120, 150, 15);
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 35));
+		lblNewLabel.setBounds(205, 110, 150, 40);
 		getContentPane().add(lblNewLabel);
 		
 		int testNumber = setNum();
@@ -93,9 +93,10 @@ public abstract class Level extends JFrame {
 		lblScore.setBounds(349, 12, 89, 15);
 		getContentPane().add(lblScore);
 		
-		lblAttempts = new JLabel("Question:" + displayAttempts + "/10" );
+		lblAttempts = new JLabel("Question# " + displayAttempts );
 		lblAttempts.setVisible(false);
-		lblAttempts.setBounds(330, 30, 110, 15);
+		//lblAttempts.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblAttempts.setBounds(30, 270, 110, 15);
 		getContentPane().add(lblAttempts);
 		
 		correct.setVisible(false);
@@ -278,7 +279,7 @@ public abstract class Level extends JFrame {
 					maoriNumber.setNumber(testNumber);
 					lblNewLabel.setText("" + testNumber);
 					displayAttempts = totalAttempts+1;
-					lblAttempts.setText("Question:" + displayAttempts + "/10");
+					lblAttempts.setText("Question# " + displayAttempts);
 					lblScore.setText("Score: "+correctAttempt+"/10");
 
 					QuestionDisplay();
