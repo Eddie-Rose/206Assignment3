@@ -26,6 +26,7 @@ public class TataiGUI extends JFrame {
 	private JButton btnBeginner;
 	private JButton btnAdvanced;
 	private JButton btnHelp;
+	private JButton btnStatistics;
 	
 	
 	public static void main(String[] args) {
@@ -97,11 +98,16 @@ public class TataiGUI extends JFrame {
 		btnAdvanced.addActionListener(new AdvancedListener());
 		getContentPane().add(btnAdvanced);
 		
-		
 		btnHelp = new JButton("Help");
-		btnHelp.setBounds(179, 174, 93, 25);
+		btnHelp.setBounds(179, 220, 93, 25);
 		btnHelp.addActionListener(new HelpListener());
 		getContentPane().add(btnHelp);
+		
+		
+		btnStatistics = new JButton("Statistics");
+		btnStatistics.setBounds(172, 174, 110, 25);
+		btnStatistics.addActionListener(new HelpListener());
+		getContentPane().add(btnStatistics);
 		
 	}
 	
