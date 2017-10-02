@@ -39,7 +39,7 @@ public abstract class Level extends JFrame {
 	
 	int wrongAttempt = 0;
 	int correctAttempt = 0;
-	int totalAttempts = 9;
+	int totalAttempts = 0;
 	int displayAttempts = totalAttempts+1;
 	Number maoriNumber = new Number();
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
