@@ -39,7 +39,7 @@ public abstract class Level extends JFrame {
 	
 	int wrongAttempt = 0;
 	int correctAttempt = 0;
-	int totalAttempts = 0;
+	int totalAttempts = 9;
 	int displayAttempts = totalAttempts+1;
 	Number maoriNumber = new Number();
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -269,7 +269,7 @@ public abstract class Level extends JFrame {
 			else if(btnBegin.getText().equals("Next") || btnBegin.getText().equals("Continue")) {
 				if(totalAttempts == 10) {
 					BashCommands commands = BashCommands.getInstance();
-					commands.addStats(correctAttempt);
+					commands.addStats(correctAttempt, name);
 					correct.setText("You scored "+ correctAttempt + "/10");
 					lblAttempts.setVisible(false);
 					

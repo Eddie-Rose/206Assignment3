@@ -140,9 +140,9 @@ public class BashCommands {
 		}
 	}
 		
-		public void addStats(int score) {
+		public void addStats(int score, String name) {
 			try {
-				String command = "echo -e \"$((`cat stats.txt | wc -l`/2 + 1))) $(date)  Score: "+score+"/10\\n\" >> stats.txt";
+				String command = "echo -e \"$((`cat stats.txt | wc -l`/2 + 1))) $(date +%D) $(date +%T) "+name+" Score: "+score+"/10\\n\" >> stats.txt";
 				ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
 
 				Process process = pb.start();
