@@ -178,49 +178,52 @@ public class HelpPanel extends JFrame {
 	private class ButtonNextListener implements ActionListener {
 		@Override
 		public void actionPerformed (ActionEvent e) {
+
+			imageNumber++;
+			back.setEnabled(true);
 			if (imageNumber == totalPages) {
-				JOptionPane.showMessageDialog(null, "Error: No next page");
+				next.setEnabled(false);
+			}
+			if (state.equals("beginner")) {
+				beginnerHelpFrameInitialisation();
+			}
+			else if (state.equals("advance")) {
+				advancedHelpFrameInitialisation();
 			}
 			else {
-				imageNumber++;
-
-				if (state.equals("beginner")) {
-					beginnerHelpFrameInitialisation();
-				}
-				else if (state.equals("advance")) {
-					advancedHelpFrameInitialisation();
-				}
-				else {
-					scoreBoardHelpInitialisation();
-				}
-
+				scoreBoardHelpInitialisation();
 			}
+
+
 		}
 	}
-	
+
 	private class ButtonBackListener implements ActionListener {
 		@Override
 		public void actionPerformed (ActionEvent e) {
-			if (imageNumber == 1) {
-				JOptionPane.showMessageDialog(null, "Error: No previous page");
+
+
+			imageNumber--;
+			next.setEnabled(true);
+
+			if (imageNumber == 0) {
+				back.setEnabled(false);
+			}
+			
+			if (state.equals("beginner")) {
+				beginnerHelpFrameInitialisation();
+			}
+			else if (state.equals("advance")) {
+				advancedHelpFrameInitialisation();
 			}
 			else {
-				imageNumber--;
-
-				if (state.equals("beginner")) {
-					beginnerHelpFrameInitialisation();
-				}
-				else if (state.equals("advance")) {
-					advancedHelpFrameInitialisation();
-				}
-				else {
-					scoreBoardHelpInitialisation();
-				}
-
+				scoreBoardHelpInitialisation();
 			}
+
+
 		}
 	}
-	
+
 	private class ButtonHelpMenuListener implements ActionListener {
 		@Override
 		public void actionPerformed (ActionEvent e) {
@@ -302,6 +305,7 @@ public class HelpPanel extends JFrame {
 		advanced.setVisible(false);
 		scoreBoard.setVisible(false);
 		panel_1.setVisible(false);
+		back.setEnabled(false);
 		
 		page.setVisible(true);
 		thumb.setVisible(true);
