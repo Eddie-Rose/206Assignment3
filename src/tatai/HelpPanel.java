@@ -34,7 +34,7 @@ public class HelpPanel extends JFrame {
 	
 	JButton beginner = new JButton("Beginner");
 	JButton advanced = new JButton("Advanced");
-	JButton scoreBoard = new JButton("ScoreBoard");
+	JButton scoreBoard = new JButton("Statistic");
 	JButton mainMenu = new JButton("Return to Main Menu");
 	
 	JButton next = new JButton("Next");
@@ -57,16 +57,21 @@ public class HelpPanel extends JFrame {
 	String a4 = "<html>If correct your overall score on the top right hand corner of the screen will increase by 1 .</html>";
 	String a5 = "<html>At the end of the 10 random questions you will be shown your total score.</html>";
 	
+	String s1 = "<html>Shows your saved scores for beginner and advanced level. You have the option to clear the field.</html>";
+	
 	String[] beginnerLabel = {b1, b2, b3, b4, b5, b6};
 	String[] advanceLabel = {a1, a2, a3, a4, a5 };
+	String[] statisticLabel = {s1};
 	
 	private int imageNumber = 1;
 	private int totalPages = 0;
 	private String beginnerURL = "./206Assignment3Images/Beginner/";
 	private String advanceURL = "./206Assignment3Images/Advanced/";
+	private String statisticURL = "./206Assignment3Images/Statistic/";
 	private String[] beginnerImages = {beginnerURL+"1.png", beginnerURL+"2.png", beginnerURL+"3.png", beginnerURL+"4.png", beginnerURL+"5.png", beginnerURL+"6.png"};
 	private String[] advancedImages = {advanceURL+"1.png", advanceURL+"2.png", advanceURL+"3.png", advanceURL+"4.png", advanceURL+"5.png"};
-	private String[] scoreBoardImages = null;
+	private String[] statisticImages = {statisticURL+"1.png"};
+	
 	
 	private String state = "";
 	
@@ -332,7 +337,12 @@ public class HelpPanel extends JFrame {
 	}
 	
 	private void scoreBoardHelpInitialisation() {
+		totalPages = 1;
+		page.setText("Page: " + imageNumber + "/" + totalPages);
+		helpTxt.setText(statisticLabel[imageNumber-1]);
 		
+		imageLoader = new SwingLoader(statisticImages[imageNumber-1]);
+		imageLoader.execute();
 		
 		
 		
