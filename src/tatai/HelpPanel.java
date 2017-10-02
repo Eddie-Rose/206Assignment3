@@ -206,7 +206,7 @@ public class HelpPanel extends JFrame {
 			imageNumber--;
 			next.setEnabled(true);
 
-			if (imageNumber == 0) {
+			if (imageNumber == 1) {
 				back.setEnabled(false);
 			}
 			
@@ -288,6 +288,8 @@ public class HelpPanel extends JFrame {
 		advanced.setVisible(true);
 		scoreBoard.setVisible(true);
 		panel_1.setVisible(true);
+		next.setEnabled(true);
+		back.setEnabled(true);
 		
 		
 		next.setVisible(false);
@@ -305,7 +307,14 @@ public class HelpPanel extends JFrame {
 		advanced.setVisible(false);
 		scoreBoard.setVisible(false);
 		panel_1.setVisible(false);
-		back.setEnabled(false);
+		
+		if (imageNumber == 1) {
+			back.setEnabled(false);
+		}
+		
+		if (imageNumber == totalPages) {
+			next.setEnabled(false);
+		}
 		
 		page.setVisible(true);
 		thumb.setVisible(true);
@@ -344,6 +353,7 @@ public class HelpPanel extends JFrame {
 		totalPages = 1;
 		page.setText("Page: " + imageNumber + "/" + totalPages);
 		helpTxt.setText(statisticLabel[imageNumber-1]);
+		next.setEnabled(false);
 		
 		imageLoader = new SwingLoader(statisticImages[imageNumber-1]);
 		imageLoader.execute();
