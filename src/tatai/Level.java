@@ -1,11 +1,14 @@
 package tatai;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
@@ -29,8 +32,11 @@ public abstract class Level extends JFrame {
 	String name;
 	int minNum;
 	int maxNum;
+	int frameWidth = 450;
+	int frameHeight = 300;
 	JButton btnBegin = new JButton("Start");
 	JButton btnRecord = new JButton("Record");
+	JLabel lblAdvancedLevel;
 	JLabel lblNewLabel = new JLabel();
 	JLabel correct = new JLabel();
 	JLabel lblHearPreviousRecording;
@@ -57,15 +63,15 @@ public abstract class Level extends JFrame {
 		name = lvlName;
 		minNum = minimumNum;
 		maxNum = maximumNum;
-		setResizable(false);
+		//setResizable(false);
 		setVisible(true);
 		getContentPane().setBackground(Color.WHITE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, frameWidth, frameHeight);
 		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
-		JLabel lblAdvancedLevel = new JLabel(name);
+		lblAdvancedLevel = new JLabel(name);
 		lblAdvancedLevel.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
 		lblAdvancedLevel.setBounds(160, 40, 192, 25);
 		getContentPane().add(lblAdvancedLevel);
@@ -149,6 +155,27 @@ public abstract class Level extends JFrame {
 					progressBar.setValue(i);
 				}
 
+			}
+		});
+		
+		getContentPane().addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent e) {
+				Component c = (Component)e.getSource();
+				//btnBegin.setBounds(158, 190, 117, 25);
+				btnBegin.setBounds(c.getWidth()/28*10, c.getHeight()/15*10, c.getWidth()/4, c.getHeight()/12);
+				mainMenu.setBounds(c.getWidth()/28*10, c.getHeight()/15*10, c.getWidth()/4, c.getHeight()/12);
+				btnRecord.setBounds(c.getWidth()/28*10, c.getHeight()/15*10, c.getWidth()/4, c.getHeight()/12);
+				lblNewLabel.setBounds(c.getWidth()/22*10, c.getHeight()/27*10, c.getWidth()/4, c.getHeight()/75*10);
+				lblScore.setBounds(c.getWidth()/13*10, c.getHeight()/30, c.getWidth()/5, c.getHeight()/20);
+				lblAttempts.setBounds(c.getWidth()/15, c.getHeight()/12*10, c.getWidth()/45*10, c.getHeight()/6);
+				lblAdvancedLevel.setBounds(c.getWidth()/28*10, c.getHeight()/75*10, c.getWidth()/23*10, c.getHeight()/12);
+				correct.setBounds(c.getWidth()/9, c.getHeight()/3, c.getWidth()/13*10, c.getHeight()/6);
+				txtrWelcomeToThe.setBounds(c.getWidth()/45*10, c.getHeight()/3, c.getWidth()/17*10, c.getHeight()/43*10);
+				btnPlay.setBounds(c.getWidth()/18*10, c.getHeight()/12*10, c.getWidth()/4, c.getHeight()/12);
+				lblHearPreviousRecording.setBounds(c.getWidth()/75*10, c.getHeight()/12*10, c.getWidth()/25*10, c.getHeight()/20);
+				progressBar.setBounds(c.getWidth()/3, c.getHeight()/13*10, c.getWidth()/3, c.getHeight()/12);
+//				System.out.println(""+c.getWidth()+c.getHeight());
+				
 			}
 		});
 		
