@@ -106,7 +106,7 @@ public class Practise extends JFrame {
 		
 	}
 	
-	public class MenuListener implements ActionListener {
+	private class MenuListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
