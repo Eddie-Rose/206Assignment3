@@ -14,8 +14,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import tatai.TataiGUI.PractiseListener;
-
 public class Practise extends JFrame {
 
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
@@ -33,6 +34,7 @@ public class TataiGUI extends JFrame {
 	private JButton btnMath;
 	private JButton btnHelp;
 	private JButton btnStatistics;
+	private JButton btnQuit;
 	
 	
 	public static void main(String[] args) {
@@ -78,9 +80,7 @@ public class TataiGUI extends JFrame {
 		descriptionLabel1 = new JLabel("<html>An interactive application which helps develop your Māori number pronounciation </html>");
 		descriptionLabel1.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
 		descriptionLabel1.setForeground(Color.WHITE);
-		descriptionLabel1.setVerticalAlignment(SwingConstants.TOP);
-		descriptionLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-		descriptionLabel1.setBounds(12, 99, 426, 44);
+		descriptionLabel1.setHorizontalAlignment(JLabel.CENTER);
 		getContentPane().add(descriptionLabel1);
 		
 		
@@ -88,6 +88,11 @@ public class TataiGUI extends JFrame {
 		//btnBeginner.setBounds(35, 174, 117, 25);	
 		btnPractise.addActionListener(new PractiseListener());
 		getContentPane().add(btnPractise);
+		
+		
+		btnQuit = new JButton ("Quit");
+		btnQuit.addActionListener(new QuitListener());
+		getContentPane().add(btnQuit);
 		
 		
 		btnMath = new JButton("Math");
@@ -121,7 +126,8 @@ public class TataiGUI extends JFrame {
 				btnHelp.setBounds(c.getWidth()/13*10, c.getHeight()/115*100, c.getWidth()/8, c.getHeight()/10);
 				btnMath.setBounds(c.getWidth()/15*10, c.getHeight()/17*10, c.getWidth()/4, c.getHeight()/12);
 				welcomeLabel.setBounds(c.getWidth()/56*10, c.getHeight()/6, c.getWidth()/16*10, c.getHeight()/5);
-				descriptionLabel1.setBounds(c.getWidth()/50, c.getHeight()/3, c.getWidth()/105*100, c.getHeight()/7);
+				descriptionLabel1.setBounds(c.getWidth()/15, c.getHeight()/3, c.getWidth()/105*100, c.getHeight()/7);
+				btnQuit.setBounds(c.getWidth()/13*8, c.getHeight()/115*100, c.getWidth()/8, c.getHeight()/10);
 			//	System.out.println(""+c.getWidth()+c.getHeight());
 				
 			}
@@ -160,7 +166,7 @@ public class TataiGUI extends JFrame {
 		}
 	}
 		
-		public class StatisticsListener implements ActionListener {
+	public class StatisticsListener implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -169,6 +175,30 @@ public class TataiGUI extends JFrame {
 			}
 		
 	}
+	
+	public class QuitListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			int YesOrNo = JOptionPane.showConfirmDialog(null, "Are you sure you want to Quit?","Quit", JOptionPane.YES_NO_OPTION);
+			
+			
+			
+			if (YesOrNo == 1) {
+				return;
+			}
+			
+			else if (YesOrNo == 0)  {
+				dispose();
+			}
+			
+			else {
+				return;
+			}
+			
+		}
+	
+}
 	
 	
 
