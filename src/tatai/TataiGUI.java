@@ -1,9 +1,6 @@
 package tatai;
 
 import java.awt.Color;
-import java.awt.*;
-import java.awt.geom.*;
-import javax.swing.*;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -22,15 +19,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.plaf.basic.BasicButtonUI;
 
 public class TataiGUI extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 	private JLabel welcomeLabel;
 	private JLabel descriptionLabel1;
-	private JButton btnBeginner;
-	private JButton btnAdvanced;
+	private JButton btnPractise;
+	private JButton btnMath;
 	private JButton btnHelp;
 	private JButton btnStatistics;
 	
@@ -84,16 +84,16 @@ public class TataiGUI extends JFrame {
 		getContentPane().add(descriptionLabel1);
 		
 		
-		btnBeginner = new JButton("Beginner");
+		btnPractise = new JButton("Practise");
 		//btnBeginner.setBounds(35, 174, 117, 25);	
-		btnBeginner.addActionListener(new BeginnerListener());
-		getContentPane().add(btnBeginner);
+		btnPractise.addActionListener(new PractiseListener());
+		getContentPane().add(btnPractise);
 		
 		
-		btnAdvanced = new JButton("Advanced");
+		btnMath = new JButton("Math");
 		//btnAdvanced.setBounds(299, 174, 117, 25);
-		btnAdvanced.addActionListener(new AdvancedListener());
-		getContentPane().add(btnAdvanced);
+		btnMath.addActionListener(new MathListener());
+		getContentPane().add(btnMath);
 		
 		btnHelp = new JButton("Help");
 		
@@ -116,10 +116,10 @@ public class TataiGUI extends JFrame {
 			public void componentResized(ComponentEvent e) {
 				Component c = (Component)e.getSource();
 				
-				btnBeginner.setBounds(c.getWidth()/13, c.getHeight()/17*10, c.getWidth()/4, c.getHeight()/12);
+				btnPractise.setBounds(c.getWidth()/13, c.getHeight()/17*10, c.getWidth()/4, c.getHeight()/12);
 				btnStatistics.setBounds(c.getWidth()/26*10, c.getHeight()/17*10, c.getWidth()/4, c.getHeight()/12);
 				btnHelp.setBounds(c.getWidth()/13*10, c.getHeight()/115*100, c.getWidth()/8, c.getHeight()/10);
-				btnAdvanced.setBounds(c.getWidth()/15*10, c.getHeight()/17*10, c.getWidth()/4, c.getHeight()/12);
+				btnMath.setBounds(c.getWidth()/15*10, c.getHeight()/17*10, c.getWidth()/4, c.getHeight()/12);
 				welcomeLabel.setBounds(c.getWidth()/56*10, c.getHeight()/6, c.getWidth()/16*10, c.getHeight()/5);
 				descriptionLabel1.setBounds(c.getWidth()/50, c.getHeight()/3, c.getWidth()/105*100, c.getHeight()/7);
 			//	System.out.println(""+c.getWidth()+c.getHeight());
@@ -140,7 +140,7 @@ public class TataiGUI extends JFrame {
 		
 	}
 	
-	public class AdvancedListener implements ActionListener {
+	public class MathListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -150,11 +150,12 @@ public class TataiGUI extends JFrame {
 		
 	}
 	
-	public class BeginnerListener implements ActionListener {
+	public class PractiseListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Level beginnerWindow = new Beginner("Beginner", 1, 9);
+			
+			Practise practiseWindow = new Practise();
 			
 		}
 	}
