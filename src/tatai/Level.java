@@ -12,9 +12,12 @@ import java.util.concurrent.ExecutionException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
+import javax.swing.Timer;
 
 import tatai.Level.Worker;
 
@@ -36,6 +39,11 @@ public abstract class Level extends JFrame {
 	JButton btnPlay;
 	JLabel txtrWelcomeToThe = new JLabel();
 	JButton mainMenu = new JButton("Main Menu");
+	
+	JProgressBar progressBar;
+	final static int interval = 20;
+	int i;
+	Timer t;
 	
 	int wrongAttempt = 0;
 	int correctAttempt = 0;
@@ -115,6 +123,11 @@ public abstract class Level extends JFrame {
 		getContentPane().add(lblHearPreviousRecording);
 		lblHearPreviousRecording.setVisible(false);
 		
+		progressBar = new JProgressBar();
+		progressBar.setBounds(140, 230, 150, 25);
+		progressBar.setValue(0);
+		getContentPane().add(progressBar);
+		progressBar.setVisible(false);
 		
 		
 		
@@ -122,6 +135,22 @@ public abstract class Level extends JFrame {
 		mainMenu.addActionListener(new ButtonMenuListener());
 		btnRecord.addActionListener(new ButtonRecordListener());
 		btnPlay.addActionListener(new ButtonPlayListener());	
+		
+		t = new Timer(interval, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				if(i==100) {
+					t.stop();
+
+				} else {
+					i++;
+					progressBar.setValue(i);
+				}
+
+			}
+		});
 		
 
 	}
@@ -140,6 +169,7 @@ public abstract class Level extends JFrame {
 		correct.setVisible(false);
 		btnPlay.setVisible(false);
 		lblHearPreviousRecording.setVisible(false);
+		progressBar.setVisible(true);
 		
 		lblNewLabel.setVisible(true);
 		btnRecord.setVisible(true);
@@ -151,10 +181,11 @@ public abstract class Level extends JFrame {
 	public void AttemptDisplay() {
 		btnRecord.setVisible(false);
 		lblNewLabel.setVisible(false);
+		progressBar.setVisible(false);
 		
 		btnPlay.setVisible(true);
 		lblHearPreviousRecording.setVisible(true);
-		
+			
 		btnBegin.setVisible(true);
 		correct.setVisible(true);
 		lblAttempts.setVisible(true);
@@ -169,6 +200,7 @@ public abstract class Level extends JFrame {
 		lblHearPreviousRecording.setVisible(false);
 		lblScore.setVisible(false);
 		lblAttempts.setVisible(false);
+		progressBar.setVisible(false);
 		
 		correct.setVisible(true);
 		mainMenu.setVisible(true);
@@ -178,13 +210,14 @@ public abstract class Level extends JFrame {
 		
 		protected void done() {
 			btnRecord.setEnabled(true);
+			progressBar.setValue(0);
 			
 			String saidNumber = "";
 			
 			try {
 				saidNumber = get();
 			} catch (InterruptedException | ExecutionException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 			
@@ -303,7 +336,9 @@ public abstract class Level extends JFrame {
 	public class ButtonRecordListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 
-
+			i = 0;
+			t.start();
+			//btn.setEnabled(false);
 			
 			Worker handler = new Worker();
 			handler.execute();

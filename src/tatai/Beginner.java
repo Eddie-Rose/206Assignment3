@@ -1,6 +1,7 @@
 package tatai;
 
 import java.awt.event.ActionEvent;
+import javax.swing.Timer;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -10,6 +11,7 @@ import javax.swing.SwingWorker;
 import tatai.Level.ButtonBeginListener;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import javax.swing.JProgressBar;
 
 public class Beginner extends Level {
 
@@ -28,7 +30,9 @@ public class Beginner extends Level {
 		finishButton.setBounds(158, 165, 117, 25);
 		finishButton.setVisible(false);
 		
+		
 		finishButton.addActionListener(new ButtonFinishListener());
+		
 	}
 	
 	public void finalDisplay() {

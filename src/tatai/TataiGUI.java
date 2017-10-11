@@ -1,11 +1,17 @@
 package tatai;
 
 import java.awt.Color;
+import java.awt.*;
+import java.awt.geom.*;
+import javax.swing.*;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -16,13 +22,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.plaf.basic.BasicButtonUI;
 
 public class TataiGUI extends JFrame {
 	
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 	private JLabel welcomeLabel;
 	private JLabel descriptionLabel1;
-	private JLabel descriptionLabel2;
 	private JButton btnBeginner;
 	private JButton btnAdvanced;
 	private JButton btnHelp;
@@ -43,9 +49,9 @@ public class TataiGUI extends JFrame {
 	
 	public TataiGUI() {
 		super("Tātai");
-		setSize(450, 300);
+		setSize(700, 500);
 		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-		setResizable(false);
+		//setResizable(false);
 		getContentPane().setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
@@ -59,8 +65,8 @@ public class TataiGUI extends JFrame {
         }
 	
 		
-		welcomeLabel = new JLabel("Welcome to Tātai!");
-		welcomeLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 25));
+		welcomeLabel = new JLabel("<html>Welcome to Tātai!</html>");
+		welcomeLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 40));
 		welcomeLabel.setForeground(Color.WHITE);
 		welcomeLabel.setVerticalAlignment(SwingConstants.TOP);
 		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -69,8 +75,8 @@ public class TataiGUI extends JFrame {
 		getContentPane().add(welcomeLabel);
 		
 		
-		descriptionLabel1 = new JLabel("An interactive application which helps develop your ");
-		descriptionLabel1.setFont(new Font("DejaVu Sans", Font.BOLD, 15));
+		descriptionLabel1 = new JLabel("<html>An interactive application which helps develop your Māori number pronounciation </html>");
+		descriptionLabel1.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
 		descriptionLabel1.setForeground(Color.WHITE);
 		descriptionLabel1.setVerticalAlignment(SwingConstants.TOP);
 		descriptionLabel1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -78,36 +84,48 @@ public class TataiGUI extends JFrame {
 		getContentPane().add(descriptionLabel1);
 		
 		
-		descriptionLabel2 = new JLabel("Māori number pronounciation");
-		descriptionLabel2.setFont(new Font("DejaVu Sans", Font.BOLD, 15));
-		descriptionLabel2.setForeground(Color.WHITE);
-		descriptionLabel2.setVerticalAlignment(SwingConstants.TOP);
-		descriptionLabel2.setHorizontalAlignment(SwingConstants.CENTER);
-		descriptionLabel2.setBounds(102, 116, 250, 37);
-		getContentPane().add(descriptionLabel2);
-		
-		
 		btnBeginner = new JButton("Beginner");
-		btnBeginner.setBounds(35, 174, 117, 25);
+		//btnBeginner.setBounds(35, 174, 117, 25);	
 		btnBeginner.addActionListener(new BeginnerListener());
 		getContentPane().add(btnBeginner);
 		
 		
 		btnAdvanced = new JButton("Advanced");
-		btnAdvanced.setBounds(299, 174, 117, 25);
+		//btnAdvanced.setBounds(299, 174, 117, 25);
 		btnAdvanced.addActionListener(new AdvancedListener());
 		getContentPane().add(btnAdvanced);
 		
 		btnHelp = new JButton("Help");
-		btnHelp.setBounds(179, 220, 93, 25);
+		
+		//btnHelp.setBounds(550, 400, 90, 50);
 		btnHelp.addActionListener(new HelpListener());
 		getContentPane().add(btnHelp);
+//		btnHelp.setContentAreaFilled(false);
+//		btnHelp.setFocusPainted(false);
+//		btnHelp.setBorderPainted(false);
+		btnHelp.setIcon(new ImageIcon("/home/hpt09/Documents/softeng206/206Assignment3/rsz_help-icon.png"));
 		
 		
 		btnStatistics = new JButton("Statistics");
-		btnStatistics.setBounds(172, 174, 110, 25);
+		//btnStatistics.setBounds(172, 174, 110, 25);
 		btnStatistics.addActionListener(new StatisticsListener());
 		getContentPane().add(btnStatistics);
+		
+		
+		getContentPane().addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent e) {
+				Component c = (Component)e.getSource();
+				
+				btnBeginner.setBounds(c.getWidth()/13, c.getHeight()/17*10, c.getWidth()/4, c.getHeight()/12);
+				btnStatistics.setBounds(c.getWidth()/26*10, c.getHeight()/17*10, c.getWidth()/4, c.getHeight()/12);
+				btnHelp.setBounds(c.getWidth()/13*10, c.getHeight()/115*100, c.getWidth()/8, c.getHeight()/10);
+				btnAdvanced.setBounds(c.getWidth()/15*10, c.getHeight()/17*10, c.getWidth()/4, c.getHeight()/12);
+				welcomeLabel.setBounds(c.getWidth()/56*10, c.getHeight()/6, c.getWidth()/16*10, c.getHeight()/5);
+				descriptionLabel1.setBounds(c.getWidth()/50, c.getHeight()/3, c.getWidth()/105*100, c.getHeight()/7);
+			//	System.out.println(""+c.getWidth()+c.getHeight());
+				
+			}
+		});
 		
 	}
 	
