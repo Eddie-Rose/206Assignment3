@@ -278,7 +278,7 @@ public abstract class Level extends JFrame {
 				totalAttempts++;
 				correctAttempt++;
 				wrongAttempt= 0;
-				answerField.append("/nQuestion: " + totalAttempts + ") " + testNumber + "     " + "correct :)");
+				answerField.append("Question: " + totalAttempts + ") " + testNumber + "     " + "correct :)\n");
 				
 
 			} else if(saidNumber.equals("")) {
@@ -291,7 +291,7 @@ public abstract class Level extends JFrame {
 					btnBegin.setText("Continue");
 					wrongAttempt= 0;
 					btnBegin.setVisible(true);
-					answerField.append("/nQuestion: " + totalAttempts + ") " + testNumber + "     " + "incorrect :(");
+					answerField.append("Question: " + totalAttempts + ") " + testNumber + "     " + "incorrect :(\n");
 				}
 				else {
 					AttemptDisplay();
@@ -310,7 +310,7 @@ public abstract class Level extends JFrame {
 					correct.setHorizontalTextPosition(SwingConstants.CENTER);
 					wrongAttempt = 0;
 					btnBegin.setText("Continue");
-					answerField.append("/nQuestion: " + totalAttempts + ") " + testNumber + "     " + "incorrect :(");
+					answerField.append("Question: " + totalAttempts + ") " + testNumber + "     " + "incorrect :(\n");
 
 				}
 				else {
