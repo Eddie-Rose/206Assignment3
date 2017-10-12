@@ -34,7 +34,7 @@ public class Practise extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
-		lblPractise = new JLabel("Practise");
+		lblPractise = new JLabel("Practice");
 		lblPractise.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
 		getContentPane().add(lblPractise);
 		

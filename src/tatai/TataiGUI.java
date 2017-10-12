@@ -84,7 +84,7 @@ public class TataiGUI extends JFrame {
 		getContentPane().add(descriptionLabel1);
 		
 		
-		btnPractise = new JButton("Practise");
+		btnPractise = new JButton("Practice");
 		//btnBeginner.setBounds(35, 174, 117, 25);	
 		btnPractise.addActionListener(new PractiseListener());
 		getContentPane().add(btnPractise);

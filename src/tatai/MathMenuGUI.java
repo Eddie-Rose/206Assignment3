@@ -115,6 +115,7 @@ public class MathMenuGUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
+			Level beginnerMathWindow = new BeginnerMath("Beginner", 0 , 0);
 			
 			
 		}

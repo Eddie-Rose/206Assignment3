@@ -107,7 +107,7 @@ public abstract class Level extends JFrame {
 		
 		testNumber = setNum();
 		maoriNumber.setNumber(testNumber);
-		lblNewLabel.setText("" + testNumber);
+
 		
 		lblScore = new JLabel("Score: "+correctAttempt+"/10");
 		lblScore.setVisible(false);
@@ -182,7 +182,7 @@ public abstract class Level extends JFrame {
 				lblAttempts.setBounds(c.getWidth()/15, c.getHeight()/12*10, c.getWidth()/45*10, c.getHeight()/6);
 				lblAdvancedLevel.setBounds(c.getWidth()/28*10, c.getHeight()/75*10, c.getWidth()/23*10, c.getHeight()/12);
 				correct.setBounds(c.getWidth()/9, c.getHeight()/5, c.getWidth()/13*10, c.getHeight()/6);
-				txtrWelcomeToThe.setBounds(c.getWidth()/45*10, c.getHeight()/3, c.getWidth()/17*10, c.getHeight()/43*10);
+				txtrWelcomeToThe.setBounds(c.getWidth()/45*10, c.getHeight()/3, c.getWidth()/17*10, c.getHeight()/43*12);
 				btnPlay.setBounds(c.getWidth()/18*10, c.getHeight()/12*10, c.getWidth()/4, c.getHeight()/12);
 				lblHearPreviousRecording.setBounds(c.getWidth()/75*10, c.getHeight()/12*10, c.getWidth()/25*10, c.getHeight()/20);
 				progressBar.setBounds(c.getWidth()/3, c.getHeight()/13*10, c.getWidth()/3, c.getHeight()/12);
@@ -200,8 +200,9 @@ public abstract class Level extends JFrame {
 	}
 	
 
-	public int setNum() {
+	protected int setNum() {
 		int random = (int )(Math.random() * maxNum + minNum);
+		lblNewLabel.setText("" + random);
 		return random;
 
 	}
@@ -277,7 +278,7 @@ public abstract class Level extends JFrame {
 				totalAttempts++;
 				correctAttempt++;
 				wrongAttempt= 0;
-				answerField.append("/nQuestion: " + totalAttempts + ") " + testNumber + "     " + "correct :)");
+				answerField.append("Question: " + totalAttempts + ") " + testNumber + "     " + "correct :)\n");
 				
 
 			} else if(saidNumber.equals("")) {
@@ -290,7 +291,7 @@ public abstract class Level extends JFrame {
 					btnBegin.setText("Continue");
 					wrongAttempt= 0;
 					btnBegin.setVisible(true);
-					answerField.append("/nQuestion: " + totalAttempts + ") " + testNumber + "     " + "incorrect :(");
+					answerField.append("Question: " + totalAttempts + ") " + testNumber + "     " + "incorrect :(\n");
 				}
 				else {
 					AttemptDisplay();
@@ -309,7 +310,7 @@ public abstract class Level extends JFrame {
 					correct.setHorizontalTextPosition(SwingConstants.CENTER);
 					wrongAttempt = 0;
 					btnBegin.setText("Continue");
-					answerField.append("/nQuestion: " + totalAttempts + ") " + testNumber + "     " + "incorrect :(");
+					answerField.append("Question: " + totalAttempts + ") " + testNumber + "     " + "incorrect :(\n");
 
 				}
 				else {
@@ -361,7 +362,7 @@ public abstract class Level extends JFrame {
 				} else {
 					testNumber = setNum();
 					maoriNumber.setNumber(testNumber);
-					lblNewLabel.setText("" + testNumber);
+					
 					displayAttempts = totalAttempts+1;
 					lblAttempts.setText("Question# " + displayAttempts);
 					lblScore.setText("Score: "+correctAttempt+"/10");
@@ -431,7 +432,6 @@ public abstract class Level extends JFrame {
 			} else {
 				testNumber = setNum();
 				maoriNumber.setNumber(testNumber);
-				lblNewLabel.setText("" + testNumber);
 				displayAttempts = totalAttempts+1;
 				lblAttempts.setText("Question# " + displayAttempts);
 				lblScore.setText("Score: "+correctAttempt+"/10");
