@@ -9,22 +9,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.Timer;
 import javax.swing.border.LineBorder;
-
-import tatai.Level.Worker;
 
 
 
@@ -48,7 +43,8 @@ public abstract class Level extends JFrame {
 	JButton btnPlay;
 	JLabel txtrWelcomeToThe = new JLabel();
 	JButton mainMenu = new JButton("Main Menu");
-	private JTextArea answerField = new JTextArea();
+	protected JButton skip;
+	protected JTextArea answerField = new JTextArea();
 	
 	int[] questions = {0,0,0,0,0,0,0,0,0,0};
 	boolean[] answers = {false,false,false,false,false,false,false,false,false,false};
@@ -60,7 +56,7 @@ public abstract class Level extends JFrame {
 	
 	int wrongAttempt = 0;
 	int correctAttempt = 0;
-	int totalAttempts = 9;
+	int totalAttempts = 0;
 	int displayAttempts = totalAttempts+1;
 	Number maoriNumber = new Number();
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -83,8 +79,6 @@ public abstract class Level extends JFrame {
 		lblAdvancedLevel.setBounds(160, 40, 192, 25);
 		getContentPane().add(lblAdvancedLevel);
 		
-		answerField.setText("HI");
-		answerField.append("THERE");
 		answerField.setVisible(false);
 		answerField.setEditable(false);
 		getContentPane().add(answerField);
@@ -148,12 +142,17 @@ public abstract class Level extends JFrame {
 		getContentPane().add(progressBar);
 		progressBar.setVisible(false);
 		
+		skip = new JButton("Skip");
+		skip.setVisible(false);
+		getContentPane().add(skip);
+		
 		
 		
 		btnBegin.addActionListener(new ButtonBeginListener());
 		mainMenu.addActionListener(new ButtonMenuListener());
 		btnRecord.addActionListener(new ButtonRecordListener());
-		btnPlay.addActionListener(new ButtonPlayListener());	
+		btnPlay.addActionListener(new ButtonPlayListener());
+		skip.addActionListener(new ButtonSkipListener());
 		
 		t = new Timer(interval, new ActionListener() {
 
@@ -188,7 +187,10 @@ public abstract class Level extends JFrame {
 				lblHearPreviousRecording.setBounds(c.getWidth()/75*10, c.getHeight()/12*10, c.getWidth()/25*10, c.getHeight()/20);
 				progressBar.setBounds(c.getWidth()/3, c.getHeight()/13*10, c.getWidth()/3, c.getHeight()/12);
 				answerField.setBounds(c.getWidth()/45*10, c.getHeight()/8*3, c.getWidth()/17*10, c.getHeight()/43*10);
+				
+				//DELETE
 				answerField.setBorder(new LineBorder(new Color(0, 0, 0)));
+				skip.setBounds(c.getWidth()/28*15, c.getHeight()/15*12, c.getWidth()/4, c.getHeight()/12);
 //				System.out.println(""+c.getWidth()+c.getHeight());
 				
 			}
@@ -217,6 +219,7 @@ public abstract class Level extends JFrame {
 		btnRecord.setVisible(true);
 		lblScore.setVisible(true);
 		lblAttempts.setVisible(true);
+		skip.setVisible(true);
 		
 	}
 	
@@ -232,6 +235,7 @@ public abstract class Level extends JFrame {
 		correct.setVisible(true);
 		lblAttempts.setVisible(true);
 		lblScore.setVisible(true);
+		skip.setVisible(false);
 	}
 	
 	public void finalDisplay() {
@@ -244,6 +248,7 @@ public abstract class Level extends JFrame {
 		lblAttempts.setVisible(false);
 		progressBar.setVisible(false);
 		answerField.setVisible(true);
+		skip.setVisible(false);
 		
 		correct.setVisible(true);
 		mainMenu.setVisible(true);
@@ -272,7 +277,7 @@ public abstract class Level extends JFrame {
 				totalAttempts++;
 				correctAttempt++;
 				wrongAttempt= 0;
-				answerField.append("Question: " + totalAttempts + ") " + testNumber + "     " + "correct :)");
+				answerField.append("/nQuestion: " + totalAttempts + ") " + testNumber + "     " + "correct :)");
 				
 
 			} else if(saidNumber.equals("")) {
@@ -285,7 +290,7 @@ public abstract class Level extends JFrame {
 					btnBegin.setText("Continue");
 					wrongAttempt= 0;
 					btnBegin.setVisible(true);
-					answerField.append("Question: " + totalAttempts + ") " + testNumber + "     " + "incorrect :(");
+					answerField.append("/nQuestion: " + totalAttempts + ") " + testNumber + "     " + "incorrect :(");
 				}
 				else {
 					AttemptDisplay();
@@ -304,7 +309,7 @@ public abstract class Level extends JFrame {
 					correct.setHorizontalTextPosition(SwingConstants.CENTER);
 					wrongAttempt = 0;
 					btnBegin.setText("Continue");
-					answerField.append("Question: " + totalAttempts + ") " + testNumber + "     " + "incorrect :(");
+					answerField.append("/nQuestion: " + totalAttempts + ") " + testNumber + "     " + "incorrect :(");
 
 				}
 				else {
@@ -354,7 +359,7 @@ public abstract class Level extends JFrame {
 					
 					finalDisplay();
 				} else {
-					int testNumber = setNum();
+					testNumber = setNum();
 					maoriNumber.setNumber(testNumber);
 					lblNewLabel.setText("" + testNumber);
 					displayAttempts = totalAttempts+1;
@@ -402,6 +407,39 @@ public abstract class Level extends JFrame {
 			btnPlay.setEnabled(false);
 			PlayWorker player = new PlayWorker();
 			player.execute();
+			
+			
+
+		}
+	}
+	
+	
+	public class ButtonSkipListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			
+			
+			answerField.append("Question: " + displayAttempts + ") " + testNumber + "     " + "incorrect :(\n");
+			totalAttempts++;
+			
+			if(totalAttempts == 10) {
+				BashCommands commands = BashCommands.getInstance();
+				commands.addStats(correctAttempt, name);
+				correct.setText("You scored "+ correctAttempt + "/10");
+				lblAttempts.setVisible(false);
+				
+				finalDisplay();
+			} else {
+				testNumber = setNum();
+				maoriNumber.setNumber(testNumber);
+				lblNewLabel.setText("" + testNumber);
+				displayAttempts = totalAttempts+1;
+				lblAttempts.setText("Question# " + displayAttempts);
+				lblScore.setText("Score: "+correctAttempt+"/10");
+				
+
+				QuestionDisplay();
+			}
+			
 			
 			
 

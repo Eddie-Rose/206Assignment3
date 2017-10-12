@@ -43,11 +43,14 @@ public class Beginner extends Level {
 			btnPlay.setVisible(false);
 			lblHearPreviousRecording.setVisible(false);
 			lblScore.setVisible(false);
+			skip.setVisible(false);
+			progressBar.setVisible(false);
 			
 			correct.setVisible(true);
 			mainMenu.setVisible(true);
 			finish.setVisible(true);
 			finishButton.setVisible(true);
+			answerField.setVisible(true);
 		} else {
 			btnRecord.setVisible(false);
 			lblNewLabel.setVisible(false);
@@ -55,11 +58,14 @@ public class Beginner extends Level {
 			btnPlay.setVisible(false);
 			lblHearPreviousRecording.setVisible(false);
 			lblScore.setVisible(false);
+			skip.setVisible(false);
+			progressBar.setVisible(false);
 			
 			correct.setVisible(true);
 			mainMenu.setVisible(true);
 			finish.setVisible(false);
 			finishButton.setVisible(false);
+			answerField.setVisible(true);
 		}
 		
 	}
