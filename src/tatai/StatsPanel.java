@@ -7,6 +7,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -22,14 +23,16 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.JTable;
 
 public class StatsPanel extends JFrame {
 
 	private JPanel contentPane;
 	private BufferedReader input;
 	private String path;
-	private JTextArea textArea;
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+	private JTable table;
+	DefaultTableModel tableModel;
 
 	/**
 	 * Create the frame.
@@ -54,21 +57,13 @@ public class StatsPanel extends JFrame {
 		lblStatisitcs.setBounds(141, 0, 143, 36);
 		contentPane.add(lblStatisitcs);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(20, 44, 320, 220);
-		contentPane.add(scrollPane);
-		
-		textArea = new JTextArea();
-		scrollPane.setViewportView(textArea);
-		textArea.setEditable(false);
-		
 		JButton btnClear = new JButton("Clear");
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				BashCommands commands = BashCommands.getInstance();
 				commands.clearStats();
-				
-				display();
+				tableModel.setRowCount(0);
+				//display();
 			}
 		});
 		btnClear.setBounds(356, 93, 80, 40);
@@ -83,6 +78,21 @@ public class StatsPanel extends JFrame {
 		btnMainMenu.setBounds(356, 167, 80, 40);
 		contentPane.add(btnMainMenu);
 		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(26, 83, 304, 179);
+		contentPane.add(scrollPane_1);
+		
+		table = new JTable();
+		scrollPane_1.setViewportView(table);
+
+		
+		String columns[] = {"Rank","Date", "Time", "Level", "Score"};
+		
+		 
+		    // specify number of columns
+		    tableModel = new DefaultTableModel(0,5); 
+		    tableModel.setColumnIdentifiers(columns);
+			table.setModel(tableModel);
 		display();
 		
 	}
@@ -90,10 +100,15 @@ public class StatsPanel extends JFrame {
 	public void display() {
 		try
         {
+			String line;
 			FileReader fr = new FileReader(path);
 			BufferedReader br = new BufferedReader(fr);
-			textArea.read(br, null);   
-            textArea.requestFocus();
+//			textArea.read(br, null);   
+//            textArea.requestFocus();
+            while((line = br.readLine()) != null) 
+            {
+               tableModel.addRow(line.split(" ")); 
+            }
             br.close();
         }
         catch(Exception e)

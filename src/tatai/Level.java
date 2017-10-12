@@ -30,8 +30,8 @@ public abstract class Level extends JFrame {
 	int testNumber;
 	int minNum;
 	int maxNum;
-	int frameWidth = 450;
-	int frameHeight = 300;
+	int frameWidth = 800;
+	int frameHeight = 500;
 	JButton btnBegin = new JButton("Start");
 	JButton btnRecord = new JButton("Record");
 	JLabel lblAdvancedLevel;
@@ -58,6 +58,7 @@ public abstract class Level extends JFrame {
 	int correctAttempt = 0;
 	int totalAttempts = 0;
 	int displayAttempts = totalAttempts+1;
+	int highScore;
 	Number maoriNumber = new Number();
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 	
@@ -190,7 +191,7 @@ public abstract class Level extends JFrame {
 				
 				//DELETE
 				answerField.setBorder(new LineBorder(new Color(0, 0, 0)));
-				skip.setBounds(c.getWidth()/28*15, c.getHeight()/15*12, c.getWidth()/4, c.getHeight()/12);
+				skip.setBounds(c.getWidth()/16*10, c.getHeight()/27*10, c.getWidth()/4, c.getHeight()/12);
 //				System.out.println(""+c.getWidth()+c.getHeight());
 				
 			}

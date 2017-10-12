@@ -51,7 +51,7 @@ public class TataiGUI extends JFrame {
 	
 	public TataiGUI() {
 		super("Tātai");
-		setSize(700, 500);
+		setSize(1100, 700);
 		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		//setResizable(false);
 		getContentPane().setBackground(Color.WHITE);
@@ -128,7 +128,7 @@ public class TataiGUI extends JFrame {
 				welcomeLabel.setBounds(c.getWidth()/56*10, c.getHeight()/6, c.getWidth()/16*10, c.getHeight()/5);
 				descriptionLabel1.setBounds(c.getWidth()/15, c.getHeight()/3, c.getWidth()/105*100, c.getHeight()/7);
 				btnQuit.setBounds(c.getWidth()/13*8, c.getHeight()/115*100, c.getWidth()/8, c.getHeight()/10);
-			//	System.out.println(""+c.getWidth()+c.getHeight());
+				System.out.println(""+c.getWidth()+c.getHeight());
 				
 			}
 		});
