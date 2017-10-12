@@ -18,9 +18,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.Timer;
+import javax.swing.border.LineBorder;
 
 import tatai.Level.Worker;
 
@@ -30,6 +32,7 @@ public abstract class Level extends JFrame {
 	
 	
 	String name;
+	int testNumber;
 	int minNum;
 	int maxNum;
 	int frameWidth = 450;
@@ -45,6 +48,10 @@ public abstract class Level extends JFrame {
 	JButton btnPlay;
 	JLabel txtrWelcomeToThe = new JLabel();
 	JButton mainMenu = new JButton("Main Menu");
+	private JTextArea answerField = new JTextArea();
+	
+	int[] questions = {0,0,0,0,0,0,0,0,0,0};
+	boolean[] answers = {false,false,false,false,false,false,false,false,false,false};
 	
 	JProgressBar progressBar;
 	final static int interval = 20;
@@ -53,7 +60,7 @@ public abstract class Level extends JFrame {
 	
 	int wrongAttempt = 0;
 	int correctAttempt = 0;
-	int totalAttempts = 0;
+	int totalAttempts = 9;
 	int displayAttempts = totalAttempts+1;
 	Number maoriNumber = new Number();
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -75,6 +82,12 @@ public abstract class Level extends JFrame {
 		lblAdvancedLevel.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
 		lblAdvancedLevel.setBounds(160, 40, 192, 25);
 		getContentPane().add(lblAdvancedLevel);
+		
+		answerField.setText("HI");
+		answerField.append("THERE");
+		answerField.setVisible(false);
+		answerField.setEditable(false);
+		getContentPane().add(answerField);
 		
 		
 		txtrWelcomeToThe.setFont(new Font("Dialog", Font.PLAIN, 14));
@@ -98,7 +111,7 @@ public abstract class Level extends JFrame {
 		lblNewLabel.setBounds(205, 110, 150, 40);
 		getContentPane().add(lblNewLabel);
 		
-		int testNumber = setNum();
+		testNumber = setNum();
 		maoriNumber.setNumber(testNumber);
 		lblNewLabel.setText("" + testNumber);
 		
@@ -163,17 +176,19 @@ public abstract class Level extends JFrame {
 				Component c = (Component)e.getSource();
 				//btnBegin.setBounds(158, 190, 117, 25);
 				btnBegin.setBounds(c.getWidth()/28*10, c.getHeight()/15*10, c.getWidth()/4, c.getHeight()/12);
-				mainMenu.setBounds(c.getWidth()/28*10, c.getHeight()/15*10, c.getWidth()/4, c.getHeight()/12);
+				mainMenu.setBounds(c.getWidth()/28*10, c.getHeight()/15*12, c.getWidth()/4, c.getHeight()/12);
 				btnRecord.setBounds(c.getWidth()/28*10, c.getHeight()/15*10, c.getWidth()/4, c.getHeight()/12);
 				lblNewLabel.setBounds(c.getWidth()/22*10, c.getHeight()/27*10, c.getWidth()/4, c.getHeight()/75*10);
-				lblScore.setBounds(c.getWidth()/13*10, c.getHeight()/30, c.getWidth()/5, c.getHeight()/20);
+				lblScore.setBounds(c.getWidth()/13*10, c.getHeight()/40, c.getWidth()/5, c.getHeight()/20);
 				lblAttempts.setBounds(c.getWidth()/15, c.getHeight()/12*10, c.getWidth()/45*10, c.getHeight()/6);
 				lblAdvancedLevel.setBounds(c.getWidth()/28*10, c.getHeight()/75*10, c.getWidth()/23*10, c.getHeight()/12);
-				correct.setBounds(c.getWidth()/9, c.getHeight()/3, c.getWidth()/13*10, c.getHeight()/6);
+				correct.setBounds(c.getWidth()/9, c.getHeight()/5, c.getWidth()/13*10, c.getHeight()/6);
 				txtrWelcomeToThe.setBounds(c.getWidth()/45*10, c.getHeight()/3, c.getWidth()/17*10, c.getHeight()/43*10);
 				btnPlay.setBounds(c.getWidth()/18*10, c.getHeight()/12*10, c.getWidth()/4, c.getHeight()/12);
 				lblHearPreviousRecording.setBounds(c.getWidth()/75*10, c.getHeight()/12*10, c.getWidth()/25*10, c.getHeight()/20);
 				progressBar.setBounds(c.getWidth()/3, c.getHeight()/13*10, c.getWidth()/3, c.getHeight()/12);
+				answerField.setBounds(c.getWidth()/45*10, c.getHeight()/8*3, c.getWidth()/17*10, c.getHeight()/43*10);
+				answerField.setBorder(new LineBorder(new Color(0, 0, 0)));
 //				System.out.println(""+c.getWidth()+c.getHeight());
 				
 			}
@@ -228,6 +243,7 @@ public abstract class Level extends JFrame {
 		lblScore.setVisible(false);
 		lblAttempts.setVisible(false);
 		progressBar.setVisible(false);
+		answerField.setVisible(true);
 		
 		correct.setVisible(true);
 		mainMenu.setVisible(true);
@@ -256,6 +272,7 @@ public abstract class Level extends JFrame {
 				totalAttempts++;
 				correctAttempt++;
 				wrongAttempt= 0;
+				answerField.append("Question: " + totalAttempts + ") " + testNumber + "     " + "correct :)");
 				
 
 			} else if(saidNumber.equals("")) {
@@ -268,6 +285,7 @@ public abstract class Level extends JFrame {
 					btnBegin.setText("Continue");
 					wrongAttempt= 0;
 					btnBegin.setVisible(true);
+					answerField.append("Question: " + totalAttempts + ") " + testNumber + "     " + "incorrect :(");
 				}
 				else {
 					AttemptDisplay();
@@ -286,6 +304,7 @@ public abstract class Level extends JFrame {
 					correct.setHorizontalTextPosition(SwingConstants.CENTER);
 					wrongAttempt = 0;
 					btnBegin.setText("Continue");
+					answerField.append("Question: " + totalAttempts + ") " + testNumber + "     " + "incorrect :(");
 
 				}
 				else {
