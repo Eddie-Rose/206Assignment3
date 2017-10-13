@@ -75,12 +75,16 @@ public class Number {
 	public static ArrayList<Integer> getFactors(int number) {
 		
 		
-		ArrayList<Integer> factors = new ArrayList();
+
+		ArrayList<Integer> factors = new ArrayList<>();
+		
+	
+		
 
         for (int i = 0; i < number; i++) {
-            if ((i + 1 % number) == 0) {
-                factors.add(i);
-                System.out.println("Factor= " + i);
+            if ((number % (i+1)) == 0) {
+                factors.add(i+1);
+                System.out.println("Factor= " + (i+1));
             }
         }
         

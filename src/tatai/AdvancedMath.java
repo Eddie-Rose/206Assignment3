@@ -1,7 +1,8 @@
 package tatai;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+
+
 
 public class AdvancedMath extends Level{
 	
@@ -23,8 +24,12 @@ public class AdvancedMath extends Level{
 	protected int setNum() {
 	
 		//int operationValue = (int)(Math.random() * 4);
-		int operationValue = 3;
+
+
+
+
 		
+		int operationValue = 3;
 		
 		
 		if (operationValue == 0) {
@@ -84,8 +89,14 @@ public class AdvancedMath extends Level{
 			factors = Number.getFactors(value1);
 			
 			
-			int size = factors.size(); 
+
+			int size = factors.size();
+			int index = (int)((Math.random() * size));
 			
+			value2 = factors.get(index);
+			answer = value1 / value2;
+			
+
 			
 			int index = (int)( (Math.random() * (size)));
 			value2 = factors.get(index);
