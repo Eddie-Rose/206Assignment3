@@ -100,6 +100,8 @@ public class StatsPanel extends JFrame {
 	public void display() {
 		try
         {
+			BashCommands commands = BashCommands.getInstance();
+			commands.sortStats();
 			String line;
 			String[] row = new String[] {};
 			int i = 1;
@@ -125,6 +127,8 @@ public class StatsPanel extends JFrame {
 	public void getHighScore() {
 		try
         {
+//			BashCommands commands = BashCommands.getInstance();
+//			commands.sortStats();
 			String line;
 			FileReader fr = new FileReader(path);
 			BufferedReader br = new BufferedReader(fr);

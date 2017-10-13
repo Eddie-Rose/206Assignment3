@@ -198,6 +198,35 @@ public class BashCommands {
 				f.printStackTrace();
 			}
 	}
+		
+		public void sortStats() {
+			try {
+				String command = "sort -k4 -nro stats.txt stats.txt";
+				ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+
+				Process process = pb.start();
+
+				BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+				BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+				int exitStatus = process.waitFor();
+
+				if (exitStatus == 0) {
+					String line;
+					while ((line = stdout.readLine()) != null) {
+						System.out.println(line);
+					}
+				} else {
+					String line;
+					while ((line = stderr.readLine()) != null) {
+						System.err.println(line);
+					}
+				}
+
+			} catch (Exception f) {
+				f.printStackTrace();
+			}
+		}
 
 
 
