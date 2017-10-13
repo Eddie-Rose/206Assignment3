@@ -98,10 +98,7 @@ public class AdvancedMath extends Level{
 			
 
 			
-			int index = (int)( (Math.random() * (size)));
-			value2 = factors.get(index);
-			answer = value1 / value2;
-			System.out.println(answer);
+			
 			
 			
 			lblNewLabel.setText("" + value1 + " / " + value2);
