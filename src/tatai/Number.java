@@ -1,5 +1,7 @@
 package tatai;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Number {
 	
@@ -68,6 +70,25 @@ public class Number {
 			maoriNumber = maori[tens - 1] + " " + maoriTen + " " + connecter + " " + maori[ones - 1];
 			return maoriNumber;
 		}
+	}
+	
+	public static ArrayList<Integer> getFactors(int number) {
+		
+		
+
+		ArrayList<Integer> factors = new ArrayList<>();
+		
+	
+		
+
+        for (int i = 0; i < number; i++) {
+            if ((number % (i+1)) == 0) {
+                factors.add(i+1);
+                System.out.println("Factor= " + (i+1));
+            }
+        }
+        
+        return factors;
 	}
 	
 	

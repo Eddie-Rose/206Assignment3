@@ -106,6 +106,7 @@ public class MathMenuGUI extends JFrame {
 			dispose();
 			
 			
+			
 		}
 		
 	}
@@ -115,6 +116,7 @@ public class MathMenuGUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
+			Level beginnerMathWindow = new BeginnerMath("Beginner", 0 , 0);
 			
 			
 		}
@@ -126,6 +128,7 @@ public class MathMenuGUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
+			Level mediumMathWindow = new MediumMath("Medium", 0, 0);
 			
 			
 		}
@@ -137,6 +140,7 @@ public class MathMenuGUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
+			Level advancedWindow = new AdvancedMath("Advanced", 0, 0);
 			
 			
 		}
