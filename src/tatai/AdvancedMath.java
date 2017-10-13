@@ -2,6 +2,8 @@ package tatai;
 
 import java.util.ArrayList;
 
+
+
 public class AdvancedMath extends Level{
 	
 	private int value1 = 0;
@@ -22,6 +24,10 @@ public class AdvancedMath extends Level{
 	protected int setNum() {
 	
 		//int operationValue = (int)(Math.random() * 4);
+
+
+
+
 		
 		int operationValue = 3;
 		
@@ -78,15 +84,24 @@ public class AdvancedMath extends Level{
 		else if (operationValue == 3) {
 			
 			value1 = (int)( 1 + (Math.random() * 99));
+			System.out.println(answers);
+			
 			factors = Number.getFactors(value1);
 			
 			
+
 			int size = factors.size();
 			int index = (int)((Math.random() * size));
 			
 			value2 = factors.get(index);
 			answer = value1 / value2;
 			
+
+			
+			int index = (int)( (Math.random() * (size)));
+			value2 = factors.get(index);
+			answer = value1 / value2;
+			System.out.println(answer);
 			
 			
 			lblNewLabel.setText("" + value1 + " / " + value2);
