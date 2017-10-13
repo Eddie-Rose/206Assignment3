@@ -1,5 +1,6 @@
 package tatai;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Number {
@@ -71,10 +72,10 @@ public class Number {
 		}
 	}
 	
-	public static HashSet<Integer> getFactors(int number) {
+	public static ArrayList<Integer> getFactors(int number) {
 		
 		
-		HashSet<Integer> factors = new HashSet<>();
+		ArrayList<Integer> factors = new ArrayList();
 
         for (int i = 0; i < number; i++) {
             if ((i + 1 % number) == 0) {
