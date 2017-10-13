@@ -1,6 +1,6 @@
 package tatai;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public class AdvancedMath extends Level{
 	
@@ -8,7 +8,7 @@ public class AdvancedMath extends Level{
 	private int value2 = 0;
 	private int answer = 0;
 	
-	HashSet<Integer> factors;
+	ArrayList<Integer> factors;
 	
 	public AdvancedMath(String name, int num, int num1){
 		super(name, num, num1);
@@ -21,8 +21,9 @@ public class AdvancedMath extends Level{
 	//private String[] operationValue = {"+", "-", "*", "/"};
 	protected int setNum() {
 	
-		int operationValue = (int)(Math.random() * 4);
+		//int operationValue = (int)(Math.random() * 4);
 		
+		int operationValue = 3;
 		
 		
 		if (operationValue == 0) {
@@ -81,13 +82,14 @@ public class AdvancedMath extends Level{
 			
 			
 			int size = factors.size();
-			Integer[] factorsArray = (Integer[]) factors.toArray();
+			int index = (int)((Math.random() * size));
 			
-			value2 = factorsArray[(int)( (Math.random() * (size)))];
+			value2 = factors.get(index);
+			answer = value1 / value2;
 			
 			
 			
-			lblNewLabel.setText("" + value1 + " * " + value2);
+			lblNewLabel.setText("" + value1 + " / " + value2);
 			
 		}
 		
