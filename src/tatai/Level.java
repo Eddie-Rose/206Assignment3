@@ -177,7 +177,7 @@ public abstract class Level extends JFrame {
 				btnBegin.setBounds(c.getWidth()/28*10, c.getHeight()/15*10, c.getWidth()/4, c.getHeight()/12);
 				mainMenu.setBounds(c.getWidth()/28*10, c.getHeight()/15*12, c.getWidth()/4, c.getHeight()/12);
 				btnRecord.setBounds(c.getWidth()/28*10, c.getHeight()/15*10, c.getWidth()/4, c.getHeight()/12);
-				lblNewLabel.setBounds(c.getWidth()/22*10, c.getHeight()/27*10, c.getWidth()/4, c.getHeight()/75*10);
+				lblNewLabel.setBounds(c.getWidth()/22*10, c.getHeight()/27*10, c.getWidth()/3, c.getHeight()/75*10);
 				lblScore.setBounds(c.getWidth()/13*10, c.getHeight()/40, c.getWidth()/5, c.getHeight()/20);
 				lblAttempts.setBounds(c.getWidth()/15, c.getHeight()/12*10, c.getWidth()/45*10, c.getHeight()/6);
 				lblAdvancedLevel.setBounds(c.getWidth()/28*10, c.getHeight()/75*10, c.getWidth()/23*10, c.getHeight()/12);

@@ -2,7 +2,7 @@ package tatai;
 
 public class BeginnerMath extends Level {
 	
-	private String[] operations = {"+", "-"};
+	
 	private int value1;
 	private int value2;
 	private int answer;
@@ -16,6 +16,8 @@ public class BeginnerMath extends Level {
 		
 	}
 	
+	
+	//private String[] operations = {"+", "-"}; Say something like what operations there are
 	protected int setNum() {
 		
 		int operationValue = (int)(Math.random() * 2);
@@ -26,7 +28,7 @@ public class BeginnerMath extends Level {
 			value2 = (int)(Math.random() * (10 - value1) + 1);
 			answer = value1 + value2;
 			
-			lblNewLabel.setText("" +value1 + "+" + value2); 
+			lblNewLabel.setText("" +value1 + " + " + value2); 
 			System.out.println(answer);
 			System.out.println(value1 + "+" + value2);
 		}
@@ -35,7 +37,7 @@ public class BeginnerMath extends Level {
 			value2 = (int)(Math.random() * (value1-1) + 1);
 			answer = value1 - value2;
 			
-			lblNewLabel.setText("" + value1 + "-" + value2);
+			lblNewLabel.setText("" + value1 + " - " + value2);
 			System.out.println(value1 + "-" + value2);
 		}
 		

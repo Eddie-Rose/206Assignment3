@@ -1,5 +1,6 @@
 package tatai;
 
+import java.util.HashSet;
 
 public class Number {
 	
@@ -68,6 +69,21 @@ public class Number {
 			maoriNumber = maori[tens - 1] + " " + maoriTen + " " + connecter + " " + maori[ones - 1];
 			return maoriNumber;
 		}
+	}
+	
+	public static HashSet<Integer> getFactors(int number) {
+		
+		
+		HashSet<Integer> factors = new HashSet<>();
+
+        for (int i = 0; i < number; i++) {
+            if ((i + 1 % number) == 0) {
+                factors.add(i);
+                System.out.println("Factor= " + i);
+            }
+        }
+        
+        return factors;
 	}
 	
 	
