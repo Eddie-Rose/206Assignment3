@@ -142,7 +142,8 @@ public class BashCommands {
 		
 		public void addStats(int score, String name) {
 			try {
-				String command = "echo -e \"$((`cat stats.txt | wc -l` + 1))) $(date +%D) $(date +%T) "+name+" "+score+"/10\" >> stats.txt";
+				String command = "echo -e \" "+"$(date +%D) $(date +%T) "+name+" "+score+"/10\" >> stats.txt";
+				//\"$((`cat stats.txt | wc -l` + 1)))
 				ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
 
 				Process process = pb.start();

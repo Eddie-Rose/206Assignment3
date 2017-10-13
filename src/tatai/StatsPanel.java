@@ -101,6 +101,31 @@ public class StatsPanel extends JFrame {
 		try
         {
 			String line;
+			String[] row = new String[] {};
+			int i = 1;
+			FileReader fr = new FileReader(path);
+			BufferedReader br = new BufferedReader(fr);
+//			textArea.read(br, null);   
+//            textArea.requestFocus();
+            while((line = br.readLine()) != null) 
+            {
+            	row = line.split(" ");
+            	row[0] = ""+i;
+            	i++;
+               tableModel.addRow(row); 
+            }
+            br.close();
+        }
+        catch(Exception e)
+        {       
+            e.printStackTrace();
+        }
+	}
+	
+	public void getHighScore() {
+		try
+        {
+			String line;
 			FileReader fr = new FileReader(path);
 			BufferedReader br = new BufferedReader(fr);
 //			textArea.read(br, null);   
