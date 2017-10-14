@@ -11,6 +11,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -18,8 +19,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+
+
 
 public class TataiGUI extends JFrame {
 	
@@ -35,6 +40,20 @@ public class TataiGUI extends JFrame {
 	private JButton btnHelp;
 	private JButton btnStatistics;
 	private JButton btnQuit;
+	
+	private JTextField usernameInput;
+	private JPasswordField passwordInput;
+	private JLabel lblUsername;
+	private JLabel lblPassWord;
+	private JButton btnLogIn;
+	private JButton btnSignUp;
+	
+	private JLabel lblUsernameWelcome;
+	private JButton btnDeleteUser;
+	private JButton btnLogOut;
+	
+	
+	private String username = "anonymos";
 	
 	
 	public static void main(String[] args) {
@@ -116,6 +135,46 @@ public class TataiGUI extends JFrame {
 		btnStatistics.addActionListener(new StatisticsListener());
 		getContentPane().add(btnStatistics);
 		
+		usernameInput = new JTextField();
+		getContentPane().add(usernameInput);
+		
+		passwordInput = new JPasswordField();
+		getContentPane().add(passwordInput);
+		
+		btnLogIn = new JButton("LogIn");
+		btnLogIn.addActionListener(new LogInListener());
+		getContentPane().add(btnLogIn);
+		
+		btnSignUp = new JButton("SignUp");
+		btnSignUp.addActionListener(new SignUpListener());
+		getContentPane().add(btnSignUp);
+		
+		lblUsername = new JLabel("Username");
+		lblUsername.setForeground(Color.WHITE);
+		getContentPane().add(lblUsername);
+		
+		lblPassWord = new JLabel("Password");
+		lblPassWord.setForeground(Color.WHITE);
+		getContentPane().add(lblPassWord);
+		
+		btnDeleteUser = new JButton ("Delete User");
+		btnDeleteUser.addActionListener(new DeleteUserListener());
+		getContentPane().add(btnDeleteUser);
+		btnDeleteUser.setVisible(false);
+		
+		btnLogOut = new JButton("Logout");
+		btnLogOut.addActionListener(new LogOutListener());
+		getContentPane().add(btnLogOut);
+		btnLogOut.setVisible(false);
+		
+		lblUsernameWelcome = new JLabel();
+		lblUsernameWelcome.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
+		lblUsernameWelcome.setForeground(Color.WHITE);
+		getContentPane().add(lblUsernameWelcome);
+		lblUsernameWelcome.setVisible(false);
+		
+		
+		
 		
 		getContentPane().addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
@@ -123,12 +182,25 @@ public class TataiGUI extends JFrame {
 				
 				btnPractise.setBounds(c.getWidth()/13, c.getHeight()/17*10, c.getWidth()/4, c.getHeight()/12);
 				btnStatistics.setBounds(c.getWidth()/26*10, c.getHeight()/17*10, c.getWidth()/4, c.getHeight()/12);
-				btnHelp.setBounds(c.getWidth()/13*10, c.getHeight()/115*100, c.getWidth()/8, c.getHeight()/10);
+				btnHelp.setBounds(c.getWidth()/13*10, c.getHeight()/115*90, c.getWidth()/8, c.getHeight()/10);
 				btnMath.setBounds(c.getWidth()/15*10, c.getHeight()/17*10, c.getWidth()/4, c.getHeight()/12);
 				welcomeLabel.setBounds(c.getWidth()/56*10, c.getHeight()/6, c.getWidth()/16*10, c.getHeight()/5);
 				descriptionLabel1.setBounds(c.getWidth()/15, c.getHeight()/3, c.getWidth()/105*100, c.getHeight()/7);
-				btnQuit.setBounds(c.getWidth()/13*8, c.getHeight()/115*100, c.getWidth()/8, c.getHeight()/10);
-				System.out.println(""+c.getWidth()+c.getHeight());
+				btnQuit.setBounds(c.getWidth()/13*8, c.getHeight()/115*90, c.getWidth()/8, c.getHeight()/10);
+				
+				
+				usernameInput.setBounds(c.getWidth()/50*1, c.getHeight()/115*109, c.getWidth()/4, c.getHeight()/25);
+				passwordInput.setBounds(c.getWidth()/50*15, c.getHeight()/115*109, c.getWidth()/4, c.getHeight()/25);
+				btnLogIn.setBounds(c.getWidth()/50*35, c.getHeight()/115*109, c.getWidth()/8, c.getHeight()/20);
+				btnSignUp.setBounds(c.getWidth()/50*42, c.getHeight()/115*109, c.getWidth()/8, c.getHeight()/20);
+				
+				lblUsername.setBounds(c.getWidth()/50*1, c.getHeight()/115*105, c.getWidth()/4, c.getHeight()/25);
+				lblPassWord.setBounds(c.getWidth()/50*15, c.getHeight()/115*105, c.getWidth()/4, c.getHeight()/25);
+				
+				btnLogOut.setBounds(c.getWidth()/50*35, c.getHeight()/115*109, c.getWidth()/8, c.getHeight()/20);
+				btnDeleteUser.setBounds(c.getWidth()/50*42, c.getHeight()/115*109, c.getWidth()/8, c.getHeight()/20);
+				
+				lblUsernameWelcome.setBounds(c.getWidth()/50*1, c.getHeight()/115*107, c.getWidth()/4, c.getHeight()/25);
 				
 			}
 		});
@@ -176,6 +248,7 @@ public class TataiGUI extends JFrame {
 		
 	}
 	
+	
 	public class QuitListener implements ActionListener {
 
 		@Override
@@ -198,8 +271,157 @@ public class TataiGUI extends JFrame {
 			
 		}
 	
-}
+	}
 	
+	private class LogInListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if ((usernameInput.getText().isEmpty()) || (passwordInput.getPassword().length == 0 )) {
+				JOptionPane.showMessageDialog(null, "Username or password has not been filled");
+				
+			}
+			
+			else {
+				
+				BashCommands commands = BashCommands.getInstance();
+				String verifyLogin = commands.verifyLogin(usernameInput.getText(), String.valueOf(passwordInput.getPassword()));
+				
+				if (verifyLogin == null) {
+					
+					usernameInput.setText("");
+					passwordInput.setText("");
+					
+					
+					
+				} else {
+					
+					username = verifyLogin;
+					
+					usernameInput.setVisible(false);
+					passwordInput.setVisible(false);
+					lblPassWord.setVisible(false);
+					lblUsername.setVisible(false);
+					
+					btnLogIn.setVisible(false);
+					btnSignUp.setVisible(false);
+					
+					btnDeleteUser.setVisible(true);
+					btnLogOut.setVisible(true);
+					
+					lblUsernameWelcome.setText("Welcome " + username);
+					lblUsernameWelcome.setVisible(true);
+					
+					
+					
+					
+					
+					
+				}
+				
+				
+			}
+			
+			
+		}
+		
+	}
 	
+	private class SignUpListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			UserHandler.signUpFrame();
+			
+			
+		}
+		
+	}
+	
+	private class LogOutListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			
+			int YesOrNo = JOptionPane.showConfirmDialog(null, "Are you sure you want to Logout?","Logout", JOptionPane.YES_NO_OPTION);
+
+
+
+			if (YesOrNo == 0) {
+				
+				username = "anonymos";
+				lblUsernameWelcome.setVisible(false);
+				
+				usernameInput.setText("");
+				passwordInput.setText("");
+				
+				usernameInput.setVisible(true);
+				passwordInput.setVisible(true);
+				lblPassWord.setVisible(true);
+				lblUsername.setVisible(true);
+				
+				btnLogIn.setVisible(true);
+				btnSignUp.setVisible(true);
+				
+				btnDeleteUser.setVisible(false);
+				btnLogOut.setVisible(false);
+				
+				
+			
+
+
+		
+			
+			
+			}
+			
+		}
+		
+	}
+	
+	private class DeleteUserListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+			int YesOrNo = JOptionPane.showConfirmDialog(null, "Are you sure you want to Delete your User details?","Delete", JOptionPane.YES_NO_OPTION);
+
+
+
+			if (YesOrNo == 0) {
+				
+				BashCommands commands = BashCommands.getInstance();
+				commands.deleteUser(usernameInput.getText());
+				
+				username = "anonymos";
+				lblUsernameWelcome.setVisible(false);
+				
+				usernameInput.setText("");
+				passwordInput.setText("");
+				
+				usernameInput.setVisible(true);
+				passwordInput.setVisible(true);
+				lblPassWord.setVisible(true);
+				lblUsername.setVisible(true);
+				
+				btnLogIn.setVisible(true);
+				btnSignUp.setVisible(true);
+				
+				btnDeleteUser.setVisible(false);
+				btnLogOut.setVisible(false);
+				
+				
+				
+			}
+
+			
+
+
+		}
+
+	}
+
 
 }

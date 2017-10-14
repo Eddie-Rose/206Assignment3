@@ -13,6 +13,7 @@ import java.awt.event.ComponentEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 
 
@@ -26,6 +27,8 @@ public class MathMenuGUI extends JFrame {
 	private JButton btnMenu;
 	private JButton btnMedium;
 	private JButton btnContinue;
+	
+	
 
 	
 
@@ -72,6 +75,10 @@ public class MathMenuGUI extends JFrame {
 		btnMenu.addActionListener(new MenuListener());
 		getContentPane().add(btnMenu);
 		
+	
+		
+		
+		
 		
 		
 		getContentPane().addComponentListener(new ComponentAdapter() {
@@ -87,6 +94,8 @@ public class MathMenuGUI extends JFrame {
 				btnMedium.setBounds(c.getWidth()/15*8, c.getHeight()/17*9, c.getWidth()/4, c.getHeight()/12);
 				btnAdvanced.setBounds(c.getWidth()/5, c.getHeight()/17*11, c.getWidth()/4, c.getHeight()/12);
 				btnContinue.setBounds(c.getWidth()/15*8, c.getHeight()/17*11, c.getWidth()/4, c.getHeight()/12);
+				
+				
 
 
 				btnMenu.setBounds(c.getWidth()/13*5, c.getHeight()/115*114, c.getWidth()/4, c.getHeight()/10);
@@ -157,6 +166,8 @@ public class MathMenuGUI extends JFrame {
 		}
 		
 	}
+	
+	
 		
 }
 	
