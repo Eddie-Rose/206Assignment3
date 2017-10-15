@@ -39,6 +39,8 @@ public abstract class Level extends JFrame {
 	JLabel correct = new JLabel();
 	JLabel lblHearPreviousRecording;
 	JLabel lblScore;
+	JLabel lblhighScore;
+	JLabel lblPersonalBest;
 	JLabel lblAttempts;
 	JButton btnPlay;
 	JLabel txtrWelcomeToThe = new JLabel();
@@ -115,6 +117,21 @@ public abstract class Level extends JFrame {
 		lblScore.setBounds(349, 12, 89, 15);
 		getContentPane().add(lblScore);
 		
+		StatsPanel highStats = new StatsPanel();
+		String high = highStats.getHighScore();
+		highScore = Integer.parseInt(high.split("/")[0]);
+		highStats.dispose();
+		
+		lblPersonalBest = new JLabel("Personal Best!");
+		lblPersonalBest.setVisible(false);
+		lblPersonalBest.setBounds(349, 12, 89, 15);
+		getContentPane().add(lblPersonalBest);
+		
+		lblhighScore = new JLabel("High Score: "+high);
+		lblhighScore.setVisible(false);
+		lblhighScore.setBounds(349, 30, 89, 15);
+		getContentPane().add(lblhighScore);
+		
 		lblAttempts = new JLabel("Question# " + displayAttempts );
 		lblAttempts.setVisible(false);
 		//lblAttempts.setFont(new Font("Dialog", Font.BOLD, 18));
@@ -179,7 +196,9 @@ public abstract class Level extends JFrame {
 				mainMenu.setBounds(c.getWidth()/28*10, c.getHeight()/15*12, c.getWidth()/4, c.getHeight()/12);
 				btnRecord.setBounds(c.getWidth()/28*10, c.getHeight()/15*10, c.getWidth()/4, c.getHeight()/12);
 				lblNewLabel.setBounds(c.getWidth()/22*10, c.getHeight()/27*10, c.getWidth()/3, c.getHeight()/75*10);
-				lblScore.setBounds(c.getWidth()/13*10, c.getHeight()/40, c.getWidth()/5, c.getHeight()/20);
+				lblScore.setBounds(c.getWidth()/14*10, c.getHeight()/40, c.getWidth()/5, c.getHeight()/20);
+				lblPersonalBest.setBounds(c.getWidth()/12*10, c.getHeight()/40, c.getWidth()/5, c.getHeight()/20);
+				lblhighScore.setBounds(c.getWidth()/15*10, c.getHeight()/20, c.getWidth()/5, c.getHeight()/20);
 				lblAttempts.setBounds(c.getWidth()/15, c.getHeight()/12*10, c.getWidth()/45*10, c.getHeight()/6);
 				lblAdvancedLevel.setBounds(c.getWidth()/28*10, c.getHeight()/75*10, c.getWidth()/23*10, c.getHeight()/12);
 				correct.setBounds(c.getWidth()/9, c.getHeight()/5, c.getWidth()/13*10, c.getHeight()/6);
@@ -220,6 +239,12 @@ public abstract class Level extends JFrame {
 		lblNewLabel.setVisible(true);
 		btnRecord.setVisible(true);
 		lblScore.setVisible(true);
+		if(correctAttempt > highScore) {
+			lblPersonalBest.setVisible(true);
+			lblhighScore.setText("High Score: "+correctAttempt+"/10");
+		}
+		
+		lblhighScore.setVisible(true);
 		lblAttempts.setVisible(true);
 		skip.setVisible(true);
 		
@@ -237,6 +262,11 @@ public abstract class Level extends JFrame {
 		correct.setVisible(true);
 		lblAttempts.setVisible(true);
 		lblScore.setVisible(true);
+		lblhighScore.setVisible(true);
+		if(correctAttempt > highScore) {
+			lblPersonalBest.setVisible(true);
+			lblhighScore.setText("High Score: "+correctAttempt+"/10");
+		}
 		skip.setVisible(false);
 	}
 	
@@ -247,10 +277,12 @@ public abstract class Level extends JFrame {
 		btnPlay.setVisible(false);
 		lblHearPreviousRecording.setVisible(false);
 		lblScore.setVisible(false);
+		lblhighScore.setVisible(false);
 		lblAttempts.setVisible(false);
 		progressBar.setVisible(false);
 		answerField.setVisible(true);
 		skip.setVisible(false);
+		lblPersonalBest.setVisible(false);
 		
 		correct.setVisible(true);
 		mainMenu.setVisible(true);

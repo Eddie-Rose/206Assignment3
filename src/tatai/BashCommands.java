@@ -142,7 +142,7 @@ public class BashCommands {
 		
 		public void addStats(int score, String name) {
 			try {
-				String command = "echo -e \" "+"$(date +%D) $(date +%T) "+name+" "+score+"/10\" >> stats.txt";
+				String command = "echo -e \" "+"$(date +%D) $(date +%T) "+name+" "+score+"/10\" >> stats.txt ; sort -k4 -nro stats.txt stats.txt";
 				//\"$((`cat stats.txt | wc -l` + 1)))
 				ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
 
@@ -168,6 +168,7 @@ public class BashCommands {
 			} catch (Exception f) {
 				f.printStackTrace();
 			}
+			
 	}
 		
 		public void clearStats() {
@@ -198,7 +199,8 @@ public class BashCommands {
 				f.printStackTrace();
 			}
 	}
-		
+	
+		// not needed right now
 		public void sortStats() {
 			try {
 				String command = "sort -k4 -nro stats.txt stats.txt";
