@@ -1,4 +1,4 @@
-package tatai;
+package tatai.main;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -26,7 +26,7 @@ import javax.swing.JTextField;
 *singleton design pattern and handle all user inputs including 
 *errors when inputting information.
 *
-*@author Edwin Roesli & Harpreet Singh
+*
 *
 */
 

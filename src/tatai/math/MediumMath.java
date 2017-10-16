@@ -1,4 +1,6 @@
-package tatai;
+package tatai.math;
+
+import tatai.main.Level;
 
 public class MediumMath extends Level{
 	

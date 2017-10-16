@@ -1,14 +1,16 @@
-package tatai;
+package tatai.practice;
 
 import java.awt.event.ActionEvent;
 import javax.swing.Timer;
+
+import tatai.main.Level;
+import tatai.main.Level.ButtonBeginListener;
+
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingWorker;
-
-import tatai.Level.ButtonBeginListener;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.JProgressBar;

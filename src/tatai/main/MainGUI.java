@@ -1,4 +1,4 @@
-package tatai;
+package tatai.main;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -11,8 +11,6 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,12 +22,28 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import tatai.applications.HelpPanel;
+import tatai.applications.MathMenuGUI;
+import tatai.applications.StatsPanel;
+import tatai.practice.Practise;
 
+/**
+ * 
+ * Initialises the main GUI with 5 main applications:
+ * Practice where you go to practice pronouncing Maori numbers
+ * Math where you choose a level depending on your mathematical skill level
+ * Help which is just a helper function which guides you through the GUI
+ * Statistics which goes through your history and outputs your highest score
+ * And a User login for different users
+ * 
+ *  Button listeners are written here as well.
+ *
+ */
 
-public class TataiGUI extends JFrame {
+public class MainGUI extends JFrame {
 	
 	/**
-	 * 
+	 * Initialises all the field values for all the labels/ buttons in the main GUI
 	 */
 	private static final long serialVersionUID = 1L;
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -55,20 +69,29 @@ public class TataiGUI extends JFrame {
 	
 	private String username = "anonymos";
 	
-	
+	/**
+	 * Initialises the main application
+	 * Calls for the Main GUI
+	 * 
+	 */
 	public static void main(String[] args) {
 		
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				TataiGUI frame = new TataiGUI();
+				MainGUI frame = new MainGUI();
 				frame.setVisible(true);
 			}
 		});
 
 	}
 	
-	public TataiGUI() {
+	
+	/**
+	 * Constructor for the main GUI, sets all the frame/ buttons/ labels 
+	 * Resizeable so full screen mode is allowed.
+	 */
+	public MainGUI() {
 		super("Tātai");
 		setSize(1100, 700);
 		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
@@ -78,6 +101,7 @@ public class TataiGUI extends JFrame {
 		getContentPane().setLayout(null);
 		
 		
+		//Sets the background image for this GUI
 		
 		try {
             setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("./back.jpg")))));
@@ -86,6 +110,7 @@ public class TataiGUI extends JFrame {
         }
 	
 		
+		//Sets the welcoming label and all the details
 		welcomeLabel = new JLabel("<html>Welcome to Tātai!</html>");
 		welcomeLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 40));
 		welcomeLabel.setForeground(Color.WHITE);
@@ -96,6 +121,7 @@ public class TataiGUI extends JFrame {
 		getContentPane().add(welcomeLabel);
 		
 		
+		//Sets the welcoming description label and all its details
 		descriptionLabel1 = new JLabel("<html>An interactive application which helps develop your Māori number pronounciation </html>");
 		descriptionLabel1.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
 		descriptionLabel1.setForeground(Color.WHITE);
@@ -103,6 +129,8 @@ public class TataiGUI extends JFrame {
 		getContentPane().add(descriptionLabel1);
 		
 		
+		
+		//Sets all the buttons and adds its listeners 
 		btnPractise = new JButton("Practice");
 		//btnBeginner.setBounds(35, 174, 117, 25);	
 		btnPractise.addActionListener(new PractiseListener());
@@ -135,6 +163,10 @@ public class TataiGUI extends JFrame {
 		btnStatistics.addActionListener(new StatisticsListener());
 		getContentPane().add(btnStatistics);
 		
+		
+		//Sets all the userName sets like UsernameTextField PasswordTextField
+		//login and signup buttons
+		
 		usernameInput = new JTextField();
 		getContentPane().add(usernameInput);
 		
@@ -157,6 +189,8 @@ public class TataiGUI extends JFrame {
 		lblPassWord.setForeground(Color.WHITE);
 		getContentPane().add(lblPassWord);
 		
+		
+		//These labels/buttons are visible when logging in.
 		btnDeleteUser = new JButton ("Delete User");
 		btnDeleteUser.addActionListener(new DeleteUserListener());
 		getContentPane().add(btnDeleteUser);
@@ -167,6 +201,8 @@ public class TataiGUI extends JFrame {
 		getContentPane().add(btnLogOut);
 		btnLogOut.setVisible(false);
 		
+		
+		//Sets the welcoming message depending on the user.
 		lblUsernameWelcome = new JLabel();
 		lblUsernameWelcome.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		lblUsernameWelcome.setForeground(Color.WHITE);
@@ -175,7 +211,7 @@ public class TataiGUI extends JFrame {
 		
 		
 		
-		
+		//Sets all the positions of all the labels, and moves it automatically when resizing 
 		getContentPane().addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
 				Component c = (Component)e.getSource();
@@ -207,48 +243,59 @@ public class TataiGUI extends JFrame {
 		
 	}
 	
+	
+	//Help listener, Generates the help panel upon clicking
 	public class HelpListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			@SuppressWarnings("unused")
 			HelpPanel help = new HelpPanel();
 			
 		}
 		
 	}
 	
+	//Generates the Math window upon clicking
 	public class MathListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			@SuppressWarnings("unused")
 			MathMenuGUI mathWindow = new MathMenuGUI();
 			
 		}
 		
 	}
 	
+	
+	//Generates the practice window upon clicking 
 	public class PractiseListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
+			@SuppressWarnings("unused")
 			Practise practiseWindow = new Practise();
 			
 		}
 	}
-		
+	
+	
+	//Generates the statistics window upon clicking
 	public class StatisticsListener implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				@SuppressWarnings("unused")
 				StatsPanel help = new StatsPanel();
 				
 			}
 		
 	}
 	
-	
+	//Generates a Option Pane upon clicking asking if you want to quit or not.
 	public class QuitListener implements ActionListener {
 
 		@Override
@@ -273,10 +320,14 @@ public class TataiGUI extends JFrame {
 	
 	}
 	
+	
+	//Tests the authenticity of log in details upon clicking
 	private class LogInListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
+			//Fields must be non empty
 			if ((usernameInput.getText().isEmpty()) || (passwordInput.getPassword().length == 0 )) {
 				JOptionPane.showMessageDialog(null, "Username or password has not been filled");
 				
@@ -284,16 +335,22 @@ public class TataiGUI extends JFrame {
 			
 			else {
 				
+				
+				//Calls the bashCommand function and returns a string
+				
 				BashCommands commands = BashCommands.getInstance();
 				String verifyLogin = commands.verifyLogin(usernameInput.getText(), String.valueOf(passwordInput.getPassword()));
 				
+				
+				//if it returns a null string then there must have been an error 
 				if (verifyLogin == null) {
 					
 					usernameInput.setText("");
 					passwordInput.setText("");
 					
 					
-					
+				//else it returns the users name.
+				//And Sets all the labels/ buttons 
 				} else {
 					
 					username = verifyLogin;
@@ -327,6 +384,8 @@ public class TataiGUI extends JFrame {
 		
 	}
 	
+	//Initialises the signUp frame using the singleton design pattern
+	
 	private class SignUpListener implements ActionListener {
 
 		@Override
@@ -339,6 +398,8 @@ public class TataiGUI extends JFrame {
 		
 	}
 	
+	
+	//Generates a Option Pane upon clicking asking if you want to logOut or not.
 	private class LogOutListener implements ActionListener {
 
 		@Override
@@ -381,6 +442,8 @@ public class TataiGUI extends JFrame {
 		
 	}
 	
+	
+	//Generates a Option Pane upon clicking asking if you want to delete their user details or not.
 	private class DeleteUserListener implements ActionListener {
 
 		@Override
@@ -392,6 +455,8 @@ public class TataiGUI extends JFrame {
 
 			if (YesOrNo == 0) {
 				
+				
+				//If they confirm it, call upon the bash commands instance and delete their details
 				BashCommands commands = BashCommands.getInstance();
 				commands.deleteUser(usernameInput.getText());
 				

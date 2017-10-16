@@ -1,7 +1,7 @@
 #!/bin/bash
 
-chmod +x Assignment3.jar
+chmod +x Project.jar
 cd MaoriNumbers
 chmod +x Go
 cd ..
-java -jar Assignment3.jar
+java -jar Project.jar

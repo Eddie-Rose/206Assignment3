@@ -1,4 +1,4 @@
-package tatai;
+package tatai.applications;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,8 +20,8 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.border.LineBorder;
 
-import tatai.Level.ButtonBeginListener;
-import tatai.Level.Worker;
+import tatai.main.Level.ButtonBeginListener;
+import tatai.main.Level.Worker;
 
 public class HelpPanel extends JFrame {
 

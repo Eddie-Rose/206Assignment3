@@ -1,4 +1,4 @@
-package tatai;
+package tatai.applications;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -14,6 +14,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import tatai.main.Level;
+import tatai.math.AdvancedMath;
+import tatai.math.BeginnerMath;
+import tatai.math.MediumMath;
 
 
 
@@ -67,6 +72,7 @@ public class MathMenuGUI extends JFrame {
 		btnContinue = new JButton("Continue");
 		//btnBeginner.setBounds(35, 174, 117, 25);	
 		btnContinue.addActionListener(new ContinueListener());
+		btnContinue.setVisible(false);
 		getContentPane().add(btnContinue);
 		
 		

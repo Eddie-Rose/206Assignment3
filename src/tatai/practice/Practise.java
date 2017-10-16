@@ -1,4 +1,4 @@
-package tatai;
+package tatai.practice;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -13,6 +13,8 @@ import java.awt.event.ComponentEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import tatai.main.Level;
 
 public class Practise extends JFrame {
 

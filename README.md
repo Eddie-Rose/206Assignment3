@@ -1,8 +1,8 @@
 Tatai helps teach moari numbers
 
-In this zip file there should be 8 things:
+In this zip file there should be 10 things:
 
-A runnable jar file named "Assignment3.jar"
+A runnable jar file named "Project.jar"
 A README file
 A 'Src' folder which includes the source code for the application
 A 'MaoriNumbers' folder which includes a script file called 'Go.sh' run by our application
@@ -11,6 +11,7 @@ A 'MaoriNumbers' folder which includes a script file called 'Go.sh' run by our a
 An image file called 'back.png'
 A text file called 'Stats.txt'
 A script file called "run.sh"
+And a help icon
 
 To excecute the app:
 Open the terminal in the directory where you unzipped the zipped file.

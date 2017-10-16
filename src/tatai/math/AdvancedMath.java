@@ -1,6 +1,9 @@
-package tatai;
+package tatai.math;
 
 import java.util.ArrayList;
+
+import tatai.main.Level;
+import tatai.main.Number;
 
 
 
@@ -23,13 +26,13 @@ public class AdvancedMath extends Level{
 	//private String[] operationValue = {"+", "-", "*", "/"};
 	protected int setNum() {
 	
-		//int operationValue = (int)(Math.random() * 4);
+		int operationValue = (int)(Math.random() * 4);
 
 
 
 
 		
-		int operationValue = 3;
+	
 		
 		
 		if (operationValue == 0) {
@@ -84,7 +87,7 @@ public class AdvancedMath extends Level{
 		else if (operationValue == 3) {
 			
 			value1 = (int)( 1 + (Math.random() * 99));
-			System.out.println(answers);
+			
 			
 			factors = Number.getFactors(value1);
 			

@@ -1,4 +1,6 @@
-package tatai;
+package tatai.practice;
+
+import tatai.main.Level;
 
 public class Advanced extends Level {
 

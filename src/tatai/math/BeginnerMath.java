@@ -1,4 +1,6 @@
-package tatai;
+package tatai.math;
+
+import tatai.main.Level;
 
 public class BeginnerMath extends Level {
 	
@@ -29,8 +31,7 @@ public class BeginnerMath extends Level {
 			answer = value1 + value2;
 			
 			lblNewLabel.setText("" +value1 + " + " + value2); 
-			System.out.println(answer);
-			System.out.println(value1 + "+" + value2);
+			
 		}
 		
 		else if (operationValue == 1) {
@@ -38,7 +39,7 @@ public class BeginnerMath extends Level {
 			answer = value1 - value2;
 			
 			lblNewLabel.setText("" + value1 + " - " + value2);
-			System.out.println(value1 + "-" + value2);
+			
 		}
 		
 	
