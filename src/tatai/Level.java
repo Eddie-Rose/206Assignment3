@@ -117,10 +117,10 @@ public abstract class Level extends JFrame {
 		lblScore.setBounds(349, 12, 89, 15);
 		getContentPane().add(lblScore);
 		
-		StatsPanel highStats = new StatsPanel();
-		String high = highStats.getHighScore();
+		
+		String high = StatsPanel.getHighScore();
 		highScore = Integer.parseInt(high.split("/")[0]);
-		highStats.dispose();
+		
 		
 		lblPersonalBest = new JLabel("Personal Best!");
 		lblPersonalBest.setVisible(false);
