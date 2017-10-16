@@ -236,7 +236,7 @@ public class BashCommands {
 
 		
 		
-		public void makeUserDir(String username, String fullName, String password) {
+		public int makeUserDir(String username, String fullName, String password) {
 			
 			try {
 				
@@ -258,7 +258,7 @@ public class BashCommands {
 
 				if (exitStatus == 1) {
 					JOptionPane.showMessageDialog(null, "Username taken, please create a new one");
-					return;
+					return 0;
 				}
 				
 				command = "cd User ; cd " + username + " ; echo \"" + fullName + "\" >> userinfo.txt ; echo \"" + password + "\" >> userinfo.txt"; 
@@ -272,13 +272,16 @@ public class BashCommands {
 
 				if (exitStatus == 0) {
 					JOptionPane.showMessageDialog(null, "New user created, please logIn to record personal data");
+					return 1;
 				} else {
 					JOptionPane.showMessageDialog(null, "Error, please try again");
+					return 0;
 				}
 
 			} catch (Exception f) {
 				f.printStackTrace();
 			}
+			return 0;
 		}
 			
 		

@@ -147,8 +147,15 @@ public class UserHandler {
 				else {
 					System.out.println(txtPassword.getPassword().toString());
 					BashCommands commands = BashCommands.getInstance();
-					commands.makeUserDir(txtUsername.getText(), txtFullName.getText(), String.valueOf(txtPassword.getPassword()));
-					frame.dispose();
+					int outcome = commands.makeUserDir(txtUsername.getText(), txtFullName.getText(), String.valueOf(txtPassword.getPassword()));
+					
+					
+					if (outcome == 1) {
+						frame.dispose();
+						frame = null;
+					}
+					
+					
 					
 				}
 				
