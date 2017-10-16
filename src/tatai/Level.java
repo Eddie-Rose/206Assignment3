@@ -278,6 +278,7 @@ public abstract class Level extends JFrame {
 		lblHearPreviousRecording.setVisible(false);
 		lblScore.setVisible(false);
 		lblhighScore.setVisible(false);
+		lblPersonalBest.setVisible(false);
 		lblAttempts.setVisible(false);
 		progressBar.setVisible(false);
 		answerField.setVisible(true);
