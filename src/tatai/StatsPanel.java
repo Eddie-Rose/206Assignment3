@@ -122,12 +122,12 @@ public class StatsPanel extends JFrame {
         }
 	}
 	
-	public String getHighScore() {
+	public static String getHighScore() {
 		 String highScore = "0";
 		try
         {
 			String line;
-			FileReader fr = new FileReader(path);
+			FileReader fr = new FileReader("./stats.txt");
 			BufferedReader br = new BufferedReader(fr);
 			if((line = br.readLine()) != null) {
 				highScore = line.split(" ")[4];

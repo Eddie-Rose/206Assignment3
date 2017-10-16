@@ -1,7 +1,13 @@
 package tatai;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import javax.swing.JOptionPane;
 
 /**
  * Class which contains all the necessary Bash/Linux commands.
@@ -230,7 +236,149 @@ public class BashCommands {
 			}
 		}
 
+		
+		
+		public int makeUserDir(String username, String fullName, String password) {
+			
+			try {
+				
+				String command = "if [ ! -d User ]; then mkdir -p User; fi";
+				ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
 
+				Process process = pb.start();
+				process.waitFor();
+
+				
+				
+				
+				
+				command = "cd User ; mkdir " + username;
+				pb = new ProcessBuilder("bash", "-c", command);
+
+				Process process0 = pb.start();
+				int exitStatus = process0.waitFor();
+
+				if (exitStatus == 1) {
+					JOptionPane.showMessageDialog(null, "Username taken, please create a new one");
+					return 0;
+				}
+				
+				command = "cd User ; cd " + username + " ; echo \"" + fullName + "\" >> userinfo.txt ; echo \"" + password + "\" >> userinfo.txt"; 
+				pb = new ProcessBuilder("bash", "-c", command);
+
+				Process process1 = pb.start();
+			
+
+
+				exitStatus = process1.waitFor();
+
+				if (exitStatus == 0) {
+					JOptionPane.showMessageDialog(null, "New user created, please logIn to record personal data");
+					return 1;
+				} else {
+					JOptionPane.showMessageDialog(null, "Error, please try again");
+					return 0;
+				}
+
+			} catch (Exception f) {
+				f.printStackTrace();
+			}
+			return 0;
+		}
+			
+		
+		
+		public String verifyLogin (String username, String password) {
+			
+			try {
+				
+				Path currentRelativePath = Paths.get("");
+				String s = currentRelativePath.toAbsolutePath().toString();
+				
+				s = s + "/User/" + username;
+				File file = new File(s);
+				
+				if (!file.exists()) {
+					
+					JOptionPane.showMessageDialog(null, "Invalid Username");
+					return null;
+					
+				}
+				
+				
+
+				else {
+					FileReader fr = new FileReader(s + "/userinfo.txt");
+					BufferedReader br = new BufferedReader(fr);
+
+					String userFullName = br.readLine();
+					String userPassword = br.readLine();
+
+					if (!(userPassword.equals(password))) {
+
+						JOptionPane.showMessageDialog(null, "Invalid password");
+						return null;
+
+					}
+					
+					else {
+						
+						return userFullName;
+						
+					}
+				}
+
+				
+				
+				
+				
+			} catch (Exception f) {
+				f.printStackTrace();
+			}
+			
+			
+			
+			return null;
+			
+			
+			
+			
+			
+		}
+		
+		
+		
+		public void deleteUser(String username) {
+			
+			try {
+				String command = "cd User ; rm -rf " + username;
+				ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+
+				Process process = pb.start();
+
+				BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+				BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+				int exitStatus = process.waitFor();
+
+				if (exitStatus == 0) {
+					String line;
+					while ((line = stdout.readLine()) != null) {
+						System.out.println(line);
+					}
+				} else {
+					String line;
+					while ((line = stderr.readLine()) != null) {
+						System.err.println(line);
+					}
+				}
+
+			} catch (Exception f) {
+				f.printStackTrace();
+			}
+			
+			
+		}
 
 }
 
