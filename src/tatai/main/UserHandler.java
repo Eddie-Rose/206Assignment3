@@ -145,7 +145,7 @@ public class UserHandler {
 				//If all conditions are met, application tries to create the user
 				//If user already exists, returns with a error message dialogue
 				else {
-					System.out.println(txtPassword.getPassword().toString());
+					
 					BashCommands commands = BashCommands.getInstance();
 					int outcome = commands.makeUserDir(txtUsername.getText(), txtFullName.getText(), String.valueOf(txtPassword.getPassword()));
 					
@@ -228,7 +228,7 @@ public class UserHandler {
             @Override
             public void windowClosing(WindowEvent e)
             {
-                System.out.println("Closed");
+                
                 frame = null;
             }
         });
