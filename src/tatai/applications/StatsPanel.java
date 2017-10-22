@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import tatai.main.BashCommands;
+import tatai.main.MainGUI;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -32,7 +33,7 @@ public class StatsPanel extends JFrame {
 
 	private JPanel contentPane;
 	private BufferedReader input;
-	private String path;
+	private static String path;
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 	private JTable table;
 	DefaultTableModel tableModel;
@@ -41,7 +42,8 @@ public class StatsPanel extends JFrame {
 	 * Create the frame.
 	 */
 	public StatsPanel() {
-		path = "./stats.txt";
+		String username = MainGUI.getUsername();
+		path = "./User/"+username+"/stats.txt";
 		
 		setTitle("Statistics");
 		setVisible(true);
@@ -89,11 +91,11 @@ public class StatsPanel extends JFrame {
 		scrollPane_1.setViewportView(table);
 
 		
-		String columns[] = {"Rank","Date", "Time", "Level", "Score"};
+		String columns[] = {"Rank","Date", "Time", "Name","Level", "Score"};
 		
 		 
 		    // specify number of columns
-		    tableModel = new DefaultTableModel(0,5); 
+		    tableModel = new DefaultTableModel(0,6); 
 		    tableModel.setColumnIdentifiers(columns);
 			table.setModel(tableModel);
 		display();
@@ -121,26 +123,27 @@ public class StatsPanel extends JFrame {
         }
         catch(Exception e)
         {       
-            e.printStackTrace();
+          // do nothing if file doesn't exist
         }
 	}
 	
 	public static String getHighScore() {
 		 String highScore = "0";
+		 String username = MainGUI.getUsername();
 		try
         {
 			String line;
-			FileReader fr = new FileReader("./stats.txt");
+			FileReader fr = new FileReader("./User/"+username+"/stats.txt");
 			BufferedReader br = new BufferedReader(fr);
 			if((line = br.readLine()) != null) {
-				highScore = line.split(" ")[4];
+				highScore = line.split(" ")[5];
 			}
             br.close();
             return highScore;
         }
         catch(Exception e)
         {       
-            e.printStackTrace();
+           // Do nothing if file does not exist
         }
 		return highScore;
 		

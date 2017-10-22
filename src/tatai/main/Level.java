@@ -40,6 +40,7 @@ public abstract class Level extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	String name;
+	String username;
 	int testNumber;
 	int minNum;
 	int maxNum;
@@ -77,10 +78,11 @@ public abstract class Level extends JFrame {
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
 	public Level(String lvlName, int minimumNum, int maximumNum) {
-
+		
 		name = lvlName;
 		minNum = minimumNum;
 		maxNum = maximumNum;
+		
 		//setResizable(false);
 		setVisible(true);
 		getContentPane().setBackground(Color.WHITE);

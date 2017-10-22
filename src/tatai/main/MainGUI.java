@@ -67,7 +67,7 @@ public class MainGUI extends JFrame {
 	private JButton btnLogOut;
 	
 	
-	private String username = "anonymos";
+	private static String username = "anonymous";
 	
 	/**
 	 * Initialises the main application
@@ -100,6 +100,8 @@ public class MainGUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
+		BashCommands commands = BashCommands.getInstance();
+		commands.makeUserFolder();
 		
 		//Sets the background image for this GUI
 		
@@ -289,7 +291,7 @@ public class MainGUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				@SuppressWarnings("unused")
-				StatsPanel help = new StatsPanel();
+				StatsPanel stats = new StatsPanel();
 				
 			}
 		
@@ -352,8 +354,8 @@ public class MainGUI extends JFrame {
 				//else it returns the users name.
 				//And Sets all the labels/ buttons 
 				} else {
-					
-					username = verifyLogin;
+					username = usernameInput.getText();
+					String displayName = verifyLogin;
 					
 					usernameInput.setVisible(false);
 					passwordInput.setVisible(false);
@@ -366,9 +368,9 @@ public class MainGUI extends JFrame {
 					btnDeleteUser.setVisible(true);
 					btnLogOut.setVisible(true);
 					
-					lblUsernameWelcome.setText("Welcome " + username);
+					lblUsernameWelcome.setText("Welcome " + displayName);
 					lblUsernameWelcome.setVisible(true);
-					
+			
 					
 					
 					
@@ -412,7 +414,7 @@ public class MainGUI extends JFrame {
 
 			if (YesOrNo == 0) {
 				
-				username = "anonymos";
+				username = "anonymous";
 				lblUsernameWelcome.setVisible(false);
 				
 				usernameInput.setText("");
@@ -460,7 +462,7 @@ public class MainGUI extends JFrame {
 				BashCommands commands = BashCommands.getInstance();
 				commands.deleteUser(usernameInput.getText());
 				
-				username = "anonymos";
+				username = "anonymous";
 				lblUsernameWelcome.setVisible(false);
 				
 				usernameInput.setText("");
@@ -475,17 +477,13 @@ public class MainGUI extends JFrame {
 				btnSignUp.setVisible(true);
 				
 				btnDeleteUser.setVisible(false);
-				btnLogOut.setVisible(false);
-				
-				
-				
+				btnLogOut.setVisible(false);						
 			}
-
-			
-
-
 		}
-
+	}
+	
+	public static String getUsername() {
+		return username;
 	}
 
 
