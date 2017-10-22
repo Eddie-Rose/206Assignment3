@@ -182,6 +182,7 @@ public abstract class Level extends JFrame {
 		progressBar.setVisible(false);
 
 		skip = new JButton("Skip");
+		skip.setBounds(300, 111, 117, 25);
 		skip.setVisible(false);
 		getContentPane().add(skip);
 
@@ -209,32 +210,35 @@ public abstract class Level extends JFrame {
 
 			}
 		});
-
+		
+		Resizable[] resizableComp = new Resizable[16];
+		
+		resizableComp[0] = new Resizable(btnBegin, frameWidth, frameHeight);
+		resizableComp[1] = new Resizable(mainMenu, frameWidth, frameHeight);
+		resizableComp[2] = new Resizable(btnRecord, frameWidth, frameHeight);
+		resizableComp[3] = new Resizable(lblNewLabel, frameWidth, frameHeight);
+		resizableComp[4] = new Resizable(lblScore, frameWidth, frameHeight);
+		resizableComp[5] = new Resizable(lblPersonalBest, frameWidth, frameHeight);
+		resizableComp[6] = new Resizable(lblhighScore, frameWidth, frameHeight);
+		resizableComp[7] = new Resizable(lblAttempts, frameWidth, frameHeight);
+		resizableComp[8] = new Resizable(lblAdvancedLevel, frameWidth, frameHeight);
+		resizableComp[9] = new Resizable(correct, frameWidth, frameHeight);
+		resizableComp[10] = new Resizable(txtrWelcomeToThe, frameWidth, frameHeight);
+		resizableComp[11] = new Resizable(btnPlay, frameWidth, frameHeight);
+		resizableComp[12] = new Resizable(lblHearPreviousRecording, frameWidth, frameHeight);
+		resizableComp[13] = new Resizable(progressBar, frameWidth, frameHeight);
+		resizableComp[14] = new Resizable(answerField, frameWidth, frameHeight);
+		resizableComp[15] = new Resizable(skip, frameWidth, frameHeight);
+		
 		getContentPane().addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
 				Component c = (Component)e.getSource();
-				//btnBegin.setBounds(158, 190, 117, 25);
-				btnBegin.setBounds(c.getWidth()/28*10, c.getHeight()/15*10, c.getWidth()/4, c.getHeight()/12);
-				mainMenu.setBounds(c.getWidth()/28*10, c.getHeight()/15*12, c.getWidth()/4, c.getHeight()/12);
-				btnRecord.setBounds(c.getWidth()/28*10, c.getHeight()/15*10, c.getWidth()/4, c.getHeight()/12);
-				lblNewLabel.setBounds(c.getWidth()/22*10, c.getHeight()/27*10, c.getWidth()/3, c.getHeight()/75*10);
-				lblScore.setBounds(c.getWidth()/14*10, c.getHeight()/40, c.getWidth()/5, c.getHeight()/20);
-				lblPersonalBest.setBounds(c.getWidth()/12*10, c.getHeight()/40, c.getWidth()/5, c.getHeight()/20);
-				lblhighScore.setBounds(c.getWidth()/15*10, c.getHeight()/20, c.getWidth()/5, c.getHeight()/20);
-				lblAttempts.setBounds(c.getWidth()/15, c.getHeight()/12*10, c.getWidth()/45*10, c.getHeight()/6);
-				lblAdvancedLevel.setBounds(c.getWidth()/28*10, c.getHeight()/75*10, c.getWidth()/23*10, c.getHeight()/12);
-				correct.setBounds(c.getWidth()/9, c.getHeight()/5, c.getWidth()/13*10, c.getHeight()/6);
-				txtrWelcomeToThe.setBounds(c.getWidth()/45*10, c.getHeight()/3, c.getWidth()/17*10, c.getHeight()/43*12);
-				btnPlay.setBounds(c.getWidth()/18*10, c.getHeight()/12*10, c.getWidth()/4, c.getHeight()/12);
-				lblHearPreviousRecording.setBounds(c.getWidth()/75*10, c.getHeight()/12*10, c.getWidth()/25*10, c.getHeight()/20);
-				progressBar.setBounds(c.getWidth()/3, c.getHeight()/13*10, c.getWidth()/3, c.getHeight()/12);
-				answerField.setBounds(c.getWidth()/45*10, c.getHeight()/8*3, c.getWidth()/17*10, c.getHeight()/43*10);
-
-				//DELETE
-				answerField.setBorder(new LineBorder(new Color(0, 0, 0)));
-				skip.setBounds(c.getWidth()/16*10, c.getHeight()/27*10, c.getWidth()/4, c.getHeight()/12);
-				//				System.out.println(""+c.getWidth()+c.getHeight());
-
+				
+				for(Resizable comp : resizableComp) {
+					comp.Resize(c.getWidth(), c.getHeight());
+				}
+				
+				
 			}
 		});
 
