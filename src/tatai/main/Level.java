@@ -14,6 +14,7 @@ import java.util.concurrent.ExecutionException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
@@ -44,10 +45,11 @@ public abstract class Level extends JFrame {
 	int testNumber;
 	int minNum;
 	int maxNum;
-	int frameWidth = 800;
-	int frameHeight = 500;
+	int frameWidth = 450;
+	int frameHeight = 300;
 	protected JButton btnBegin = new JButton("Start");
 	protected JButton btnRecord = new JButton("Record");
+	protected JButton btnBack;
 	JLabel lblAdvancedLevel;
 	protected JLabel lblNewLabel = new JLabel();
 	protected JLabel correct = new JLabel();
@@ -116,6 +118,11 @@ public abstract class Level extends JFrame {
 		btnRecord.setVisible(false);
 		btnRecord.setBounds(158, 190, 117, 25);
 		getContentPane().add(btnRecord);
+		
+		btnBack = new JButton("<<");
+		btnBack.setVisible(false);
+		btnBack.setBounds(30, 20, 60, 25);
+		getContentPane().add(btnBack);
 
 		lblNewLabel.setVisible(false);
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 35));
@@ -185,6 +192,7 @@ public abstract class Level extends JFrame {
 		btnRecord.addActionListener(new ButtonRecordListener());
 		btnPlay.addActionListener(new ButtonPlayListener());
 		skip.addActionListener(new ButtonSkipListener());
+		btnBack.addActionListener(new ButtonBackListener());
 
 		t = new Timer(interval, new ActionListener() {
 
@@ -248,6 +256,8 @@ public abstract class Level extends JFrame {
 		correct.setVisible(false);
 		btnPlay.setVisible(false);
 		lblHearPreviousRecording.setVisible(false);
+		
+		btnBack.setVisible(true);
 		progressBar.setVisible(true);
 
 		lblNewLabel.setVisible(true);
@@ -270,6 +280,7 @@ public abstract class Level extends JFrame {
 		progressBar.setVisible(false);
 
 		btnPlay.setVisible(true);
+		btnBack.setVisible(true);
 		lblHearPreviousRecording.setVisible(true);
 
 		btnBegin.setVisible(true);
@@ -298,6 +309,7 @@ public abstract class Level extends JFrame {
 		answerField.setVisible(true);
 		skip.setVisible(false);
 		lblPersonalBest.setVisible(false);
+		btnBack.setVisible(false);
 
 		correct.setVisible(true);
 		mainMenu.setVisible(true);
@@ -460,6 +472,28 @@ public abstract class Level extends JFrame {
 
 
 		}
+	}
+	
+	public class ButtonBackListener implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				int YesOrNo = JOptionPane.showConfirmDialog(null, "Are you sure you want to go back? Your current progress will not be saved.","Back", JOptionPane.YES_NO_OPTION);			
+				
+				if (YesOrNo == 1) {
+					return;
+				}
+				
+				else if (YesOrNo == 0)  {
+					dispose();
+				}
+				
+				else {
+					return;
+				}
+				
+			}
 	}
 
 
