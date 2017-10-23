@@ -46,7 +46,7 @@ public class CustomInitialMenu {
 
 
 		JButton createSet = new JButton("Create Set");
-		createSet.setBounds(100, 300, 300, 200);
+		createSet.setBounds(100, 300, 300, 100);
 		customFrame.getContentPane().add(createSet);
 		createSet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -58,6 +58,37 @@ public class CustomInitialMenu {
 
 			}
 		});
+		
+		JButton playSet = new JButton("View Sets");
+		playSet.setBounds(100, 150, 300, 100);
+		customFrame.getContentPane().add(playSet);
+		playSet.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				customFrame.dispose();
+				
+				
+
+
+			}
+		});
+		
+		
+		JButton menu = new JButton("Menu");
+		menu.setBounds(150, 500, 200, 80);
+		customFrame.getContentPane().add(menu);
+		menu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				customFrame.dispose();
+				
+				
+
+
+			}
+		});
+
+
 
 
 		customFrame.setVisible(true);
