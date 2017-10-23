@@ -326,7 +326,7 @@ public class CustomSetCreation  {
 
 	private void setNextQuestion() {
 
-		if (questionNumber == 2) {
+		if (questionNumber == 11) {
 			finishFrame();
 			return;
 		}
@@ -604,7 +604,7 @@ public class CustomSetCreation  {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			if (questionNumber == 2) {
+			if (questionNumber == 11) {
 				
 				customQuestionFrame.dispose();
 				customQuestionFrame = null;
@@ -629,7 +629,7 @@ public class CustomSetCreation  {
 
 			}
 
-			else if (questionNumber != 10) {
+			else if (questionNumber != 11) {
 
 				int YesOrNo = JOptionPane.showConfirmDialog(null, "Any progress you have made will not be saved, are you sure you want to exit?","exit", JOptionPane.YES_NO_OPTION);
 				if (YesOrNo == 0) {
