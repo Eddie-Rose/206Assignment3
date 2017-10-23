@@ -156,6 +156,8 @@ public class CustomSetCreation  {
 
 		leftParameter = new JTextField();
 		leftParameter.setBounds(158, 229, 217, 162);
+		leftParameter.setHorizontalAlignment(SwingConstants.CENTER);
+		leftParameter.setFont(new Font("DejaVu Sans", Font.BOLD, 35));
 		customQuestionFrame.getContentPane().add(leftParameter);
 		leftParameter.addKeyListener(new ParameterKeyListener());	
 		leftParameter.setTransferHandler(null);
@@ -164,7 +166,9 @@ public class CustomSetCreation  {
 
 		rightParameter = new JTextField();
 		rightParameter.setTransferHandler(null);
+		rightParameter.setFont(new Font("DejaVu Sans", Font.BOLD, 35));
 		rightParameter.setBounds(793, 229, 217, 162);
+		rightParameter.setHorizontalAlignment(SwingConstants.CENTER);
 		rightParameter.addKeyListener(new ParameterKeyListener());	
 		customQuestionFrame.getContentPane().add(rightParameter);
 		rightParameter.setVisible(false);
@@ -318,34 +322,172 @@ public class CustomSetCreation  {
 		btnDivide.setVisible(true);
 
 
+	}
 
+	private void setNextQuestion() {
+
+		if (questionNumber == 2) {
+			finishFrame();
+			return;
+		}
+
+		leftParameter.setText("");
+		rightParameter.setText(""); 
+		btnAddition.setEnabled(true);
+		btnSubtract.setEnabled(true);
+		btnMultiply.setEnabled(true);
+		btnDivide.setEnabled(true);
+
+		
+		lblQuestionX.setText("Question: "+questionNumber+" /10");
 
 
 	}
-	
-	
-	private class nextListener implements ActionListener {
+
+	private void finishFrame() {
+
+		lblLeftParameter.setVisible(false);
+		lblRightParameter.setVisible(false);
+		btnMultiply.setVisible(false);
+		btnAddition.setVisible(false);
+		btnDivide.setVisible(false);
+		btnSubtract.setVisible(false);
+		btnNext.setVisible(false);
+		lblQuestionX.setVisible(false);
+		rightParameter.setVisible(false);
+		leftParameter.setVisible(false);
+		lblOperation.setVisible(false);
+		
+
+		JLabel confirmLabel = new JLabel();
+		confirmLabel.setText("<html>New Set: \"" + nameOfSet.getText() +"\" has been created!</html>"); 
+		confirmLabel.setBounds(400, 300, 1100, 50);
+		confirmLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
+		customQuestionFrame.getContentPane().add(confirmLabel);
+		
+		btnMenu.setBounds(477, 537, 233, 51);
+		
+
+	}
+
+
+	private class NextListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if ((leftParameter.getText().length() == 0 ) && (rightParameter.getText().length() == 0)) {
-				
+
 				JOptionPane.showMessageDialog(null, "Fill in all parameters");
 			}
-			
+
 			else if ((btnMultiply.isEnabled()) && (btnDivide.isEnabled()) && (btnAddition.isEnabled()) && (btnSubtract.isEnabled())) {
-				
+
 				JOptionPane.showMessageDialog(null, "Select Operation");
-				
+
 			}
-			
-			
-			
-			
-			
+
+			else {
+				
+				int left = Integer.parseInt(leftParameter.getText());
+				int right = Integer.parseInt(rightParameter.getText());
+				BashCommands command = BashCommands.getInstance();
+
+				if (!(btnAddition.isEnabled())) {
+
+					int answer = left + right;
+					if (( answer >= 99 ) || ( answer <= 0 )) {
+
+						JOptionPane.showMessageDialog(null, "Answer out of Bounds, must be between 1 - 99");
+
+					}
+					else {
+
+						command.addEquation(nameOfSet.getText(), left + " + " + right , "" + answer);
+						questionNumber++;
+						setNextQuestion();
+
+
+					} 
+				}
+
+				else if (!(btnSubtract.isEnabled())) {
+
+					int answer = left - right;
+					if (( answer >= 99 ) || ( answer <= 0 )) {
+
+						JOptionPane.showMessageDialog(null, "Answer out of Bounds, must be between 1 - 99");
+
+					}
+					else {
+
+						command.addEquation(nameOfSet.getText(), left + " - " + right , "" + answer);
+						questionNumber++;
+						setNextQuestion();
+
+
+					} 
+
+				}
+				else if (!(btnMultiply.isEnabled())) {
+
+					int answer = left * right;
+					if (( answer >= 99 ) || ( answer <= 0 )) {
+
+						JOptionPane.showMessageDialog(null, "Answer out of Bounds, must be between 1 - 99");
+
+					}
+					else {
+
+						command.addEquation(nameOfSet.getText(), ""+left + " X " + right , "" + answer);
+						questionNumber++;
+						setNextQuestion();
+
+
+					} 
+
+				}
+
+				else if (!(btnDivide.isEnabled())) {
+
+					int answer = 0;
+
+					try {
+						answer = left / right;
+					} catch (ArithmeticException e1) {
+						JOptionPane.showMessageDialog(null, "0/0 is not accepted");
+						return;
+					} 
+
+					if ((left % right) != 0) {
+
+						JOptionPane.showMessageDialog(null, "Answer must return a whole number");
+
+
+					}
+
+					else if (( answer >= 99 ) || ( answer <= 0 )) {
+
+						JOptionPane.showMessageDialog(null, "Answer out of Bounds, must be between 1 - 99");
+
+					}
+					else {
+
+						command.addEquation(nameOfSet.getText(), left + " / " + right , "" + answer);
+						questionNumber++;
+						setNextQuestion();
+
+
+					}
+				}
+			}
+
+
+
+
+
 		}
-		
-		
+
+
 	}
 
 
@@ -388,7 +530,6 @@ public class CustomSetCreation  {
 
 			JTextField comp = (JTextField) e.getComponent();
 			int length = comp.getText().length();
-			System.out.println(length);
 			if (Character.isLetterOrDigit(c) && (length == 2)) {
 
 				e.consume();
@@ -463,7 +604,17 @@ public class CustomSetCreation  {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			if (btnCreateSet.isVisible()) {
+			if (questionNumber == 2) {
+				
+				customQuestionFrame.dispose();
+				customQuestionFrame = null;
+				
+				
+				
+			}
+			
+			
+			else if (btnCreateSet.isVisible()) {
 
 				int YesOrNo = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?","exit", JOptionPane.YES_NO_OPTION);
 				if (YesOrNo == 0) {

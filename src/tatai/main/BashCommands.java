@@ -472,7 +472,7 @@ public class BashCommands {
 
 
 		} catch (IOException | InterruptedException e) {
-
+				e.printStackTrace();
 
 		}
 		return 0;
@@ -494,9 +494,30 @@ public class BashCommands {
 
 
 		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+			
+		}
+	}
+	
+	
+	public void addEquation (String txtFile, String equation, String answer) {
+		
+		try {	
 
+			String command = "cd CustomQuestionSet ; echo " + equation + " >> " + txtFile + ".txt ; echo " + answer + " >> " + txtFile + ".txt ;"; 
+			ProcessBuilder pb = new ProcessBuilder("bash","-c", command);
+
+			Process process = pb.start();
+			process.waitFor();
+
+
+
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
 
 		}
+		
+		
 	}
 
 
