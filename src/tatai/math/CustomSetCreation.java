@@ -280,12 +280,21 @@ public class CustomSetCreation  {
 				if (!(nameOfSet.isVisible())) {
 
 
+					String[] options = {"Save" , "Delete" , "Cancel"};
+					int option = JOptionPane.showOptionDialog(null, "Would you like save current progress and fill the blanks with random questions or delete current progress? ", "Exit", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
-					customQuestionFrame.dispose();
-					customQuestionFrame = null;
+					if (option == 0) {
+						customQuestionFrame.dispose();
+						customQuestionFrame = null;
 
-					BashCommands command = BashCommands.getInstance();
-					command.deleteSet(nameOfSet.getText());
+					}
+
+					else if (option == 1) {
+						BashCommands command = BashCommands.getInstance();
+						command.deleteSet(nameOfSet.getText());
+						customQuestionFrame.dispose();
+						customQuestionFrame = null;					
+					}
 				}
 
 				else {
@@ -338,7 +347,7 @@ public class CustomSetCreation  {
 		btnMultiply.setEnabled(true);
 		btnDivide.setEnabled(true);
 
-		
+
 		lblQuestionX.setText("Question: "+questionNumber+" /10");
 
 
@@ -357,16 +366,16 @@ public class CustomSetCreation  {
 		rightParameter.setVisible(false);
 		leftParameter.setVisible(false);
 		lblOperation.setVisible(false);
-		
+
 
 		JLabel confirmLabel = new JLabel();
 		confirmLabel.setText("<html>New Set: \"" + nameOfSet.getText() +"\" has been created!</html>"); 
 		confirmLabel.setBounds(400, 300, 1100, 50);
 		confirmLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
 		customQuestionFrame.getContentPane().add(confirmLabel);
-		
+
 		btnMenu.setBounds(477, 537, 233, 51);
-		
+
 
 	}
 
@@ -387,7 +396,7 @@ public class CustomSetCreation  {
 			}
 
 			else {
-				
+
 				int left = Integer.parseInt(leftParameter.getText());
 				int right = Integer.parseInt(rightParameter.getText());
 				BashCommands command = BashCommands.getInstance();
@@ -605,15 +614,15 @@ public class CustomSetCreation  {
 		public void actionPerformed(ActionEvent e) {
 
 			if (questionNumber == 11) {
-				
+
 				customQuestionFrame.dispose();
 				customQuestionFrame = null;
-				
-				
-				
+
+
+
 			}
-			
-			
+
+
 			else if (btnCreateSet.isVisible()) {
 
 				int YesOrNo = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?","exit", JOptionPane.YES_NO_OPTION);
@@ -623,34 +632,34 @@ public class CustomSetCreation  {
 					customQuestionFrame = null;
 
 
-
-
 				}
-
 			}
 
 			else if (questionNumber != 11) {
 
-				int YesOrNo = JOptionPane.showConfirmDialog(null, "Any progress you have made will not be saved, are you sure you want to exit?","exit", JOptionPane.YES_NO_OPTION);
-				if (YesOrNo == 0) {
+				String[] options = {"Save" , "Delete" , "Cancel"};
+				int option = JOptionPane.showOptionDialog(null, "Would you like save current progress and fill the blanks with random questions or delete current progress? ", "Exit", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
+				if (option == 0) {
 					customQuestionFrame.dispose();
 					customQuestionFrame = null;
 
+				}
+
+				else if (option == 1) {
 					BashCommands command = BashCommands.getInstance();
 					command.deleteSet(nameOfSet.getText());
-
-
-
-
+					customQuestionFrame.dispose();
+					customQuestionFrame = null;					
 				}
 
 			}
 
+
+
+
+
 		}
-
-
-
 	}
 
 

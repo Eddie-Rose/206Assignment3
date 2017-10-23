@@ -18,8 +18,8 @@ import javax.swing.JTextField;
 import tatai.main.Level;
 import tatai.math.AdvancedMath;
 import tatai.math.BeginnerMath;
-import tatai.math.CustomInitialMenu;
 import tatai.math.MediumMath;
+import tatai.math.ViewCustomSet;
 
 
 
@@ -168,8 +168,7 @@ public class MathMenuGUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
-			CustomInitialMenu menu = new CustomInitialMenu();
-			menu.CustomInitialMenuFrame();
+			ViewCustomSet.getInstance();
 			
 		}
 		
