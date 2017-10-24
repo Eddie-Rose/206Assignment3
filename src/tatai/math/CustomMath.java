@@ -11,10 +11,13 @@ public class CustomMath extends Level{
 	Map<String, Integer> questionMap;
 
 
-	public CustomMath(String lvlName, int minNum, int maxNum, Map qMap) {
+	public CustomMath(String lvlName, int minNum, int maxNum, Map<String, Integer> qMap) {
 		
 		super(lvlName, 0, 0 );
 		questionMap = qMap;
+		
+	
+		
 		
 	}
 	
@@ -26,9 +29,10 @@ public class CustomMath extends Level{
 		int answer;
 		String question = "";
 		
+		Set<String> questionsSet = questionMap.keySet();
 		
-		String[] questions = (String[]) questionMap.keySet().toArray();
-		question = questions[index];
+		Object[] questions = questionsSet.toArray();
+		question = (String) questions[index];
 		
 		
 		

@@ -74,8 +74,8 @@ public abstract class Level extends JFrame {
 	Timer t;
 
 	int wrongAttempt = 0;
-	protected int correctAttempt = 8;
-	int totalAttempts = 8;
+	protected int correctAttempt = 0;
+	int totalAttempts = 0;
 	int displayAttempts = totalAttempts+1;
 	int highScore;
 	Number maoriNumber = new Number();
@@ -134,8 +134,6 @@ public abstract class Level extends JFrame {
 		lblNewLabel.setBounds(472, 250, 221, 55);
 		getContentPane().add(lblNewLabel);
 
-		testNumber = setNum();
-		maoriNumber.setNumber(testNumber);
 
 
 		lblScore = new JLabel("Score: "+correctAttempt+"/10");
@@ -266,6 +264,9 @@ public abstract class Level extends JFrame {
 
 
 	public void QuestionDisplay() {
+		testNumber = setNum();
+		maoriNumber.setNumber(testNumber);
+		
 		btnBegin.setVisible(false);
 		txtrWelcomeToThe.setVisible(false);
 		correct.setVisible(false);

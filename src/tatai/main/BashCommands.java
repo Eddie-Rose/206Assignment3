@@ -583,8 +583,14 @@ public class BashCommands {
 
 
 
-				while (((line = stdout.readLine()) != null) || (questionNumber != 11)) {
-					if (questionLine) {
+				while ((line = stdout.readLine()) != null)  {
+					
+					
+					if (questionNumber == 11) {
+						break;
+					}
+					
+					else if (questionLine) {
 
 						question = line;
 						questionLine = false;
@@ -597,6 +603,9 @@ public class BashCommands {
 
 						questionNumber++;
 						questionLine = true;
+						
+						System.out.println(question);
+						System.out.println(answer);
 
 					}
 
@@ -611,7 +620,7 @@ public class BashCommands {
 						int value2;
 						int operationValue = (int)(Math.random() * 4);
 						
-
+						
 
 						if (operationValue == 0) {
 
@@ -619,8 +628,12 @@ public class BashCommands {
 							value2 = (int)(1 + (Math.random() * (99 - value1)));
 							answer = value1 + value2;
 							
-							qMap.put(value1 + " + " + value2, answer);
+							question = value1 + " + " + value2;
+							qMap.put(question, answer);
 
+								
+							System.out.println(question);
+							System.out.println(answer);
 
 
 
@@ -628,13 +641,16 @@ public class BashCommands {
 
 						else if (operationValue == 1) {
 
-							value1 = (int)(50 + (Math.random() * 99));
+							value1 = (int)(50 + (Math.random() * 49));
 							value2 = (int)(1 + (Math.random() * (value1) - 1));
 							answer = value1 - value2;
 							
-							qMap.put(value1 + " - " + value2, answer);
+							question = value1 + " - " + value2;
+							qMap.put(question, answer);
 
-
+							
+							System.out.println(question);
+							System.out.println(answer);
 
 						}
 
@@ -662,9 +678,12 @@ public class BashCommands {
 							}
 
 							answer = value1 * value2;
+							question = value1 + " X " + value2;
 							
-							qMap.put(value1 + " X " + value2, answer);
-
+							
+							qMap.put(question, answer);
+							System.out.println(question);
+							System.out.println(answer);
 
 
 						}
@@ -683,9 +702,11 @@ public class BashCommands {
 
 							value2 = factors.get(index);
 							answer = value1 / value2;
+							question= value1 + " / " + value2;
 							
-							qMap.put(value1 + " / " + value2, answer);
-
+							qMap.put(question, answer);
+							System.out.println(question);
+							System.out.println(answer);
 
 
 
@@ -715,7 +736,7 @@ public class BashCommands {
 		}
 
 
-
+		
 		return qMap;
 	}
 
