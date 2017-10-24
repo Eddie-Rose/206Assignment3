@@ -20,6 +20,8 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.Timer;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.LineBorder;
 
 import tatai.applications.StatsPanel;
@@ -45,8 +47,8 @@ public abstract class Level extends JFrame {
 	int testNumber;
 	int minNum;
 	int maxNum;
-	int frameWidth = 450;
-	int frameHeight = 300;
+	int frameWidth = 1100;
+	int frameHeight = 700;
 	protected JButton btnBegin = new JButton("Start");
 	protected JButton btnRecord = new JButton("Record");
 	protected JButton btnBack;
@@ -55,9 +57,9 @@ public abstract class Level extends JFrame {
 	protected JLabel correct = new JLabel();
 	protected JLabel lblHearPreviousRecording;
 	protected JLabel lblScore;
-	JLabel lblhighScore;
-	JLabel lblPersonalBest;
-	JLabel lblAttempts;
+	protected JLabel lblhighScore;
+	protected JLabel lblPersonalBest;
+	protected JLabel lblAttempts;
 	protected JButton btnPlay;
 	protected JLabel txtrWelcomeToThe = new JLabel();
 	protected JButton mainMenu = new JButton("Main Menu");
@@ -72,8 +74,8 @@ public abstract class Level extends JFrame {
 	Timer t;
 
 	int wrongAttempt = 0;
-	protected int correctAttempt = 0;
-	int totalAttempts = 0;
+	protected int correctAttempt = 8;
+	int totalAttempts = 8;
 	int displayAttempts = totalAttempts+1;
 	int highScore;
 	Number maoriNumber = new Number();
@@ -87,46 +89,49 @@ public abstract class Level extends JFrame {
 		
 		//setResizable(false);
 		setVisible(true);
-		getContentPane().setBackground(Color.WHITE);
+		//getContentPane().setBackground(Color.WHITE);
 		setBounds(100, 100, frameWidth, frameHeight);
 		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
+		
 
 		lblAdvancedLevel = new JLabel(name);
-		lblAdvancedLevel.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
-		lblAdvancedLevel.setBounds(160, 40, 192, 25);
+		lblAdvancedLevel.setFont(new Font("DejaVu Sans", Font.BOLD, 45));
+		lblAdvancedLevel.setBounds(391, 83, 335, 70);
 		getContentPane().add(lblAdvancedLevel);
+		answerField.setLocation(280, 191);
+		answerField.setSize(457, 348);
 
 		answerField.setVisible(false);
 		answerField.setEditable(false);
 		getContentPane().add(answerField);
 
 
-		txtrWelcomeToThe.setFont(new Font("Dialog", Font.PLAIN, 14));
+		txtrWelcomeToThe.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtrWelcomeToThe.setText("<html>Welcome to the "+name+" level,\nNumbers asked are from "+ minNum+" to "+ maxNum + " ,\nPress \"Start\" to begin.</html>");
-		txtrWelcomeToThe.setBounds(103, 94, 264, 69);
+		txtrWelcomeToThe.setBounds(237, 241, 561, 119);
 		getContentPane().add(txtrWelcomeToThe);
 
-		btnBegin.setBounds(158, 190, 117, 25);
+		btnBegin.setBounds(250, 433, 531, 60);
 		getContentPane().add(btnBegin);
 
 		mainMenu.setVisible(false);
-		mainMenu.setBounds(158, 190, 117, 25);
+		mainMenu.setBounds(429, 555, 183, 60);
 		getContentPane().add(mainMenu);
 
 		btnRecord.setVisible(false);
-		btnRecord.setBounds(158, 190, 117, 25);
+		btnRecord.setBounds(429, 395, 173, 65);
 		getContentPane().add(btnRecord);
 		
 		btnBack = new JButton("<<");
 		btnBack.setVisible(false);
-		btnBack.setBounds(30, 20, 60, 25);
+		btnBack.setBounds(30, 42, 60, 25);
 		getContentPane().add(btnBack);
 
 		lblNewLabel.setVisible(false);
-		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 35));
-		lblNewLabel.setBounds(205, 110, 150, 40);
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 55));
+		lblNewLabel.setBounds(472, 250, 221, 55);
 		getContentPane().add(lblNewLabel);
 
 		testNumber = setNum();
@@ -134,8 +139,9 @@ public abstract class Level extends JFrame {
 
 
 		lblScore = new JLabel("Score: "+correctAttempt+"/10");
+		lblScore.setFont(new Font("Dialog", Font.BOLD, 17));
 		lblScore.setVisible(false);
-		lblScore.setBounds(349, 12, 89, 15);
+		lblScore.setBounds(798, 41, 128, 25);
 		getContentPane().add(lblScore);
 
 
@@ -144,45 +150,50 @@ public abstract class Level extends JFrame {
 
 
 		lblPersonalBest = new JLabel("Personal Best!");
+		lblPersonalBest.setForeground(Color.RED);
+		lblPersonalBest.setFont(new Font("Dialog", Font.BOLD, 17));
 		lblPersonalBest.setVisible(false);
-		lblPersonalBest.setBounds(349, 12, 89, 15);
+		lblPersonalBest.setBounds(938, 41, 150, 25);
 		getContentPane().add(lblPersonalBest);
 
 		lblhighScore = new JLabel("High Score: "+high);
+		lblhighScore.setFont(new Font("Dialog", Font.BOLD, 17));
 		lblhighScore.setVisible(false);
-		lblhighScore.setBounds(349, 30, 89, 15);
+		lblhighScore.setBounds(760, 83, 166, 36);
 		getContentPane().add(lblhighScore);
 
 		lblAttempts = new JLabel("Question# " + displayAttempts );
+		lblAttempts.setFont(new Font("Dialog", Font.BOLD, 17));
 		lblAttempts.setVisible(false);
 		//lblAttempts.setFont(new Font("Dialog", Font.BOLD, 18));
-		lblAttempts.setBounds(30, 270, 110, 15);
+		lblAttempts.setBounds(52, 630, 162, 36);
 		getContentPane().add(lblAttempts);
 
 		correct.setVisible(false);
-		correct.setFont(new Font("Dialog", Font.PLAIN, 14));
-		correct.setBounds(50, 100, 350, 50);
+		correct.setFont(new Font("Dialog", Font.PLAIN, 18));
+		correct.setBounds(294, 141, 416, 50);
 		correct.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(correct);
 
 		btnPlay = new JButton("Play");
-		btnPlay.setBounds(250, 240, 117, 25);
+		btnPlay.setBounds(503, 567, 150, 36);
 		getContentPane().add(btnPlay);
 		btnPlay.setVisible(false);
 
 		lblHearPreviousRecording = new JLabel("Hear previous recording:");
-		lblHearPreviousRecording.setBounds(60, 245, 176, 15);
+		lblHearPreviousRecording.setFont(new Font("Dialog", Font.BOLD, 17));
+		lblHearPreviousRecording.setBounds(214, 569, 271, 31);
 		getContentPane().add(lblHearPreviousRecording);
 		lblHearPreviousRecording.setVisible(false);
 
 		progressBar = new JProgressBar();
-		progressBar.setBounds(140, 230, 150, 25);
+		progressBar.setBounds(280, 505, 509, 50);
 		progressBar.setValue(0);
 		getContentPane().add(progressBar);
 		progressBar.setVisible(false);
 
 		skip = new JButton("Skip");
-		skip.setBounds(300, 111, 117, 25);
+		skip.setBounds(833, 292, 128, 41);
 		skip.setVisible(false);
 		getContentPane().add(skip);
 
@@ -242,7 +253,7 @@ public abstract class Level extends JFrame {
 			}
 		});
 
-
+		//getContentPane().
 	}
 
 

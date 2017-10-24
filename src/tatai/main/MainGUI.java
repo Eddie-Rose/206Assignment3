@@ -21,11 +21,15 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 import tatai.applications.HelpPanel;
 import tatai.applications.MathMenuGUI;
 import tatai.applications.StatsPanel;
 import tatai.practice.Practise;
+
+
 
 /**
  * 
@@ -110,7 +114,18 @@ public class MainGUI extends JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-	
+		
+		try {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            break;
+		        }
+		    }
+		} catch (Exception e) {
+		    // If Nimbus is not available, you can set the GUI to another look and feel.
+		}
+		
 		
 		//Sets the welcoming label and all the details
 		welcomeLabel = new JLabel("<html>Welcome to Tātai!</html>");
