@@ -79,6 +79,7 @@ public class MainGUI extends JFrame {
 	 * 
 	 */
 	public static void main(String[] args) {
+	
 		
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
@@ -172,7 +173,7 @@ public class MainGUI extends JFrame {
 //		btnHelp.setContentAreaFilled(false);
 //		btnHelp.setFocusPainted(false);
 //		btnHelp.setBorderPainted(false);
-		btnHelp.setIcon(new ImageIcon("/home/hpt09/Documents/softeng206/206Assignment3/rsz_help-icon.png"));
+		btnHelp.setIcon(new ImageIcon("./rsz_help-icon.png"));
 		
 		
 		btnStatistics = new JButton("Statistics");
@@ -408,7 +409,7 @@ public class MainGUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			UserHandler.signUpFrame();
+			UserHandler.getInstance();
 			
 			
 		}

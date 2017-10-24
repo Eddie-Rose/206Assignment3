@@ -3,6 +3,7 @@ package tatai.main;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -159,8 +160,8 @@ public class BashCommands {
 			f.printStackTrace();
 		}
 	}
-	
-	
+
+
 	/**
 	 * After the end of the level session we need to store the score
 	 * This bash command stores the score into a text file
@@ -201,8 +202,8 @@ public class BashCommands {
 		}
 
 	}
-	
-	
+
+
 	/**
 	 * Clears the stats txt file 
 	 */
@@ -309,6 +310,16 @@ public class BashCommands {
 
 		try {
 
+			//If there is no "User" directory create it  
+			String command = "if [ ! -d User ]; then mkdir -p User; fi";
+			ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+
+			Process process = pb.start();
+			process.waitFor();
+
+
+
+
 
 			//Tries to create the Username directory under the User directory 
 			String command = "cd User ; mkdir " + username;
@@ -316,14 +327,14 @@ public class BashCommands {
 
 			Process process0 = pb.start();
 			int exitStatus = process0.waitFor();
-			
-			
+
+
 			//If exit 1 then there is an existing user with the same username, returns with nothing 
 			if (exitStatus == 1) {
 				JOptionPane.showMessageDialog(null, "Username taken, please create a new one");
 				return 0;
 			}
-			
+
 			//When creating the new user, create the info text file with it to store their details such as password and fullname 
 			command = "cd User ; cd " + username + " ; echo \"" + fullName + "\" >> userinfo.txt ; echo \"" + password + "\" >> userinfo.txt"; 
 			pb = new ProcessBuilder("bash", "-c", command);
@@ -333,8 +344,8 @@ public class BashCommands {
 
 
 			exitStatus = process1.waitFor();
-			
-			
+
+
 			//Shows the final message, shows if the process has failed or not
 			if (exitStatus == 0) {
 				JOptionPane.showMessageDialog(null, "New user created, please logIn to record personal data");
@@ -384,10 +395,10 @@ public class BashCommands {
 
 				String userFullName = br.readLine();
 				String userPassword = br.readLine();
-				
+
 				br.close();
-				
-				
+
+
 				//checks whether the password in the file is the same as the on extracted in the TextField 
 				if (!(userPassword.equals(password))) {
 
@@ -395,8 +406,8 @@ public class BashCommands {
 					return null;
 
 				}
-				
-				
+
+
 				//If it is corrcet, outputs the users name
 				else {
 
@@ -460,6 +471,88 @@ public class BashCommands {
 
 
 	}
+
+
+
+	public int createNewSet(String name) {
+
+
+		try {
+
+			//If there is no "CustomSet" directory create it  
+			String command = "if [ ! -d CustomQuestionSet ]; then mkdir -p CustomQuestionSet; fi";
+			ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+
+			Process process = pb.start();
+			process.waitFor();
+
+
+			//Tries to create the new CustomSetname directory under the CustomSet directory 
+			command = "cd CustomQuestionSet ; if [ ! -e " + name +".txt ]; then >>" + name + ".txt ; else exit 1; fi";
+			pb = new ProcessBuilder("bash", "-c", command);
+
+			Process process0 = pb.start();
+			int exitStatus = process0.waitFor();
+
+
+			//If exit 1 then there is an existing user with the same CustomSetName, returns with nothing 
+			if (exitStatus == 1) {
+				JOptionPane.showMessageDialog(null, "Custom Set name taken, please create a new one");
+				return 1;
+			}
+
+
+
+		} catch (IOException | InterruptedException e) {
+				e.printStackTrace();
+
+		}
+		return 0;
+
+
+	}
+
+	public void deleteSet (String name) {
+
+
+		try {	
+
+			String command = "cd CustomQuestionSet ; rm " + name + ".txt ";
+			ProcessBuilder pb = new ProcessBuilder("bash","-c", command);
+
+			Process process = pb.start();
+			process.waitFor();
+
+
+
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+			
+		}
+	}
+	
+	
+	public void addEquation (String txtFile, String equation, String answer) {
+		
+		try {	
+
+			String command = "cd CustomQuestionSet ; echo " + equation + " >> " + txtFile + ".txt ; echo " + answer + " >> " + txtFile + ".txt ;"; 
+			ProcessBuilder pb = new ProcessBuilder("bash","-c", command);
+
+			Process process = pb.start();
+			process.waitFor();
+
+
+
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+
+		}
+		
+		
+	}
+
+
 
 }
 

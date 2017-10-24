@@ -19,6 +19,7 @@ import tatai.main.Level;
 import tatai.math.AdvancedMath;
 import tatai.math.BeginnerMath;
 import tatai.math.MediumMath;
+import tatai.math.ViewCustomSet;
 
 
 
@@ -31,6 +32,7 @@ public class MathMenuGUI extends JFrame {
 	private JButton btnAdvanced;
 	private JButton btnMenu;
 	private JButton btnMedium;
+	private JButton btnCustom;
 	private JButton btnContinue;
 	private String name;
 	
@@ -69,11 +71,11 @@ public class MathMenuGUI extends JFrame {
 		btnMedium.addActionListener(new MediumListener());
 		getContentPane().add(btnMedium);
 		
-		btnContinue = new JButton("Continue");
+		btnCustom = new JButton("Custom");
 		//btnBeginner.setBounds(35, 174, 117, 25);	
-		btnContinue.addActionListener(new ContinueListener());
-		btnContinue.setVisible(false);
-		getContentPane().add(btnContinue);
+		btnCustom.addActionListener(new CustomListener());
+		btnCustom.setVisible(true);
+		getContentPane().add(btnCustom);
 		
 		
 		btnMenu = new JButton("Main Menu");
@@ -99,7 +101,7 @@ public class MathMenuGUI extends JFrame {
 				btnBeginner.setBounds(c.getWidth()/5, c.getHeight()/17*9, c.getWidth()/4, c.getHeight()/12);
 				btnMedium.setBounds(c.getWidth()/15*8, c.getHeight()/17*9, c.getWidth()/4, c.getHeight()/12);
 				btnAdvanced.setBounds(c.getWidth()/5, c.getHeight()/17*11, c.getWidth()/4, c.getHeight()/12);
-				btnContinue.setBounds(c.getWidth()/15*8, c.getHeight()/17*11, c.getWidth()/4, c.getHeight()/12);
+				btnCustom.setBounds(c.getWidth()/15*8, c.getHeight()/17*11, c.getWidth()/4, c.getHeight()/12);
 				
 				
 
@@ -162,12 +164,12 @@ public class MathMenuGUI extends JFrame {
 		
 	}
 	
-	private class ContinueListener implements ActionListener {
+	private class CustomListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
-			
+			ViewCustomSet.getInstance();
 			
 		}
 		
