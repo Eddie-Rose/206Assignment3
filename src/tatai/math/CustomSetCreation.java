@@ -637,10 +637,10 @@ public class CustomSetCreation  {
 
 			else if (questionNumber != 11) {
 
-				String[] options = {"Save" , "Delete" , "Cancel"};
+				String[] options = {"Cancel" , "Delete" , "Save"};
 				int option = JOptionPane.showOptionDialog(null, "Would you like save current progress and fill the blanks with random questions or delete current progress? ", "Exit", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
-				if (option == 0) {
+				if (option == 2) {
 					customQuestionFrame.dispose();
 					customQuestionFrame = null;
 

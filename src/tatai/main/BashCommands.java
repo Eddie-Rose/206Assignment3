@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
@@ -174,7 +177,7 @@ public class BashCommands {
 		try {
 			String username = MainGUI.getUsername();
 			String command = "cd User/"+username+" ; echo -e \" "+"$(date +%D) $(date +%T) "+username+ " " +name+" "+score+"/10\" >> stats.txt ; sort -k5 -nro stats.txt stats.txt";
-			
+
 			//\"$((`cat stats.txt | wc -l` + 1)))
 			ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
 
@@ -266,7 +269,7 @@ public class BashCommands {
 			f.printStackTrace();
 		}
 	}
-	
+
 	public void makeUserFolder() {
 		try {
 			String command = "if [ ! -d User ]; then mkdir -p User; cd User ; mkdir -p anonymous ; cd anonymous ; > stats.txt ; fi ";
@@ -322,8 +325,8 @@ public class BashCommands {
 
 
 			//Tries to create the Username directory under the User directory 
-			String command = "cd User ; mkdir " + username;
-			ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+			command = "cd User ; mkdir " + username;
+			pb = new ProcessBuilder("bash", "-c", command);
 
 			Process process0 = pb.start();
 			int exitStatus = process0.waitFor();
@@ -504,7 +507,7 @@ public class BashCommands {
 
 
 		} catch (IOException | InterruptedException e) {
-				e.printStackTrace();
+			e.printStackTrace();
 
 		}
 		return 0;
@@ -527,13 +530,13 @@ public class BashCommands {
 
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
-			
+
 		}
 	}
-	
-	
+
+
 	public void addEquation (String txtFile, String equation, String answer) {
-		
+
 		try {	
 
 			String command = "cd CustomQuestionSet ; echo " + equation + " >> " + txtFile + ".txt ; echo " + answer + " >> " + txtFile + ".txt ;"; 
@@ -548,8 +551,172 @@ public class BashCommands {
 			e.printStackTrace();
 
 		}
-		
-		
+
+
+	}
+
+	public Map<String, Integer> getSetQuestions(String name) {
+
+		Map<String, Integer> qMap = new HashMap<String, Integer>();
+		String line;
+		String question = "";
+		int answer;
+		int questionNumber = 1;
+		boolean questionLine = true;
+
+
+		try {
+
+
+			//Sets up the process builder and starts it
+			String command = "cd CustomQuestionSet ; cat " + name + ".txt ;";
+			ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+
+			Process process = pb.start();
+
+			BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+			int exitStatus = process.waitFor();
+
+			if (exitStatus == 0) {
+
+
+
+				while (((line = stdout.readLine()) != null) || (questionNumber != 11)) {
+					if (questionLine) {
+
+						question = line;
+						questionLine = false;
+
+					}
+					else {
+
+						answer = Integer.parseInt(line);
+						qMap.put(question, answer);
+
+						questionNumber++;
+						questionLine = true;
+
+					}
+
+
+
+
+				}
+
+				if (questionNumber != 11) {
+					while (questionNumber != 11) {
+						int value1;
+						int value2;
+						int operationValue = (int)(Math.random() * 4);
+						
+
+
+						if (operationValue == 0) {
+
+							value1 = (int)( 1 + (Math.random() * 98));
+							value2 = (int)(1 + (Math.random() * (99 - value1)));
+							answer = value1 + value2;
+							
+							qMap.put(value1 + " + " + value2, answer);
+
+
+
+
+						}
+
+						else if (operationValue == 1) {
+
+							value1 = (int)(50 + (Math.random() * 99));
+							value2 = (int)(1 + (Math.random() * (value1) - 1));
+							answer = value1 - value2;
+							
+							qMap.put(value1 + " - " + value2, answer);
+
+
+
+						}
+
+						else if (operationValue == 2) {
+
+							value1 = (int)( 1 + (Math.random() * 11));
+
+							if (value1 == 11) {
+								value2 = (int)( 1 + (Math.random() * 9));
+							}
+
+							else if (value1 == 10) {
+								value2 = (int)( 1 + (Math.random() * 9));
+
+							}
+
+							else if (value1 == 9) {
+								value2 = (int)( 1 + (Math.random() * 11));
+
+							}
+
+							else {
+								value2 = (int)( 1 + (Math.random() * 12));
+
+							}
+
+							answer = value1 * value2;
+							
+							qMap.put(value1 + " X " + value2, answer);
+
+
+
+						}
+
+						else if (operationValue == 3) {
+
+							value1 = (int)( 1 + (Math.random() * 99));
+
+							ArrayList<Integer> factors = new ArrayList<>();
+							factors = Number.getFactors(value1);
+
+
+
+							int size = factors.size();
+							int index = (int)((Math.random() * size));
+
+							value2 = factors.get(index);
+							answer = value1 / value2;
+							
+							qMap.put(value1 + " / " + value2, answer);
+
+
+
+
+						}
+
+
+						questionNumber++;
+					}
+				}
+
+
+				//else we extract the std error and output it 	
+			} else {
+
+				while ((line = stderr.readLine()) != null) {
+					System.err.println(line);
+
+				}
+			}
+
+
+
+		} catch (IOException | InterruptedException | NumberFormatException e) {
+
+			return null;
+
+		}
+
+
+
+		return qMap;
 	}
 
 

@@ -8,21 +8,30 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import tatai.main.BashCommands;
+import tatai.main.Level;
 
 public class ViewCustomSet {
 
 	private static JFrame viewCustomSetFrame = null;
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
+	
+	private DefaultListModel model;
 	private JButton btnPlay;
 	private JButton btnDelete;
 	private JList list;
@@ -30,6 +39,7 @@ public class ViewCustomSet {
 	private JButton delete;
 	private JButton play;
 	private JButton add;
+	
 
 	private final File dir = new File("./CustomQuestionSet"); 
 
@@ -90,6 +100,7 @@ public class ViewCustomSet {
 			dir.mkdir();
 		}
 		
+		model = new DefaultListModel();
 		String[] txtFileList = dir.list();
 		if (txtFileList != null) {
 			for (int i = 0; i < txtFileList.length ; i++) {
@@ -97,10 +108,12 @@ public class ViewCustomSet {
 				if (pos > 0) {
 					txtFileList[i] = txtFileList[i].substring(0, pos);
 				}
+				model.addElement(txtFileList[i]);
 			}
 		}
-	
-		list = new JList(txtFileList);
+		
+		list = new JList();
+		list.setModel(model);
 		scrollPane.setViewportView(list);
 
 		JLabel lblCustomSets = new JLabel("Custom Sets:");
@@ -109,11 +122,13 @@ public class ViewCustomSet {
 
 		delete = new JButton("Delete");
 		delete.setBounds(550, 420, 150, 50);
+		delete.addActionListener(new DeleteListener());
 		viewCustomSetFrame.getContentPane().add(delete);
 
 
 		play = new JButton("Play");
 		play.setBounds(100, 420, 150, 50);
+		play.addActionListener(new PlayListener());
 		viewCustomSetFrame.getContentPane().add(play);
 
 
@@ -142,7 +157,27 @@ public class ViewCustomSet {
 	}
 	
 	
-
+	public void refresh() {
+		
+		
+		DefaultListModel model = new DefaultListModel();
+		String[] txtFileList = dir.list();
+		if (txtFileList != null) {
+			for (int i = 0; i < txtFileList.length ; i++) {
+				int pos = txtFileList[i].lastIndexOf(".");
+				if (pos > 0) {
+					txtFileList[i] = txtFileList[i].substring(0, pos);
+				}
+				
+				model.addElement(txtFileList[i]);
+			}
+		}
+		
+		
+		
+		list.setModel(model);
+		
+	}
 
 	private class AddCustomSetListener implements ActionListener {
 
@@ -155,6 +190,66 @@ public class ViewCustomSet {
 		}
 
 
+	}
+	
+	private class DeleteListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			if (list.getSelectedValue() == null) {
+				
+				JOptionPane.showMessageDialog(null, "No Set has been selected");
+				
+			}
+			else {
+				
+				String name = (String) list.getSelectedValue();
+				BashCommands commands = BashCommands.getInstance();
+				commands.deleteSet(name);
+				refresh();
+				
+				
+			}
+		
+		}
+		
+	}
+	
+	private class PlayListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			if(list.getSelectedValue() == null) {
+				
+				JOptionPane.showMessageDialog(null, "No Set has been selected");
+				
+			}
+			else {
+				
+				String name = (String) list.getSelectedValue();
+				
+				Map<String, Integer> answerMap = new HashMap<String, Integer>();
+				BashCommands commands = BashCommands.getInstance();
+				answerMap = commands.getSetQuestions(name);
+				
+				if (answerMap == null) {
+					commands.deleteSet(name);
+					
+				}
+				else {
+					
+					Level custom = new CustomMath(name, 0, 0, answerMap);
+				}
+				
+				
+				
+			}
+			
+		}
+		
+		
 	}
 	
 
