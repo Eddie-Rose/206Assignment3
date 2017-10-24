@@ -23,13 +23,14 @@ public class Beginner extends Level {
 	public Beginner(String name, int minNum, int maxNum) {
 		super(name, minNum, maxNum);
 		finish = new JLabel("Good Score! Go to Next Level:");
+		finish.setFont(new Font("Dialog", Font.BOLD, 17));
 		getContentPane().add(finish);
-		finish.setBounds(120, 140, 250, 25);
+		finish.setBounds(291, 630, 299, 41);
 		finish.setVisible(false);
 		
 		finishButton = new JButton("Advanced");
 		getContentPane().add(finishButton);
-		finishButton.setBounds(158, 165, 117, 25);
+		finishButton.setBounds(607, 629, 173, 41);
 		finishButton.setVisible(false);
 		
 		
@@ -45,8 +46,14 @@ public class Beginner extends Level {
 			btnPlay.setVisible(false);
 			lblHearPreviousRecording.setVisible(false);
 			lblScore.setVisible(false);
-			skip.setVisible(false);
+			lblhighScore.setVisible(false);
+			lblPersonalBest.setVisible(false);
+			lblAttempts.setVisible(false);
 			progressBar.setVisible(false);
+			answerField.setVisible(true);
+			skip.setVisible(false);
+			lblPersonalBest.setVisible(false);
+			btnBack.setVisible(false);
 			
 			correct.setVisible(true);
 			mainMenu.setVisible(true);
@@ -60,14 +67,17 @@ public class Beginner extends Level {
 			btnPlay.setVisible(false);
 			lblHearPreviousRecording.setVisible(false);
 			lblScore.setVisible(false);
-			skip.setVisible(false);
+			lblhighScore.setVisible(false);
+			lblPersonalBest.setVisible(false);
+			lblAttempts.setVisible(false);
 			progressBar.setVisible(false);
-			
+			answerField.setVisible(true);
+			skip.setVisible(false);
+			lblPersonalBest.setVisible(false);
+			btnBack.setVisible(false);
+
 			correct.setVisible(true);
 			mainMenu.setVisible(true);
-			finish.setVisible(false);
-			finishButton.setVisible(false);
-			answerField.setVisible(true);
 		}
 		
 	}

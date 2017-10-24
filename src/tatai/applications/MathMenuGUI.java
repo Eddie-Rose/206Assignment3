@@ -33,13 +33,14 @@ public class MathMenuGUI extends JFrame {
 	private JButton btnMenu;
 	private JButton btnMedium;
 	private JButton btnCustom;
-	
+	private JButton btnContinue;
+	private String name;
 	
 
 	
 
 	public MathMenuGUI() {
-		
+				
 		setVisible(true);
 		getContentPane().setBackground(Color.WHITE);
 		setBounds(100, 100, 450, 300);

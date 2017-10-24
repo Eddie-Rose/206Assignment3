@@ -172,7 +172,9 @@ public class BashCommands {
 	 */
 	public void addStats(int score, String name) {
 		try {
-			String command = "echo -e \" "+"$(date +%D) $(date +%T) "+name+" "+score+"/10\" >> stats.txt ; sort -k4 -nro stats.txt stats.txt";
+			String username = MainGUI.getUsername();
+			String command = "cd User/"+username+" ; echo -e \" "+"$(date +%D) $(date +%T) "+username+ " " +name+" "+score+"/10\" >> stats.txt ; sort -k5 -nro stats.txt stats.txt";
+			
 			//\"$((`cat stats.txt | wc -l` + 1)))
 			ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
 
@@ -207,7 +209,8 @@ public class BashCommands {
 	 */
 	public void clearStats() {
 		try {
-			String command = "> stats.txt";
+			String username = MainGUI.getUsername();
+			String command = "cd User/"+username+" ; > stats.txt";
 			ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
 
 			Process process = pb.start();
@@ -263,6 +266,35 @@ public class BashCommands {
 			f.printStackTrace();
 		}
 	}
+	
+	public void makeUserFolder() {
+		try {
+			String command = "if [ ! -d User ]; then mkdir -p User; cd User ; mkdir -p anonymous ; cd anonymous ; > stats.txt ; fi ";
+			ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+
+			Process process = pb.start();
+
+			BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+			int exitStatus = process.waitFor();
+
+			if (exitStatus == 0) {
+				String line;
+				while ((line = stdout.readLine()) != null) {
+					System.out.println(line);
+				}
+			} else {
+				String line;
+				while ((line = stderr.readLine()) != null) {
+					System.err.println(line);
+				}
+			}
+
+		} catch (Exception f) {
+			f.printStackTrace();
+		}
+	}
 
 
 	/**
@@ -278,7 +310,6 @@ public class BashCommands {
 
 		try {
 
-
 			//If there is no "User" directory create it  
 			String command = "if [ ! -d User ]; then mkdir -p User; fi";
 			ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
@@ -289,9 +320,10 @@ public class BashCommands {
 
 
 
+
 			//Tries to create the Username directory under the User directory 
-			command = "cd User ; mkdir " + username;
-			pb = new ProcessBuilder("bash", "-c", command);
+			String command = "cd User ; mkdir " + username;
+			ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
 
 			Process process0 = pb.start();
 			int exitStatus = process0.waitFor();

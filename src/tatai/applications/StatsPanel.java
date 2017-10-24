@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import tatai.main.BashCommands;
+import tatai.main.MainGUI;
+import tatai.main.Resizable;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -24,30 +26,37 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JTable;
 
 public class StatsPanel extends JFrame {
 
 	private JPanel contentPane;
 	private BufferedReader input;
-	private String path;
+	private static String path;
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 	private JTable table;
 	DefaultTableModel tableModel;
+	private int frameWidth = 1100;
+	private int frameHeight = 700;
 
 	/**
 	 * Create the frame.
 	 */
 	public StatsPanel() {
-		path = "./stats.txt";
+		String username = MainGUI.getUsername();
+		path = "./User/"+username+"/stats.txt";
 		
 		setTitle("Statistics");
 		setVisible(true);
-		setResizable(false);
+//		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, frameWidth, frameHeight);
 		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -56,8 +65,8 @@ public class StatsPanel extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblStatisitcs = new JLabel("Statistics");
-		lblStatisitcs.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
-		lblStatisitcs.setBounds(141, 0, 143, 36);
+		lblStatisitcs.setFont(new Font("DejaVu Sans", Font.BOLD, 50));
+		lblStatisitcs.setBounds(352, 55, 287, 36);
 		contentPane.add(lblStatisitcs);
 		
 		JButton btnClear = new JButton("Clear");
@@ -69,7 +78,7 @@ public class StatsPanel extends JFrame {
 				//display();
 			}
 		});
-		btnClear.setBounds(356, 93, 80, 40);
+		btnClear.setBounds(887, 171, 156, 87);
 		contentPane.add(btnClear);
 		
 		JButton btnMainMenu = new JButton("<html>Main Menu</html>");
@@ -78,22 +87,40 @@ public class StatsPanel extends JFrame {
 				dispose();
 			}
 		});
-		btnMainMenu.setBounds(356, 167, 80, 40);
+		btnMainMenu.setBounds(887, 337, 156, 87);
 		contentPane.add(btnMainMenu);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(26, 83, 304, 179);
+		scrollPane_1.setBounds(26, 157, 804, 441);
 		contentPane.add(scrollPane_1);
 		
 		table = new JTable();
 		scrollPane_1.setViewportView(table);
+		
+		Resizable[] resizableComp = new Resizable[4];
+		
+		resizableComp[0] = new Resizable(lblStatisitcs, frameWidth, frameHeight);
+		resizableComp[1] = new Resizable(btnClear, frameWidth, frameHeight);
+		resizableComp[2] = new Resizable(btnMainMenu, frameWidth, frameHeight);
+		resizableComp[3] = new Resizable(scrollPane_1, frameWidth, frameHeight);
+		//resizableComp[4] = new Resizable(btnMenu, frameWidth, frameHeight);
+		
+		getContentPane().addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent e) {
+				Component c = (Component)e.getSource();
+				
+				for(Resizable comp : resizableComp) {
+					comp.Resize(c.getWidth(), c.getHeight());
+				}
+			}
+		});
 
 		
-		String columns[] = {"Rank","Date", "Time", "Level", "Score"};
+		String columns[] = {"Rank","Date", "Time", "Name","Level", "Score"};
 		
 		 
 		    // specify number of columns
-		    tableModel = new DefaultTableModel(0,5); 
+		    tableModel = new DefaultTableModel(0,6); 
 		    tableModel.setColumnIdentifiers(columns);
 			table.setModel(tableModel);
 		display();
@@ -121,26 +148,27 @@ public class StatsPanel extends JFrame {
         }
         catch(Exception e)
         {       
-            e.printStackTrace();
+          // do nothing if file doesn't exist
         }
 	}
 	
 	public static String getHighScore() {
 		 String highScore = "0";
+		 String username = MainGUI.getUsername();
 		try
         {
 			String line;
-			FileReader fr = new FileReader("./stats.txt");
+			FileReader fr = new FileReader("./User/"+username+"/stats.txt");
 			BufferedReader br = new BufferedReader(fr);
 			if((line = br.readLine()) != null) {
-				highScore = line.split(" ")[4];
+				highScore = line.split(" ")[5];
 			}
             br.close();
             return highScore;
         }
         catch(Exception e)
         {       
-            e.printStackTrace();
+           // Do nothing if file does not exist
         }
 		return highScore;
 		
