@@ -178,10 +178,15 @@ public class BashCommands {
 			String username = MainGUI.getUsername();
 			String command = "cd User/"+username+" ; echo -e \" "+"$(date +%D) $(date +%T) "+username+ " " +name+" "+score+"/10\" >> stats.txt ; sort -k5 -nro stats.txt stats.txt";
 
-			//\"$((`cat stats.txt | wc -l` + 1)))
 			ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
 
 			Process process = pb.start();
+			
+			command = "cd User ; echo -e \" "+"$(date +%D) $(date +%T) "+username+ " " +name+" "+score+"/10\" >> stats.txt ; sort -k5 -nro stats.txt stats.txt";
+			
+			pb = new ProcessBuilder("bash", "-c", command);
+
+			process = pb.start();
 
 			BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
 			BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
@@ -272,7 +277,7 @@ public class BashCommands {
 
 	public void makeUserFolder() {
 		try {
-			String command = "if [ ! -d User ]; then mkdir -p User; cd User ; mkdir -p anonymous ; cd anonymous ; > stats.txt ; fi ";
+			String command = "if [ ! -d User ]; then mkdir -p User; cd User ; > stats.txt ; mkdir -p anonymous ; cd anonymous ; > stats.txt ; fi ";
 			ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
 
 			Process process = pb.start();

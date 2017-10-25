@@ -42,6 +42,9 @@ public class StatsPanel extends JFrame {
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 	private JTable table;
 	DefaultTableModel tableModel;
+	JButton btnLeaderboard;
+	JButton btnPersonal;
+	JButton btnClear;
 	private int frameWidth = 1100;
 	private int frameHeight = 700;
 
@@ -69,7 +72,7 @@ public class StatsPanel extends JFrame {
 		lblStatisitcs.setBounds(352, 55, 287, 36);
 		contentPane.add(lblStatisitcs);
 		
-		JButton btnClear = new JButton("Clear");
+		btnClear = new JButton("Clear");
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				BashCommands commands = BashCommands.getInstance();
@@ -79,7 +82,7 @@ public class StatsPanel extends JFrame {
 				
 			}
 		});
-		btnClear.setBounds(887, 171, 156, 87);
+		btnClear.setBounds(887, 397, 156, 87);
 		contentPane.add(btnClear);
 		
 		JButton btnMainMenu = new JButton("<html>Main Menu</html>");
@@ -88,7 +91,7 @@ public class StatsPanel extends JFrame {
 				dispose();
 			}
 		});
-		btnMainMenu.setBounds(887, 337, 156, 87);
+		btnMainMenu.setBounds(887, 511, 156, 87);
 		contentPane.add(btnMainMenu);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -97,25 +100,6 @@ public class StatsPanel extends JFrame {
 		
 		table = new JTable();
 		scrollPane_1.setViewportView(table);
-		
-		Resizable[] resizableComp = new Resizable[4];
-		
-		resizableComp[0] = new Resizable(lblStatisitcs, frameWidth, frameHeight);
-		resizableComp[1] = new Resizable(btnClear, frameWidth, frameHeight);
-		resizableComp[2] = new Resizable(btnMainMenu, frameWidth, frameHeight);
-		resizableComp[3] = new Resizable(scrollPane_1, frameWidth, frameHeight);
-		//resizableComp[4] = new Resizable(btnMenu, frameWidth, frameHeight);
-		
-		getContentPane().addComponentListener(new ComponentAdapter() {
-			public void componentResized(ComponentEvent e) {
-				Component c = (Component)e.getSource();
-				
-				for(Resizable comp : resizableComp) {
-					comp.Resize(c.getWidth(), c.getHeight());
-				}
-			}
-		});
-
 		
 		String columns[] = {"Rank","Date", "Time", "Name","Level", "Score"};
 		
@@ -129,7 +113,54 @@ public class StatsPanel extends JFrame {
 		      };
 		    tableModel.setColumnIdentifiers(columns);
 			table.setModel(tableModel);
+			
+			btnPersonal = new JButton("Personal");
+			btnPersonal.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					tableModel.setRowCount(0);
+					path = "./User/"+username+"/stats.txt";
+					display();
+					btnPersonal.setEnabled(false);
+					btnLeaderboard.setEnabled(true);
+				}
+			});
+			btnPersonal.setEnabled(false);
+			btnPersonal.setBounds(887, 153, 156, 87);
+			contentPane.add(btnPersonal);
+			
+			btnLeaderboard = new JButton("Leaderboard");
+			btnLeaderboard.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					tableModel.setRowCount(0);
+					path = "./User/stats.txt";
+					display();
+					btnLeaderboard.setEnabled(false);
+					btnClear.setEnabled(false);
+					btnPersonal.setEnabled(true);
+				}
+			});
+			btnLeaderboard.setBounds(887, 268, 156, 87);
+			contentPane.add(btnLeaderboard);
 		display();
+		
+		Resizable[] resizableComp = new Resizable[6];
+		
+		resizableComp[0] = new Resizable(lblStatisitcs, frameWidth, frameHeight);
+		resizableComp[1] = new Resizable(btnClear, frameWidth, frameHeight);
+		resizableComp[2] = new Resizable(btnMainMenu, frameWidth, frameHeight);
+		resizableComp[3] = new Resizable(scrollPane_1, frameWidth, frameHeight);
+		resizableComp[4] = new Resizable(btnPersonal, frameWidth, frameHeight);
+		resizableComp[5] = new Resizable(btnLeaderboard, frameWidth, frameHeight);
+		
+		getContentPane().addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent e) {
+				Component c = (Component)e.getSource();
+				
+				for(Resizable comp : resizableComp) {
+					comp.Resize(c.getWidth(), c.getHeight());
+				}
+			}
+		});
 		
 	}
 	
@@ -141,8 +172,6 @@ public class StatsPanel extends JFrame {
 			int i = 1;
 			FileReader fr = new FileReader(path);
 			BufferedReader br = new BufferedReader(fr);
-//			textArea.read(br, null);   
-//            textArea.requestFocus();
             while((line = br.readLine()) != null) 
             {
             	row = line.split(" ");
