@@ -86,15 +86,6 @@ public class Practise extends JFrame {
 					comp.Resize(c.getWidth(), c.getHeight());
 				}
 				
-				
-			//	System.out.println(""+c.getWidth()+c.getHeight());
-//				lblPractise.setBounds(c.getWidth()/8 *3, c.getHeight()/15, c.getWidth()/16*10, c.getHeight()/5);
-//				System.out.println("lblPractise.setBounds("+c.getWidth()/8 *3+","+ c.getHeight()/15 + ","+ c.getWidth()/16*10 + "," + c.getHeight()/5+")");
-//				lblPractiseIntro.setBounds(c.getWidth()/5 , c.getHeight()/10 * 2, c.getWidth()/16*10, c.getHeight()/2);
-//				btnBeginner.setBounds(c.getWidth()/5, c.getHeight()/17*11, c.getWidth()/4, c.getHeight()/12);
-//				btnAdvanced.setBounds(c.getWidth()/15*8, c.getHeight()/17*11, c.getWidth()/4, c.getHeight()/12);
-//				btnMenu.setBounds(c.getWidth()/13*5, c.getHeight()/115*114, c.getWidth()/4, c.getHeight()/10);
-				
 			}
 		});
 		

@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import tatai.main.Level;
+import tatai.main.Resizable;
 import tatai.math.AdvancedMath;
 import tatai.math.BeginnerMath;
 import tatai.math.MediumMath;
@@ -35,7 +36,8 @@ public class MathMenuGUI extends JFrame {
 	private JButton btnCustom;
 	private JButton btnContinue;
 	private String name;
-	
+	private int frameWidth =1100;
+	private int frameHeight= 700;
 
 	
 
@@ -43,71 +45,67 @@ public class MathMenuGUI extends JFrame {
 				
 		setVisible(true);
 		getContentPane().setBackground(Color.WHITE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, frameWidth, frameHeight);
 		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
 		lblMath = new JLabel("Math");
-		lblMath.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
+		lblMath.setFont(new Font("DejaVu Sans", Font.BOLD, 50));
 		getContentPane().add(lblMath);
 		
 		lblMathIntro = new JLabel("<html>Welcome to the Math menu,\nHere you can practice your mathematical skills. \nSelect a level to start.</html>");
-		lblMathIntro.setFont(new Font("Dialog", Font.PLAIN, 14));
+		lblMathIntro.setFont(new Font("Dialog", Font.PLAIN, 17));
 		getContentPane().add(lblMathIntro);
 		
 		btnBeginner = new JButton("Beginner");
-		//btnBeginner.setBounds(35, 174, 117, 25);	
 		btnBeginner.addActionListener(new BeginnerListener());
 		getContentPane().add(btnBeginner);
 		
 		btnAdvanced = new JButton("Advanced");
-		//btnBeginner.setBounds(35, 174, 117, 25);	
 		btnAdvanced.addActionListener(new AdvancedListener());
 		getContentPane().add(btnAdvanced);
 		
 		btnMedium = new JButton("Medium");
-		//btnBeginner.setBounds(35, 174, 117, 25);	
+		btnMedium.setBounds(594, 325, 275, 75);
 		btnMedium.addActionListener(new MediumListener());
 		getContentPane().add(btnMedium);
 		
 		btnCustom = new JButton("Custom");
-		//btnBeginner.setBounds(35, 174, 117, 25);	
 		btnCustom.addActionListener(new CustomListener());
 		btnCustom.setVisible(true);
 		getContentPane().add(btnCustom);
 		
 		
 		btnMenu = new JButton("Main Menu");
-		//btnBeginner.setBounds(35, 174, 117, 25);	
 		btnMenu.addActionListener(new MenuListener());
 		getContentPane().add(btnMenu);
 		
-	
+		lblMath.setBounds(418, 69, 162, 118);
+		lblMathIntro.setBounds(121 , 185 , 842, 140);
+		btnBeginner.setBounds(220, 325, 275, 75);
+		btnMedium.setBounds(594, 325, 275, 75);
+		btnAdvanced.setBounds(220, 437, 275, 75);
+		btnCustom.setBounds(594, 437, 294, 75);
+		btnMenu.setBounds(418, 548, 275, 75);
 		
+		Resizable[] resizableComp = new Resizable[7];
 		
-		
-		
+		resizableComp[0] = new Resizable(lblMath, frameWidth, frameHeight);
+		resizableComp[1] = new Resizable(lblMathIntro, frameWidth, frameHeight);
+		resizableComp[2] = new Resizable(btnBeginner, frameWidth, frameHeight);
+		resizableComp[3] = new Resizable(btnMedium, frameWidth, frameHeight);
+		resizableComp[4] = new Resizable(btnAdvanced, frameWidth, frameHeight);
+		resizableComp[5] = new Resizable(btnCustom, frameWidth, frameHeight);
+		resizableComp[6] = new Resizable(btnMenu, frameWidth, frameHeight);
 		
 		getContentPane().addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
 				Component c = (Component)e.getSource();
 				
-				
-				
-			//	System.out.println(""+c.getWidth()+c.getHeight());
-				lblMath.setBounds(c.getWidth()/8 *3, c.getHeight()/15, c.getWidth()/16*10, c.getHeight()/5);
-				lblMathIntro.setBounds(c.getWidth()/5 , c.getHeight()/10 , c.getWidth()/16*10, c.getHeight()/2);
-				btnBeginner.setBounds(c.getWidth()/5, c.getHeight()/17*9, c.getWidth()/4, c.getHeight()/12);
-				btnMedium.setBounds(c.getWidth()/15*8, c.getHeight()/17*9, c.getWidth()/4, c.getHeight()/12);
-				btnAdvanced.setBounds(c.getWidth()/5, c.getHeight()/17*11, c.getWidth()/4, c.getHeight()/12);
-				btnCustom.setBounds(c.getWidth()/15*8, c.getHeight()/17*11, c.getWidth()/4, c.getHeight()/12);
-				
-				
-
-
-				btnMenu.setBounds(c.getWidth()/13*5, c.getHeight()/115*114, c.getWidth()/4, c.getHeight()/10);
-				
+				for(Resizable comp : resizableComp) {
+					comp.Resize(c.getWidth(), c.getHeight());
+				}
 			}
 		});
 		

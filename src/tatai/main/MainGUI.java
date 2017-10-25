@@ -70,6 +70,9 @@ public class MainGUI extends JFrame {
 	private JButton btnDeleteUser;
 	private JButton btnLogOut;
 	
+	private int frameWidth = 1100;
+	private int frameHeight = 700;
+	
 	
 	private static String username = "anonymous";
 	
@@ -98,7 +101,7 @@ public class MainGUI extends JFrame {
 	 */
 	public MainGUI() {
 		super("Tātai");
-		setSize(1100, 700);
+		setSize(frameWidth, frameHeight);
 		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		//setResizable(false);
 		getContentPane().setBackground(Color.WHITE);
@@ -227,34 +230,56 @@ public class MainGUI extends JFrame {
 		getContentPane().add(lblUsernameWelcome);
 		lblUsernameWelcome.setVisible(false);
 		
+		btnPractise.setBounds(84, 411, 275, 58);
+		btnStatistics.setBounds(423, 411, 275, 58);
+		btnHelp.setBounds(846, 547, 137, 70);
+		btnMath.setBounds(733, 411, 275, 58);
+		welcomeLabel.setBounds(196, 116, 687, 140);
+		descriptionLabel1.setBounds(73, 233, 1047, 100);
+		btnQuit.setBounds(676, 547, 137, 70);
+		
+		
+		usernameInput.setBounds(22, 663,275, 28);
+		passwordInput.setBounds(330, 663, 275, 28);
+		btnLogIn.setBounds(770, 663, 137, 35);
+		btnSignUp.setBounds(924, 663, 137, 35);
+		
+		lblUsername.setBounds(22, 639, 275,28);
+		lblPassWord.setBounds(330, 639, 275, 28);
+		
+		btnLogOut.setBounds(770, 663, 137, 35);
+		btnDeleteUser.setBounds(924, 663, 137, 35);
+		
+		lblUsernameWelcome.setBounds(22, 639, 275, 28);
 		
 		
 		//Sets all the positions of all the labels, and moves it automatically when resizing 
+		Resizable[] resizableComp = new Resizable[16];
+		
+		resizableComp[0] = new Resizable(btnPractise, frameWidth, frameHeight);
+		resizableComp[1] = new Resizable(btnStatistics, frameWidth, frameHeight);
+		resizableComp[2] = new Resizable(btnHelp, frameWidth, frameHeight);
+		resizableComp[3] = new Resizable(btnMath, frameWidth, frameHeight);
+		resizableComp[4] = new Resizable(welcomeLabel, frameWidth, frameHeight);
+		resizableComp[5] = new Resizable(descriptionLabel1, frameWidth, frameHeight);
+		resizableComp[6] = new Resizable(btnQuit, frameWidth, frameHeight);
+		resizableComp[7] = new Resizable(usernameInput, frameWidth, frameHeight);
+		resizableComp[8] = new Resizable(passwordInput, frameWidth, frameHeight);
+		resizableComp[9] = new Resizable(btnLogIn, frameWidth, frameHeight);
+		resizableComp[10] = new Resizable(btnSignUp, frameWidth, frameHeight);
+		resizableComp[11] = new Resizable(lblUsername, frameWidth, frameHeight);
+		resizableComp[12] = new Resizable(lblPassWord, frameWidth, frameHeight);
+		resizableComp[13] = new Resizable(btnLogOut, frameWidth, frameHeight);
+		resizableComp[14] = new Resizable(btnDeleteUser, frameWidth, frameHeight);
+		resizableComp[15] = new Resizable(lblUsernameWelcome, frameWidth, frameHeight);
+		
 		getContentPane().addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
 				Component c = (Component)e.getSource();
 				
-				btnPractise.setBounds(c.getWidth()/13, c.getHeight()/17*10, c.getWidth()/4, c.getHeight()/12);
-				btnStatistics.setBounds(c.getWidth()/26*10, c.getHeight()/17*10, c.getWidth()/4, c.getHeight()/12);
-				btnHelp.setBounds(c.getWidth()/13*10, c.getHeight()/115*90, c.getWidth()/8, c.getHeight()/10);
-				btnMath.setBounds(c.getWidth()/15*10, c.getHeight()/17*10, c.getWidth()/4, c.getHeight()/12);
-				welcomeLabel.setBounds(c.getWidth()/56*10, c.getHeight()/6, c.getWidth()/16*10, c.getHeight()/5);
-				descriptionLabel1.setBounds(c.getWidth()/15, c.getHeight()/3, c.getWidth()/105*100, c.getHeight()/7);
-				btnQuit.setBounds(c.getWidth()/13*8, c.getHeight()/115*90, c.getWidth()/8, c.getHeight()/10);
-				
-				
-				usernameInput.setBounds(c.getWidth()/50*1, c.getHeight()/115*109, c.getWidth()/4, c.getHeight()/25);
-				passwordInput.setBounds(c.getWidth()/50*15, c.getHeight()/115*109, c.getWidth()/4, c.getHeight()/25);
-				btnLogIn.setBounds(c.getWidth()/50*35, c.getHeight()/115*109, c.getWidth()/8, c.getHeight()/20);
-				btnSignUp.setBounds(c.getWidth()/50*42, c.getHeight()/115*109, c.getWidth()/8, c.getHeight()/20);
-				
-				lblUsername.setBounds(c.getWidth()/50*1, c.getHeight()/115*105, c.getWidth()/4, c.getHeight()/25);
-				lblPassWord.setBounds(c.getWidth()/50*15, c.getHeight()/115*105, c.getWidth()/4, c.getHeight()/25);
-				
-				btnLogOut.setBounds(c.getWidth()/50*35, c.getHeight()/115*109, c.getWidth()/8, c.getHeight()/20);
-				btnDeleteUser.setBounds(c.getWidth()/50*42, c.getHeight()/115*109, c.getWidth()/8, c.getHeight()/20);
-				
-				lblUsernameWelcome.setBounds(c.getWidth()/50*1, c.getHeight()/115*107, c.getWidth()/4, c.getHeight()/25);
+				for(Resizable comp : resizableComp) {
+					comp.Resize(c.getWidth(), c.getHeight());
+				}
 				
 			}
 		});
