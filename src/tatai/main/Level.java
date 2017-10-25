@@ -9,8 +9,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,6 +29,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.LineBorder;
 
 import tatai.applications.StatsPanel;
+import javax.swing.JScrollPane;
 
 /**
  * 
@@ -80,6 +85,7 @@ public abstract class Level extends JFrame {
 	int highScore;
 	Number maoriNumber = new Number();
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+	protected JScrollPane scrollPane;
 
 	public Level(String lvlName, int minimumNum, int maximumNum) {
 		
@@ -89,23 +95,32 @@ public abstract class Level extends JFrame {
 		
 		//setResizable(false);
 		setVisible(true);
-		//getContentPane().setBackground(Color.WHITE);
+		getContentPane().setBackground(Color.WHITE);
 		setBounds(100, 100, frameWidth, frameHeight);
 		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
+//		try {
+//            setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("./maori.jpg")))));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+		
 
 		lblAdvancedLevel = new JLabel(name);
-		lblAdvancedLevel.setFont(new Font("DejaVu Sans", Font.BOLD, 45));
-		lblAdvancedLevel.setBounds(391, 83, 335, 70);
+		lblAdvancedLevel.setFont(new Font("DejaVu Sans", Font.BOLD, 50));
+		lblAdvancedLevel.setBounds(373, 41, 335, 70);
 		getContentPane().add(lblAdvancedLevel);
-		answerField.setLocation(280, 191);
-		answerField.setSize(457, 348);
-
-		answerField.setVisible(false);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(247, 191, 594, 306);
+		getContentPane().add(scrollPane);
+		scrollPane.setViewportView(answerField);
+		answerField.setFont(new Font("DejaVu Sans", Font.PLAIN, 18));
+		
+		scrollPane.setVisible(false);
 		answerField.setEditable(false);
-		getContentPane().add(answerField);
 
 
 		txtrWelcomeToThe.setFont(new Font("Dialog", Font.PLAIN, 20));
@@ -117,7 +132,7 @@ public abstract class Level extends JFrame {
 		getContentPane().add(btnBegin);
 
 		mainMenu.setVisible(false);
-		mainMenu.setBounds(429, 555, 183, 60);
+		mainMenu.setBounds(429, 535, 224, 78);
 		getContentPane().add(mainMenu);
 
 		btnRecord.setVisible(false);
@@ -128,10 +143,11 @@ public abstract class Level extends JFrame {
 		btnBack.setVisible(false);
 		btnBack.setBounds(30, 42, 60, 25);
 		getContentPane().add(btnBack);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 		lblNewLabel.setVisible(false);
-		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 55));
-		lblNewLabel.setBounds(472, 250, 221, 55);
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 90));
+		lblNewLabel.setBounds(328, 165, 416, 154);
 		getContentPane().add(lblNewLabel);
 
 
@@ -169,7 +185,7 @@ public abstract class Level extends JFrame {
 
 		correct.setVisible(false);
 		correct.setFont(new Font("Dialog", Font.PLAIN, 18));
-		correct.setBounds(294, 141, 416, 50);
+		correct.setBounds(292, 124, 416, 50);
 		correct.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(correct);
 
@@ -236,8 +252,8 @@ public abstract class Level extends JFrame {
 		resizableComp[11] = new Resizable(btnPlay, frameWidth, frameHeight);
 		resizableComp[12] = new Resizable(lblHearPreviousRecording, frameWidth, frameHeight);
 		resizableComp[13] = new Resizable(progressBar, frameWidth, frameHeight);
-		resizableComp[14] = new Resizable(answerField, frameWidth, frameHeight);
-		resizableComp[15] = new Resizable(skip, frameWidth, frameHeight);
+		resizableComp[14] = new Resizable(skip, frameWidth, frameHeight);
+		resizableComp[15] = new Resizable(scrollPane, frameWidth, frameHeight);
 		
 		getContentPane().addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
@@ -329,6 +345,7 @@ public abstract class Level extends JFrame {
 
 		correct.setVisible(true);
 		mainMenu.setVisible(true);
+		scrollPane.setVisible(true);
 	}
 
 	public class Worker extends SwingWorker<String, Void> {
@@ -354,7 +371,7 @@ public abstract class Level extends JFrame {
 				totalAttempts++;
 				correctAttempt++;
 				wrongAttempt= 0;
-				answerField.append("Question: " + totalAttempts + ") " + testNumber + "     " + "correct :)\n");
+				answerField.append("Question: " + totalAttempts + ") " + testNumber + "     " + "Correct ✔ \n\n");
 
 
 			} else if(saidNumber.equals("")) {
@@ -367,7 +384,7 @@ public abstract class Level extends JFrame {
 					btnBegin.setText("Continue");
 					wrongAttempt= 0;
 					btnBegin.setVisible(true);
-					answerField.append("Question: " + totalAttempts + ") " + testNumber + "     " + "incorrect :(\n");
+					answerField.append("Question: " + totalAttempts + ") " + testNumber + "     " + "Incorrect ✖ \n\n");
 				}
 				else {
 					AttemptDisplay();
@@ -386,7 +403,7 @@ public abstract class Level extends JFrame {
 					correct.setHorizontalTextPosition(SwingConstants.CENTER);
 					wrongAttempt = 0;
 					btnBegin.setText("Continue");
-					answerField.append("Question: " + totalAttempts + ") " + testNumber + "     " + "incorrect :(\n");
+					answerField.append("Question: " + totalAttempts + ") " + testNumber + "     " + "Incorrect ✖ \n\n");
 
 				}
 				else {
@@ -517,7 +534,7 @@ public abstract class Level extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 
 
-			answerField.append("Question: " + displayAttempts + ") " + testNumber + "     " + "incorrect :(\n");
+			answerField.append("Question: " + displayAttempts + ") " + testNumber + "     " + "Incorrect ✖ \n\n");
 			totalAttempts++;
 
 			if(totalAttempts == 10) {

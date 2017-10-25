@@ -153,7 +153,6 @@ public class MainGUI extends JFrame {
 		
 		//Sets all the buttons and adds its listeners 
 		btnPractise = new JButton("Practice");
-		//btnBeginner.setBounds(35, 174, 117, 25);	
 		btnPractise.addActionListener(new PractiseListener());
 		getContentPane().add(btnPractise);
 		
@@ -164,13 +163,11 @@ public class MainGUI extends JFrame {
 		
 		
 		btnMath = new JButton("Math");
-		//btnAdvanced.setBounds(299, 174, 117, 25);
 		btnMath.addActionListener(new MathListener());
 		getContentPane().add(btnMath);
 		
 		btnHelp = new JButton("Help");
 		
-		//btnHelp.setBounds(550, 400, 90, 50);
 		btnHelp.addActionListener(new HelpListener());
 		getContentPane().add(btnHelp);
 //		btnHelp.setContentAreaFilled(false);
@@ -180,7 +177,6 @@ public class MainGUI extends JFrame {
 		
 		
 		btnStatistics = new JButton("Statistics");
-		//btnStatistics.setBounds(172, 174, 110, 25);
 		btnStatistics.addActionListener(new StatisticsListener());
 		getContentPane().add(btnStatistics);
 		
@@ -307,7 +303,7 @@ public class MainGUI extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			@SuppressWarnings("unused")
 			MathMenuGUI mathWindow = new MathMenuGUI();
-			
+			dispose();
 		}
 		
 	}
@@ -321,7 +317,7 @@ public class MainGUI extends JFrame {
 			
 			@SuppressWarnings("unused")
 			Practise practiseWindow = new Practise();
-			
+			dispose();
 		}
 	}
 	
@@ -333,7 +329,7 @@ public class MainGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				@SuppressWarnings("unused")
 				StatsPanel stats = new StatsPanel();
-				
+				dispose();
 			}
 		
 	}

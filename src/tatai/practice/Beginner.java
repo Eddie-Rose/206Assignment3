@@ -50,7 +50,6 @@ public class Beginner extends Level {
 			lblPersonalBest.setVisible(false);
 			lblAttempts.setVisible(false);
 			progressBar.setVisible(false);
-			answerField.setVisible(true);
 			skip.setVisible(false);
 			lblPersonalBest.setVisible(false);
 			btnBack.setVisible(false);
@@ -59,6 +58,8 @@ public class Beginner extends Level {
 			mainMenu.setVisible(true);
 			finish.setVisible(true);
 			finishButton.setVisible(true);
+			scrollPane.setVisible(true);
+
 			answerField.setVisible(true);
 		} else {
 			btnRecord.setVisible(false);
@@ -71,13 +72,14 @@ public class Beginner extends Level {
 			lblPersonalBest.setVisible(false);
 			lblAttempts.setVisible(false);
 			progressBar.setVisible(false);
-			answerField.setVisible(true);
 			skip.setVisible(false);
 			lblPersonalBest.setVisible(false);
 			btnBack.setVisible(false);
 
 			correct.setVisible(true);
 			mainMenu.setVisible(true);
+			scrollPane.setVisible(true);
+
 		}
 		
 	}
