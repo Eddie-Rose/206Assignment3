@@ -76,6 +76,7 @@ public class StatsPanel extends JFrame {
 				commands.clearStats();
 				tableModel.setRowCount(0);
 				//display();
+				
 			}
 		});
 		btnClear.setBounds(887, 171, 156, 87);
@@ -120,7 +121,12 @@ public class StatsPanel extends JFrame {
 		
 		 
 		    // specify number of columns
-		    tableModel = new DefaultTableModel(0,6); 
+		    tableModel = new DefaultTableModel(0,6){
+		        public boolean isCellEditable(int row, int column)
+		        {
+		          return false;
+		        }
+		      };
 		    tableModel.setColumnIdentifiers(columns);
 			table.setModel(tableModel);
 		display();
