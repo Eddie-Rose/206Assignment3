@@ -107,6 +107,7 @@ public class MainGUI extends JFrame {
 		getContentPane().setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
+		setVisible(true);
 		
 		BashCommands commands = BashCommands.getInstance();
 		commands.makeUserFolder();

@@ -101,14 +101,15 @@ public abstract class Level extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
-//		try {
-//            setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("./maori.jpg")))));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+		try {
+            setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("./background.jpg")))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 		
 
 		lblAdvancedLevel = new JLabel(name);
+		lblAdvancedLevel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAdvancedLevel.setFont(new Font("DejaVu Sans", Font.BOLD, 50));
 		lblAdvancedLevel.setBounds(373, 41, 335, 70);
 		getContentPane().add(lblAdvancedLevel);
@@ -519,6 +520,7 @@ public abstract class Level extends JFrame {
 				}
 				
 				else if (YesOrNo == 0)  {
+					new MainGUI();
 					dispose();
 				}
 				
