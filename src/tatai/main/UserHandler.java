@@ -26,7 +26,7 @@ import javax.swing.JTextField;
  *singleton design pattern and handle all user inputs including 
  *errors when inputting information.
  *
- *
+ *Author: Edwin Roesli
  *
  */
 
@@ -45,6 +45,7 @@ public class UserHandler {
 	}
 
 
+	@SuppressWarnings("unused")
 	private static UserHandler instance;
 
 	public static void getInstance(){

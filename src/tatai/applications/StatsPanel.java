@@ -90,6 +90,8 @@ public class StatsPanel extends JFrame {
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new MainGUI();
+				MainGUI frame = new MainGUI();
+				frame.setVisible(true);
 				dispose();
 			}
 		});
