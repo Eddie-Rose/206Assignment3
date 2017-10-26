@@ -21,6 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import tatai.main.BashCommands;
 import tatai.main.Level;
+import tatai.main.MainGUI;
 
 
 /**
@@ -47,6 +48,7 @@ public class ViewCustomSet {
 	private JButton btnDelete;
 	private JButton btnPlay;
 	private JButton btnAdd;
+	private JButton btnMenu;
 	
 	
 	//Create a new directory to store all the custom questions if it does
@@ -158,21 +160,26 @@ public class ViewCustomSet {
 		//Sets the delete, play and add button into the frame and 
 		//Set its listeners.
 		btnDelete = new JButton("Delete");
-		btnDelete.setBounds(550, 420, 150, 50);
+		btnDelete.setBounds(600, 420, 100, 50);
 		btnDelete.addActionListener(new DeleteListener());
 		viewCustomSetFrame.getContentPane().add(btnDelete);
 
 
 		btnPlay = new JButton("Play");
-		btnPlay.setBounds(100, 420, 150, 50);
+		btnPlay.setBounds(265, 420, 100, 50);
 		btnPlay.addActionListener(new PlayListener());
 		viewCustomSetFrame.getContentPane().add(btnPlay);
 
 
 		btnAdd = new JButton("add");
-		btnAdd.setBounds(330, 420, 150, 50);
+		btnAdd.setBounds(430, 420, 100, 50);
 		viewCustomSetFrame.getContentPane().add(btnAdd);
 		btnAdd.addActionListener(new AddCustomSetListener());
+		
+		btnMenu = new JButton("Menu");
+		btnMenu.setBounds(100, 420, 100, 50);
+		viewCustomSetFrame.getContentPane().add(btnMenu);
+		btnMenu.addActionListener(new MenuListener());
 
 		
 		//Listen to when the window is closed, and set the viewCustomFrame 
@@ -267,6 +274,21 @@ public class ViewCustomSet {
 		
 	}
 	
+	//Set the menu listener to return to the main menu 
+	//if the w=user wants to.
+	private class MenuListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			new MainGUI();
+			viewCustomSetFrame.dispose();
+			viewCustomSetFrame = null;		
+		}
+		
+		
+	}
+	
+	
 	//Set the play listener to play the chosen set 
 	//if no set has been chosen, return with a message pane.
 	private class PlayListener implements ActionListener {
@@ -299,7 +321,8 @@ public class ViewCustomSet {
 				//else it returns as it should and initialise the custom level frame
 				else {
 					
-					
+					viewCustomSetFrame.dispose();
+					viewCustomSetFrame = null;
 					@SuppressWarnings("unused")
 					Level custom = new CustomMath(name, 0, 0, answerMap);
 				}

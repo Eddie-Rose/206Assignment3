@@ -709,8 +709,7 @@ public class BashCommands {
 							qMap.put(question, answer);
 
 
-							System.out.println(question);
-							System.out.println(answer);
+						
 
 						}
 						
@@ -749,8 +748,7 @@ public class BashCommands {
 
 
 							qMap.put(question, answer);
-							System.out.println(question);
-							System.out.println(answer);
+							
 
 
 						}
