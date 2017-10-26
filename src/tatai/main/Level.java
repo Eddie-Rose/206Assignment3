@@ -57,7 +57,7 @@ public abstract class Level extends JFrame {
 	protected JButton btnBegin = new JButton("Start");
 	protected JButton btnRecord = new JButton("");
 	protected JButton btnBack;
-	JLabel lblAdvancedLevel;
+	protected JLabel lblAdvancedLevel;
 	protected JLabel lblNewLabel = new JLabel();
 	protected JLabel correct = new JLabel();
 	protected JLabel lblHearPreviousRecording;
