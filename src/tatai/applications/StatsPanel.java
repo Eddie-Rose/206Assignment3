@@ -139,6 +139,8 @@ public class StatsPanel extends JFrame {
 			btnLeaderboard = new JButton("Leaderboard");
 			btnLeaderboard.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					BashCommands commands = BashCommands.getInstance();
+					commands.getAllStats();
 					tableModel.setRowCount(0);
 					path = "./User/stats.txt";
 					display();

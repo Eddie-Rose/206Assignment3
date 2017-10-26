@@ -193,11 +193,11 @@ public class BashCommands {
 
 			Process process = pb.start();
 
-			command = "cd User ; echo -e \" "+"$(date +%D) $(date +%T) "+username+ " " +name+" "+score+"/10\" >> stats.txt ; sort -k5 -nro stats.txt stats.txt";
-
-			pb = new ProcessBuilder("bash", "-c", command);
-
-			process = pb.start();
+//			command = "cd User ; echo -e \" "+"$(date +%D) $(date +%T) "+username+ " " +name+" "+score+"/10\" >> stats.txt ; sort -k5 -nro stats.txt stats.txt";
+//
+//			pb = new ProcessBuilder("bash", "-c", command);
+//
+//			process = pb.start();
 
 			BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
 			BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
@@ -256,12 +256,12 @@ public class BashCommands {
 		}
 	}
 
-	// not needed right now
-	public void sortStats() {
+	//getting all the stats from all users for leaderboard
+	public void getAllStats() {
 		try {
-			String command = "sort -k4 -nro stats.txt stats.txt";
+			String command = "cd User ; > stats.txt ; for i in $(ls -d */); do cat ./${i%%/}/stats.txt >> stats.txt ; done ; sort -k5 -nro stats.txt stats.txt";
 			ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
-
+			
 			Process process = pb.start();
 
 			BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
