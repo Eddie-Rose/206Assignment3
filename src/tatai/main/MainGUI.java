@@ -111,9 +111,13 @@ public class MainGUI extends JFrame {
 		getContentPane().setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
+
 		setVisible(true);
 		
 
+
+
+		//Creates the User folder if one does not exist
 		BashCommands commands = BashCommands.getInstance();
 		commands.makeUserFolder();
 
@@ -160,9 +164,11 @@ public class MainGUI extends JFrame {
 		//Sets all the buttons and adds its listeners 
 		btnPractise = new JButton("Practice");
 		btnPractise.addActionListener(new PractiseListener());
+
 		getContentPane().add(btnPractise);		
 		
 		btnQuit = new JButton ("");
+
 
 		btnQuit.addActionListener(new QuitListener());
 		getContentPane().add(btnQuit);
@@ -171,11 +177,13 @@ public class MainGUI extends JFrame {
 		btnMath = new JButton("Math");
 		btnMath.addActionListener(new MathListener());
 		getContentPane().add(btnMath);
+
 		
 		btnHelp = new JButton("");
 		
 		btnHelp.addActionListener(new HelpListener());
 		getContentPane().add(btnHelp);
+
 
 		btnStatistics = new JButton("Statistics");
 		btnStatistics.addActionListener(new StatisticsListener());
@@ -240,6 +248,7 @@ public class MainGUI extends JFrame {
 		lblPassWord.setVisible(false);
 		
 		
+
 		
 		//Checks if the there is a user logged on, if there isn't then set up the log in implementation
 		if (username.equals("anonymous")) {
@@ -298,6 +307,7 @@ public class MainGUI extends JFrame {
 		btnSignUp.setBounds(780, 663, 137, 35);
 		
 		
+
 
 		lblUsername.setBounds(22, 639, 275,28);
 		lblPassWord.setBounds(330, 639, 275, 28);

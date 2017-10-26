@@ -89,7 +89,10 @@ public class StatsPanel extends JFrame {
 		JButton btnMainMenu = new JButton("");
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				new MainGUI();
+
+		
 				dispose();
 			}
 		});
