@@ -24,6 +24,7 @@ import java.io.InputStreamReader;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -82,17 +83,18 @@ public class StatsPanel extends JFrame {
 				
 			}
 		});
-		btnClear.setBounds(887, 397, 156, 87);
+		btnClear.setBounds(887, 474, 156, 87);
 		contentPane.add(btnClear);
 		
-		JButton btnMainMenu = new JButton("<html>Main Menu</html>");
+		JButton btnMainMenu = new JButton("");
 		btnMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new MainGUI();
 				dispose();
 			}
 		});
-		btnMainMenu.setBounds(887, 511, 156, 87);
+		btnMainMenu.setBounds(30, 42, 100, 80);
+		btnMainMenu.setIcon(new ImageIcon("./206Assignment3Images/Icons/backIcon.png"));
 		contentPane.add(btnMainMenu);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -126,7 +128,7 @@ public class StatsPanel extends JFrame {
 				}
 			});
 			btnPersonal.setEnabled(false);
-			btnPersonal.setBounds(887, 153, 156, 87);
+			btnPersonal.setBounds(887, 187, 156, 87);
 			contentPane.add(btnPersonal);
 			
 			btnLeaderboard = new JButton("Leaderboard");
@@ -140,7 +142,8 @@ public class StatsPanel extends JFrame {
 					btnPersonal.setEnabled(true);
 				}
 			});
-			btnLeaderboard.setBounds(887, 268, 156, 87);
+			btnLeaderboard.setBounds(887, 335, 156, 87);
+			btnLeaderboard.setIcon(new ImageIcon("./206Assignment3Images/Icons/leaderboard.png"));
 			contentPane.add(btnLeaderboard);
 		display();
 		

@@ -55,7 +55,7 @@ public abstract class Level extends JFrame {
 	int frameWidth = 1100;
 	int frameHeight = 700;
 	protected JButton btnBegin = new JButton("Start");
-	protected JButton btnRecord = new JButton("Record");
+	protected JButton btnRecord = new JButton("");
 	protected JButton btnBack;
 	JLabel lblAdvancedLevel;
 	protected JLabel lblNewLabel = new JLabel();
@@ -137,12 +137,14 @@ public abstract class Level extends JFrame {
 		getContentPane().add(mainMenu);
 
 		btnRecord.setVisible(false);
-		btnRecord.setBounds(429, 395, 173, 65);
+		btnRecord.setBounds(475, 380, 130, 100);
+		btnRecord.setIcon(new ImageIcon("./206Assignment3Images/Icons/record.png"));
 		getContentPane().add(btnRecord);
 		
-		btnBack = new JButton("<<");
-		btnBack.setVisible(false);
-		btnBack.setBounds(30, 42, 60, 25);
+		btnBack = new JButton("");
+		btnBack.setVisible(true);
+		btnBack.setBounds(30, 42, 100, 80);
+		btnBack.setIcon(new ImageIcon("./206Assignment3Images/Icons/backIcon.png"));
 		getContentPane().add(btnBack);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -190,8 +192,9 @@ public abstract class Level extends JFrame {
 		correct.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(correct);
 
-		btnPlay = new JButton("Play");
-		btnPlay.setBounds(503, 567, 150, 36);
+		btnPlay = new JButton("");
+		btnPlay.setBounds(475, 545, 75, 75);
+		btnPlay.setIcon(new ImageIcon("./206Assignment3Images/Icons/play.png"));
 		getContentPane().add(btnPlay);
 		btnPlay.setVisible(false);
 
@@ -207,8 +210,12 @@ public abstract class Level extends JFrame {
 		getContentPane().add(progressBar);
 		progressBar.setVisible(false);
 
-		skip = new JButton("Skip");
-		skip.setBounds(833, 292, 128, 41);
+		skip = new JButton("");
+		skip.setIcon(new ImageIcon("./206Assignment3Images/Icons/skip.png"));
+		skip.setBounds(833, 190, 100, 80);
+		//skip.setContentAreaFilled(false);
+		skip.setFocusPainted(false);
+		//skip.setBorderPainted(false);
 		skip.setVisible(false);
 		getContentPane().add(skip);
 
@@ -473,7 +480,7 @@ public abstract class Level extends JFrame {
 
 	public class ButtonMenuListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-
+			new MainGUI();
 			dispose();
 
 		}
