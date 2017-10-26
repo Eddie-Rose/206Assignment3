@@ -2,8 +2,14 @@ package tatai.main;
 
 import java.awt.Component;
 
-import javax.swing.JButton;
 
+/**
+ * 
+ * Resize class which handles of the components resizing
+ * 
+ * @author Harpreet Singh
+ *
+ */
 public class Resizable {
 	
 	private double xRatio;
@@ -11,7 +17,16 @@ public class Resizable {
 	private double widthRatio;
 	private double heightRatio;
 	private Component component;
-
+	
+	
+	/**
+	 * Gathers the information of the components 
+	 * and stores the relative ratio of the component to the frame
+	 * 
+	 * @param c The component itself
+	 * @param frameWidth The width of the original frame
+	 * @param frameHeight The height of the original frame
+	 */
 	public Resizable(Component c, int frameWidth, int frameHeight) {
 		component = c;
 		xRatio = (double)frameWidth/c.getX();
@@ -20,16 +35,13 @@ public class Resizable {
 		heightRatio = (double)frameHeight/c.getHeight();
 	}
 	
-//	public static void main(String[] args) {
-//		JButton btnBegin = new JButton();
-//		btnBegin.setBounds(158, 190, 117, 25);
-//		Resizable a = new Resizable(btnBegin, 450, 300);
-//		System.out.println(a.xRatio);
-//		System.out.println(a.yRatio);
-//		System.out.println(a.widthRatio);
-//		System.out.println(a.heightRatio);
-//	}
-	
+
+	/**
+	 * Resizes the components based on the new frame width/ height 
+	 * 
+	 * @param frameWidth new frame width
+	 * @param frameHeight new frame height
+	 */
 	public void Resize(int frameWidth, int frameHeight) {
 		component.setBounds((int)(frameWidth/xRatio), (int)(frameHeight/yRatio), (int)(frameWidth/widthRatio), (int)(frameHeight/heightRatio));
 	}
