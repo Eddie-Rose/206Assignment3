@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import tatai.main.Level;
+import tatai.main.MainGUI;
 import tatai.main.Resizable;
 
 public class Practise extends JFrame {
@@ -123,6 +124,7 @@ public class Practise extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			new MainGUI();
 			dispose();
 			
 			
