@@ -1,9 +1,6 @@
 package tatai.applications;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -17,12 +14,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileReader;
-import java.io.InputStreamReader;
-
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -35,10 +27,20 @@ import java.awt.Component;
 
 import javax.swing.JTable;
 
+/**
+ * 
+ * Stores the information of the users score data in this class
+ * This class has the option to show the leader board of the statistics 
+ * or see the users personal statistics
+ * 
+ * @author Harpreet Singh
+ *
+ */
 public class StatsPanel extends JFrame {
 
+	
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private BufferedReader input;
 	private static String path;
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 	private JTable table;
@@ -52,13 +54,13 @@ public class StatsPanel extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings("serial")
 	public StatsPanel() {
 		String username = MainGUI.getUsername();
 		path = "./User/"+username+"/stats.txt";
 		
 		setTitle("Statistics");
 		setVisible(true);
-//		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, frameWidth, frameHeight);
 		setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);

@@ -42,15 +42,16 @@ public class BeginnerMath extends Level {
 		
 		int operationValue = (int)(Math.random() * 2);
 		
-		//Generates a number between 1 and 50
-		value1 = (int)(Math.random() * 50 + 1);
+		
 		
 		//addition operation 
 		if (operationValue == 0) {
+			//Generates a number between 1 and 20
+			value1 = (int)(Math.random() * 20 + 1);
 			
 			//Value 2 is generated so that the addition of value 1 and 
-			//value 2 is between 1 and 99
-			value2 = (int)(Math.random() * (99 - value1) + 1);
+			//value 2 is between 1 and 40
+			value2 = (int)(Math.random() * (20) + 1);
 			answer = value1 + value2;
 			
 			
@@ -62,6 +63,10 @@ public class BeginnerMath extends Level {
 		
 		//Subtraction operation 
 		else if (operationValue == 1) {
+			
+			//Generates a number between 1 and 50
+			value1 = (int)(Math.random() * 40 + 1);
+			
 			value2 = (int)(Math.random() * (value1-1) + 1);
 			answer = value1 - value2;
 			

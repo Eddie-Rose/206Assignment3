@@ -673,7 +673,7 @@ public class BashCommands {
 
 				}
 				
-				//If the content of th file does not have 10 questions, create random questions 
+				//If the content of the file does not have 10 questions, create random questions 
 				if (questionNumber != 11) {
 					while (questionNumber != 11) {
 						int value1;
@@ -692,8 +692,6 @@ public class BashCommands {
 							qMap.put(question, answer);
 
 
-							System.out.println(question);
-							System.out.println(answer);
 
 
 

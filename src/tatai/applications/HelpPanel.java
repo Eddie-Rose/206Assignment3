@@ -3,7 +3,6 @@ package tatai.applications;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,18 +11,26 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.border.LineBorder;
 
-import tatai.main.Level.ButtonBeginListener;
-import tatai.main.Level.Worker;
 
+/**
+ * 
+ * This class is where the Help Panel Frame is initialised
+ * Here the first thing the user sees is what the areas in which they 
+ * might need help on such as Practice or Math or the User login.
+ * 
+ * @author Edwin Roesli and Harpreet Singh
+ *
+ */
 public class HelpPanel extends JFrame {
+
+	
+	private static final long serialVersionUID = 1L;
 
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();	
 	

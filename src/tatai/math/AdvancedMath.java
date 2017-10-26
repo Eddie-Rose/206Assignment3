@@ -40,7 +40,7 @@ public class AdvancedMath extends Level{
 	}
 	
 	
-	//private String[] operationValue = {"+", "-", "*", "/"};
+	//Overrides the Levels setNum method
 	protected int setNum() {
 		
 		

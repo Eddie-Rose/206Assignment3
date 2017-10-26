@@ -19,33 +19,43 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import tatai.main.BashCommands;
 import tatai.main.Level;
 
-public class ViewCustomSet {
 
+/**
+ * 
+ * This is the first Frame the user will see when 
+ * they choose the custom option in the math menu
+ * 
+ * From here the user can choose to add, delete or play their 
+ * custom Set.
+ * 
+ * @author Edwin Roesli and Harpreet Singh
+ *
+ */
+public class ViewCustomSet {
+	
+	//
 	private static JFrame viewCustomSetFrame = null;
 	private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
 	
-	private DefaultListModel model;
-	private JButton btnPlay;
-	private JButton btnDelete;
-	private JList list;
+	private DefaultListModel<String> model;
+	private JList<String> list;
 	private JLabel lblMainLabel;
-	private JButton delete;
-	private JButton play;
-	private JButton add;
+	private JButton btnDelete;
+	private JButton btnPlay;
+	private JButton btnAdd;
 	
-
+	
+	//Create a new directory to store all the custom questions if it does
+	//not exist
 	private final File dir = new File("./CustomQuestionSet"); 
 
 
 
-
+	//Private constructor to be called within the class
 	private ViewCustomSet() {
 
 
@@ -54,11 +64,13 @@ public class ViewCustomSet {
 	}
 
 
+	@SuppressWarnings("unused")
 	private static ViewCustomSet instance;
 
 
 
-
+	//This static method is what is called outside of this class to ensure 
+	//That only a single instance of this class is called
 	public static void getInstance(){
 
 		if (viewCustomSetFrame == null) {
@@ -75,9 +87,16 @@ public class ViewCustomSet {
 
 		}
 	}
-
+	
+	/**
+	 * Main method in this class
+	 * This method sets all the components in the frame 
+	 *  
+	 */
 	private void createViewCustomSetFrame() {
-
+		
+		
+		//Set all the main components first and set where they are set at.
 		viewCustomSetFrame = new JFrame();
 		viewCustomSetFrame.setSize(800, 500);
 		viewCustomSetFrame.setLocation(dim.width/2-viewCustomSetFrame.getSize().width/2, dim.height/2-viewCustomSetFrame.getSize().height/2);
@@ -85,60 +104,79 @@ public class ViewCustomSet {
 		viewCustomSetFrame.setLayout(null);
 		viewCustomSetFrame.setResizable(false);
 
-
+		
+		//Set the main label of the Frame to show what this class is about.
 		lblMainLabel = new JLabel("Custom question sets!");
 		lblMainLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 35));
 		lblMainLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMainLabel.setBounds(20, 37, 800, 33);
 		viewCustomSetFrame.getContentPane().add(lblMainLabel);
-
+		
+		//Initialise a JScrollPane to have a place to set the Table containing all the sets.
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(81, 114, 646, 283);
 		viewCustomSetFrame.getContentPane().add(scrollPane);
-
+		
+		
+		//If the directory that stores the Custom set does not 
+		//exist, create it 
 		if (!(dir.exists())) {
 			dir.mkdir();
 		}
 		
-		model = new DefaultListModel();
+		//Set the new Default list model to store all the custom sets 
+		//that is stored in the directory.
+		model = new DefaultListModel<String>();
+		
+		//Stores the txtFiles found in the directory into a String array first
 		String[] txtFileList = dir.list();
 		if (txtFileList != null) {
+			
+			//Loops through the directory and lists the custom sets in the model list 
 			for (int i = 0; i < txtFileList.length ; i++) {
 				int pos = txtFileList[i].lastIndexOf(".");
 				if (pos > 0) {
 					txtFileList[i] = txtFileList[i].substring(0, pos);
 				}
+				//add the txt file name into the default model
 				model.addElement(txtFileList[i]);
 			}
 		}
 		
-		list = new JList();
+		//store the model into a JList
+		list = new JList<String>();
 		list.setModel(model);
+		
+		//add the JList into the scroll pane
 		scrollPane.setViewportView(list);
-
+		
+		//Set the header of the scrollPane to be "Custom Sets: "
 		JLabel lblCustomSets = new JLabel("Custom Sets:");
 		scrollPane.setColumnHeaderView(lblCustomSets);
 
-
-		delete = new JButton("Delete");
-		delete.setBounds(550, 420, 150, 50);
-		delete.addActionListener(new DeleteListener());
-		viewCustomSetFrame.getContentPane().add(delete);
-
-
-		play = new JButton("Play");
-		play.setBounds(100, 420, 150, 50);
-		play.addActionListener(new PlayListener());
-		viewCustomSetFrame.getContentPane().add(play);
+		
+		//Sets the delete, play and add button into the frame and 
+		//Set its listeners.
+		btnDelete = new JButton("Delete");
+		btnDelete.setBounds(550, 420, 150, 50);
+		btnDelete.addActionListener(new DeleteListener());
+		viewCustomSetFrame.getContentPane().add(btnDelete);
 
 
-		add = new JButton("add");
-		add.setBounds(330, 420, 150, 50);
-		viewCustomSetFrame.getContentPane().add(add);
-		add.addActionListener(new AddCustomSetListener());
+		btnPlay = new JButton("Play");
+		btnPlay.setBounds(100, 420, 150, 50);
+		btnPlay.addActionListener(new PlayListener());
+		viewCustomSetFrame.getContentPane().add(btnPlay);
+
+
+		btnAdd = new JButton("add");
+		btnAdd.setBounds(330, 420, 150, 50);
+		viewCustomSetFrame.getContentPane().add(btnAdd);
+		btnAdd.addActionListener(new AddCustomSetListener());
 
 		
-		
+		//Listen to when the window is closed, and set the viewCustomFrame 
+		//field to null so it can be instantiated again.
 		viewCustomSetFrame.addWindowListener(new WindowAdapter()
 		{
 
@@ -157,12 +195,20 @@ public class ViewCustomSet {
 	}
 	
 	
+	//refresh method to refresh the whole model to take into account 
+	//the change that happened
 	public void refresh() {
 		
 		
-		DefaultListModel model = new DefaultListModel();
+		//Set the default model 
+		DefaultListModel<String> model = new DefaultListModel<String>();
+		
+		//Set the String array for the text file to be stored in 
 		String[] txtFileList = dir.list();
 		if (txtFileList != null) {
+			
+			//Loops through the whole directory so trim the file name (remove the .txt part)
+			//and add it to the model list
 			for (int i = 0; i < txtFileList.length ; i++) {
 				int pos = txtFileList[i].lastIndexOf(".");
 				if (pos > 0) {
@@ -174,13 +220,16 @@ public class ViewCustomSet {
 		}
 		
 		
-		
+		//set the model
 		list.setModel(model);
 		
 	}
-
+	
+	//Set the add listener to dispose of this frame and create the
+	//CustomSetCreate class
 	private class AddCustomSetListener implements ActionListener {
-
+		
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			CustomSetCreation.getInstance();
@@ -192,6 +241,8 @@ public class ViewCustomSet {
 
 	}
 	
+	//Set the delete listener to delete the chosen set,
+	//if no set is chosen return with a messagePane
 	private class DeleteListener implements ActionListener {
 
 		@Override
@@ -216,6 +267,8 @@ public class ViewCustomSet {
 		
 	}
 	
+	//Set the play listener to play the chosen set 
+	//if no set has been chosen, return with a message pane.
 	private class PlayListener implements ActionListener {
 
 		@Override
@@ -230,16 +283,24 @@ public class ViewCustomSet {
 				
 				String name = (String) list.getSelectedValue();
 				
+				//Initialise the hashMap and invoke the Bash command's getInstance() 
+				//method to read the txt file and store the questions and answers into a 
+				//hash map
+				
 				Map<String, Integer> answerMap = new HashMap<String, Integer>();
 				BashCommands commands = BashCommands.getInstance();
 				answerMap = commands.getSetQuestions(name);
 				
+				//if the map is null delete the set as it is faulty
 				if (answerMap == null) {
 					commands.deleteSet(name);
 					
 				}
+				//else it returns as it should and initialise the custom level frame
 				else {
 					
+					
+					@SuppressWarnings("unused")
 					Level custom = new CustomMath(name, 0, 0, answerMap);
 				}
 				
