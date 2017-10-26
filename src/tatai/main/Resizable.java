@@ -20,15 +20,15 @@ public class Resizable {
 		heightRatio = (double)frameHeight/c.getHeight();
 	}
 	
-	public static void main(String[] args) {
-		JButton btnBegin = new JButton();
-		btnBegin.setBounds(158, 190, 117, 25);
-		Resizable a = new Resizable(btnBegin, 450, 300);
-		System.out.println(a.xRatio);
-		System.out.println(a.yRatio);
-		System.out.println(a.widthRatio);
-		System.out.println(a.heightRatio);
-	}
+//	public static void main(String[] args) {
+//		JButton btnBegin = new JButton();
+//		btnBegin.setBounds(158, 190, 117, 25);
+//		Resizable a = new Resizable(btnBegin, 450, 300);
+//		System.out.println(a.xRatio);
+//		System.out.println(a.yRatio);
+//		System.out.println(a.widthRatio);
+//		System.out.println(a.heightRatio);
+//	}
 	
 	public void Resize(int frameWidth, int frameHeight) {
 		component.setBounds((int)(frameWidth/xRatio), (int)(frameHeight/yRatio), (int)(frameWidth/widthRatio), (int)(frameHeight/heightRatio));
