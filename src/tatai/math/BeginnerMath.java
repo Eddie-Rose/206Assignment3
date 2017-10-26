@@ -65,7 +65,7 @@ public class BeginnerMath extends Level {
 		else if (operationValue == 1) {
 			
 			//Generates a number between 1 and 50
-			value1 = (int)(Math.random() * 40 + 1);
+			value1 = (int)(Math.random() * 30 + 10);
 			
 			value2 = (int)(Math.random() * (value1-1) + 1);
 			answer = value1 - value2;

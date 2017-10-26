@@ -43,8 +43,8 @@ public class MediumMath extends Level{
 		if (operationValue == 0) {
 			
 			//Restricts it so the maximum number the answer can go to is 99
-			value1 = (int)( 1 + (Math.random() * 50));
-			value2 = (int)(1 + (Math.random() * (50 - value1) + 1));
+			value1 = (int)( 1 + (Math.random() * 49));
+			value2 = (int)(1 + (Math.random() * (49)));
 			answer = value1 + value2;
 			
 			//Set the question label of the level class
@@ -58,7 +58,7 @@ public class MediumMath extends Level{
 			
 			//Restricts it so the answer is in the bound of 0 - 99
 			
-			value1 = (int)(10 + (Math.random() * 50));
+			value1 = (int)(10 + (Math.random() * 40));
 			value2 = (int)(1 + (Math.random() * (value1-1) ));
 			answer = value1 - value2;
 			

@@ -130,6 +130,8 @@ public class StatsPanel extends JFrame {
 					display();
 					btnPersonal.setEnabled(false);
 					btnLeaderboard.setEnabled(true);
+					btnClear.setEnabled(true);
+					
 				}
 			});
 			btnPersonal.setEnabled(false);

@@ -39,7 +39,7 @@ public class UserHandler {
 
 	private UserHandler() {
 
-		
+
 		signUpFrame();
 
 	}
@@ -72,7 +72,7 @@ public class UserHandler {
 
 	public void signUpFrame() {
 
-		
+
 
 		// Set up the frame
 		frame = new JFrame("New User");
@@ -152,22 +152,59 @@ public class UserHandler {
 
 					}
 				}
+				
+				//Checks if the password is alphaNumeric
+				boolean isPasswordAlphanumeric = true;
+				char[] passWord =  txtPassword.getPassword();
+				for(char c : passWord) {
+					if((!Character.isLetter(c)) || (!Character.isDigit(c))) {
+						isPasswordAlphanumeric = false;
+					}
+				}
+				
+				
+				//Checks if the username is alphanumeric
+				boolean isUserNameAlphanumeric = true;
+				char[] userName =  txtUsername.getText().toCharArray();
+				for(char c : userName) {
+					if((!Character.isLetter(c)) || (!Character.isDigit(c))) {
+						isUserNameAlphanumeric = false;
+					}
+				}
+				
+				
+				//checks if the fullname is alphanumeric
+				boolean isFullNameAlphanumeric = true;
+				char[] fullName =  txtFullName.getText().toCharArray();
+				for(char c : fullName) {
+					if((!Character.isLetter(c)) || (!Character.isDigit(c))) {
+						isFullNameAlphanumeric = false;
+					}
+				}
 
 
-				//Checks if all text fields are fileld in 
+				//Checks if all text fields are filled in 
 				if ((txtConfirmPassword.getPassword().length == 0)  || (txtFullName.getText().isEmpty()) || (txtPassword.getPassword().length == 0) || (txtUsername.getText().isEmpty())) {
 					JOptionPane.showMessageDialog(null, "Some fields not filled in");
 				}
 
-				//Username cannot have spaces
+				//User name cannot have spaces
 				else if (validUserName == false) {
 					JOptionPane.showMessageDialog(null, "Not a valid UserName, no spaces allowed");
 				}
 
-				//Checks if the 2 passowrd fields are the same
+				//Checks if the 2 password fields are the same
 				else if (!(Arrays.equals(txtPassword.getPassword(), txtConfirmPassword.getPassword()))) {
 
 					JOptionPane.showMessageDialog(null, "Password fields do not match");
+
+				}
+				
+				//checks if the fields is alphanumeric
+				else if (!(isFullNameAlphanumeric && isPasswordAlphanumeric && isUserNameAlphanumeric)) {
+
+					JOptionPane.showMessageDialog(null, "Fields must be alphaNumerical");
+
 
 				}
 

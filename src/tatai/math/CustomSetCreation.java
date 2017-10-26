@@ -543,129 +543,35 @@ public class CustomSetCreation  {
 					} catch (ArithmeticException e1) {
 						JOptionPane.showMessageDialog(null, "0/0 is not accepted");
 						return;
-					} String[] options = {"Cancel" , "Delete" , "Save"};
-					int option = JOptionPane.showOptionDialog(null, "Would you like save current progress and fill the blanks with random questions or delete current progress? ", "Exit", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+					} 
+	
 
+					//Checks if left / right returns a whole number 
+					if ((left % right) != 0) {
 
-					//Option = Save, save the file and go back to the main menu
-					if (option == 2) {
-						customQuestionFrame.dispose();
-						customQuestionFrame = null;
-						new MainGUI();
+						JOptionPane.showMessageDialog(null, "Answer must return a whole number");
+
 
 					}
-					
-					//Option = delete, delete the file and go back to the main menu
-					else if (option == 1) {
-						
-						command.deleteSet(nameOfSet.getText());
-						customQuestionFrame.dispose();
-						customQuestionFrame = null;		
 
-						//Checks if left / right returns a whole number 
-						if ((left % right) != 0) {
+					//Checks if the answer is within the bounds 1 - 99 
+					else if (( answer >= 99 ) || ( answer <= 0 )) {
 
-							JOptionPane.showMessageDialog(null, "Answer must return a whole number");
-
-
-						}
-
-						//Checks if the answer is within the bounds 1 - 99 
-						else if (( answer >= 99 ) || ( answer <= 0 )) {
-
-							JOptionPane.showMessageDialog(null, "Answer out of Bounds, must be between 1 - 99");
-
-						}
-						else {
-
-							//if it does meet the criteria append it into the txt file and invoke the nextQuestion method
-							command.addEquation(nameOfSet.getText(), left + " / " + right , "" + answer);
-							questionNumber++;
-							setNextQuestion();
-
-
-						}
-					}
-				}
-
-
-
-			}
-
-			}
-
-
-		}
-
-
-		private class CreateSetListener implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				if (nameOfSet.getText().length() == 0) {
-					JOptionPane.showMessageDialog(null, "Please enter a name for your set");
-
-				}
-
-				else {
-
-					BashCommands command = BashCommands.getInstance();
-					int status = command.createNewSet(nameOfSet.getText());
-
-					if (status == 0) {
-
-						setUpCustomQuestion();
+						JOptionPane.showMessageDialog(null, "Answer out of Bounds, must be between 1 - 99");
 
 					}
-					else  {
-						return;
+					else {
+
+						//if it does meet the criteria append it into the txt file and invoke the nextQuestion method
+						command.addEquation(nameOfSet.getText(), left + " / " + right , "" + answer);
+						questionNumber++;
+						setNextQuestion();
+
+
 					}
 				}
-
 			}
 
-
-		}
-
-		//Custom keyListener for the parameter TextField
-		private class ParameterKeyListener implements KeyListener {
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-
-				char c = e.getKeyChar();
-
-				//Cast the component into a JTextField as it should always be used with a JTextField
-				JTextField comp = (JTextField) e.getComponent();
-				int length = comp.getText().length();
-
-				//length of the JTextField must always be 2 
-				if (Character.isLetterOrDigit(c) && (length == 2)) {
-
-					e.consume();
-				}
-
-				//If the character is not a digit, cancel the input
-				else if (!(Character.isDigit(c))) {
-
-					e.consume();
-				}
-
-
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
 
 
 
@@ -673,129 +579,207 @@ public class CustomSetCreation  {
 		}
 
 
-		//KeyListener for the JtextField which stores the new Set name
-		private class KeyTypedListener implements KeyListener {
+	}
 
-			@Override
-			public void keyTyped(KeyEvent e) {
-				char c = e.getKeyChar();
 
-				//If the key pressed is a backspace, set the condition label back to black
-				if (c == KeyEvent.VK_BACK_SPACE ) {
-					requirementLabel.setForeground(Color.BLACK);
+	private class CreateSetListener implements ActionListener {
 
-				}
+		@Override
+		public void actionPerformed(ActionEvent e) {
 
-				//If the key pressed is not a letter nor a digit set the condition label 
-				//colour to red to show that it is invalid and cancel the key pressed event.
-				else if (!(Character.isLetterOrDigit(c)))  {
-					Toolkit.getDefaultToolkit().beep();
-					requirementLabel.setForeground(Color.RED);
-					e.consume();
-				}
-
-				//if the key pressed is a digit or a number, set the colour of the 
-				//condition label back to black
-				else if (requirementLabel.getForeground() == Color.RED) {
-					requirementLabel.setForeground(Color.BLACK);
-				}
-				
-				
-				//Limits the name to be less than 10 characters
-				JTextField comp = (JTextField) e.getComponent();
-				int length = comp.getText().length();
-
-				//length of the JTextField must be less than 10
-				if  (length == 10) {
-
-					e.consume();
-				}
-
+			if (nameOfSet.getText().length() == 0) {
+				JOptionPane.showMessageDialog(null, "Please enter a name for your set");
 
 			}
 
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
+			else {
 
-			}
+				BashCommands command = BashCommands.getInstance();
+				int status = command.createNewSet(nameOfSet.getText());
 
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
+				if (status == 0) {
 
+					setUpCustomQuestion();
+
+				}
+				else  {
+					return;
+				}
 			}
 
 		}
 
 
+	}
 
-		//Action listener for the menu button 
-		private class menuListener implements ActionListener{
+	//Custom keyListener for the parameter TextField
+	private class ParameterKeyListener implements KeyListener {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
+		@Override
+		public void keyTyped(KeyEvent e) {
 
-				//If all the questions have been set, go back to the main menu
-				if (questionNumber == 11) {
+			char c = e.getKeyChar();
+
+			//Cast the component into a JTextField as it should always be used with a JTextField
+			JTextField comp = (JTextField) e.getComponent();
+			int length = comp.getText().length();
+
+			//length of the JTextField must always be 2 
+			if (Character.isLetterOrDigit(c) && (length == 2)) {
+
+				e.consume();
+			}
+
+			//If the character is not a digit, cancel the input
+			else if (!(Character.isDigit(c))) {
+
+				e.consume();
+			}
+
+
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+
+
+
+	}
+
+
+	//KeyListener for the JtextField which stores the new Set name
+	private class KeyTypedListener implements KeyListener {
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+			char c = e.getKeyChar();
+
+			//If the key pressed is a backspace, set the condition label back to black
+			if (c == KeyEvent.VK_BACK_SPACE ) {
+				requirementLabel.setForeground(Color.BLACK);
+
+			}
+
+			//If the key pressed is not a letter nor a digit set the condition label 
+			//colour to red to show that it is invalid and cancel the key pressed event.
+			else if (!(Character.isLetterOrDigit(c)))  {
+				Toolkit.getDefaultToolkit().beep();
+				requirementLabel.setForeground(Color.RED);
+				e.consume();
+			}
+
+			//if the key pressed is a digit or a number, set the colour of the 
+			//condition label back to black
+			else if (requirementLabel.getForeground() == Color.RED) {
+				requirementLabel.setForeground(Color.BLACK);
+			}
+
+
+			//Limits the name to be less than 10 characters
+			JTextField comp = (JTextField) e.getComponent();
+			int length = comp.getText().length();
+
+			//length of the JTextField must be less than 10
+			if  (length == 10) {
+
+				e.consume();
+			}
+
+
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+	}
+
+
+
+	//Action listener for the menu button 
+	private class menuListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+			//If all the questions have been set, go back to the main menu
+			if (questionNumber == 11) {
+
+				customQuestionFrame.dispose();
+				customQuestionFrame = null;
+				new MainGUI();
+
+
+
+			}
+
+
+			//if the new set name has not been created, ask the user if they want to exit now or cancel.
+			else if (btnCreateSet.isVisible()) {
+
+				//Output the Option pane the user can choose from 
+				int YesOrNo = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?","exit", JOptionPane.YES_NO_OPTION);
+
+				//If the option was to exit, dispose the frame and show the main menu
+				if (YesOrNo == 0) {
 
 					customQuestionFrame.dispose();
 					customQuestionFrame = null;
 					new MainGUI();
 
 
+				}
+			}
+
+			//If they are in the middle of creating questions ask if they want to delete their current progress or save it 
+			else if (questionNumber != 11) {
+
+				String[] options = {"Cancel" , "Delete" , "Save"};
+				int option = JOptionPane.showOptionDialog(null, "Would you like save current progress and fill the blanks with random questions or delete current progress? ", "Exit", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+
+				//
+				if (option == 2) {
+					customQuestionFrame.dispose();
+					customQuestionFrame = null;
+					new MainGUI();
 
 				}
 
-
-				//if the new set name has not been created, ask the user if they want to exit now or cancel.
-				else if (btnCreateSet.isVisible()) {
-
-					//Output the Option pane the user can choose from 
-					int YesOrNo = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?","exit", JOptionPane.YES_NO_OPTION);
-
-					//If the option was to exit, dispose the frame and show the main menu
-					if (YesOrNo == 0) {
-
-						customQuestionFrame.dispose();
-						customQuestionFrame = null;
-						new MainGUI();
-
-
-					}
+				else if (option == 1) {
+					BashCommands command = BashCommands.getInstance();
+					command.deleteSet(nameOfSet.getText());
+					customQuestionFrame.dispose();
+					customQuestionFrame = null;		
+					new MainGUI();
 				}
-
-				//If they are in the middle of creating questions ask if they want to delete their current progress or save it 
-				else if (questionNumber != 11) {
-
-					String[] options = {"Cancel" , "Delete" , "Save"};
-					int option = JOptionPane.showOptionDialog(null, "Would you like save current progress and fill the blanks with random questions or delete current progress? ", "Exit", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-
-
-					//
-					if (option == 2) {
-						customQuestionFrame.dispose();
-						customQuestionFrame = null;
-						new MainGUI();
-
-					}
-
-					else if (option == 1) {
-						BashCommands command = BashCommands.getInstance();
-						command.deleteSet(nameOfSet.getText());
-						customQuestionFrame.dispose();
-						customQuestionFrame = null;		
-						new MainGUI();
-					}
-
-				}
-
 
 			}
 
 
 		}
-	
+
+
+	}
+
 
 
 

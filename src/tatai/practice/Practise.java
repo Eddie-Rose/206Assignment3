@@ -144,7 +144,7 @@ public class Practise extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			dispose();
 			@SuppressWarnings("unused")
-			Level beginnerWindow = new Beginner("Beginner", 1, 9);
+			Level beginnerWindow = new Beginner("Beginner(Practice)", 1, 9);
 
 		}
 
@@ -158,7 +158,7 @@ public class Practise extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			dispose();
 			@SuppressWarnings("unused")
-			Level advancedWindow = new Advanced("Advanced", 1, 99);
+			Level advancedWindow = new Advanced("Advanced(Practice)", 1, 99);
 
 		}
 
