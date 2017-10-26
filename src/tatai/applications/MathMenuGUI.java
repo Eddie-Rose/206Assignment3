@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import tatai.main.Level;
+import tatai.main.MainGUI;
 import tatai.main.Resizable;
 import tatai.math.AdvancedMath;
 import tatai.math.BeginnerMath;
@@ -118,6 +119,7 @@ public class MathMenuGUI extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			new MainGUI();
 			dispose();
 			
 			

@@ -112,6 +112,11 @@ public class MainGUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 
+		setVisible(true);
+		
+
+
+
 		//Creates the User folder if one does not exist
 		BashCommands commands = BashCommands.getInstance();
 		commands.makeUserFolder();
@@ -159,10 +164,12 @@ public class MainGUI extends JFrame {
 		//Sets all the buttons and adds its listeners 
 		btnPractise = new JButton("Practice");
 		btnPractise.addActionListener(new PractiseListener());
-		getContentPane().add(btnPractise);
+
+		getContentPane().add(btnPractise);		
+		
+		btnQuit = new JButton ("");
 
 
-		btnQuit = new JButton ("Quit");
 		btnQuit.addActionListener(new QuitListener());
 		getContentPane().add(btnQuit);
 
@@ -171,13 +178,11 @@ public class MainGUI extends JFrame {
 		btnMath.addActionListener(new MathListener());
 		getContentPane().add(btnMath);
 
-		btnHelp = new JButton("Help");
-
+		
+		btnHelp = new JButton("");
+		
 		btnHelp.addActionListener(new HelpListener());
 		getContentPane().add(btnHelp);
-
-		//Sets the icon "?" for the help button
-		btnHelp.setIcon(new ImageIcon("./rsz_help-icon.png"));
 
 
 		btnStatistics = new JButton("Statistics");
@@ -243,6 +248,7 @@ public class MainGUI extends JFrame {
 		lblPassWord.setVisible(false);
 		
 		
+
 		
 		//Checks if the there is a user logged on, if there isn't then set up the log in implementation
 		if (username.equals("anonymous")) {
@@ -261,7 +267,9 @@ public class MainGUI extends JFrame {
 			btnLogOut.setVisible(false);
 		}
 		
+
 		
+
 		//else there must be a person logged in, set all the welcome labels and logout, delete user buttons
 		else {
 			
@@ -278,22 +286,28 @@ public class MainGUI extends JFrame {
 		}
 
 
-
-
 		//Sets all the bounds/sizes of the components
-		btnPractise.setBounds(84, 411, 275, 58);
-		btnStatistics.setBounds(423, 411, 275, 58);
-		btnHelp.setBounds(846, 547, 137, 70);
-		btnMath.setBounds(733, 411, 275, 58);
+		
+		btnPractise.setBounds(84, 411, 275, 80);
+		btnStatistics.setBounds(415, 411, 275, 80);
+		btnHelp.setBounds(1000, 20, 70, 70);
+		btnHelp.setIcon(new ImageIcon("./206Assignment3Images/Icons/help.png"));
+		
+		btnMath.setBounds(733, 411, 275, 80);
 		welcomeLabel.setBounds(196, 116, 687, 140);
 		descriptionLabel1.setBounds(73, 233, 1047, 100);
-		btnQuit.setBounds(676, 547, 137, 70);
-
-
+		
+		btnQuit.setBounds(30, 20, 70, 70);
+		btnQuit.setIcon(new ImageIcon("./206Assignment3Images/Icons/exitIcon.png"));
+		
+		
 		usernameInput.setBounds(22, 663,275, 28);
 		passwordInput.setBounds(330, 663, 275, 28);
-		btnLogIn.setBounds(770, 663, 137, 35);
-		btnSignUp.setBounds(924, 663, 137, 35);
+		btnLogIn.setBounds(630, 663, 137, 35);
+		btnSignUp.setBounds(780, 663, 137, 35);
+		
+		
+
 
 		lblUsername.setBounds(22, 639, 275,28);
 		lblPassWord.setBounds(330, 639, 275, 28);
