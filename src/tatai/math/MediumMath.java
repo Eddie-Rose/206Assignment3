@@ -27,7 +27,7 @@ public class MediumMath extends Level{
 		super(name, num, num1);
 		
 		//Overrides the Levels main description message
-		txtrWelcomeToThe.setText("<html>Welcome to the "+name+" level,\nSimple addition, subtraction and multiplication questions are asked  ,\nPress \"Start\" to begin.</html>");
+		txtMainLevelDescription.setText("<html>Welcome to the "+name+" level,\nSimple addition, subtraction and multiplication questions are asked  ,\nPress \"Start\" to begin.</html>");
 
 	
 	}

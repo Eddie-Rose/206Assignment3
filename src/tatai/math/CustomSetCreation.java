@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import tatai.main.BashCommands;
+import tatai.main.MainGUI;
 
 
 /**
@@ -546,13 +547,15 @@ public class CustomSetCreation  {
 					int option = JOptionPane.showOptionDialog(null, "Would you like save current progress and fill the blanks with random questions or delete current progress? ", "Exit", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
 
-					//
+					//Option = Save, save the file and go back to the main menu
 					if (option == 2) {
 						customQuestionFrame.dispose();
 						customQuestionFrame = null;
+						new MainGUI();
 
 					}
-
+					
+					//Option = delete, delete the file and go back to the main menu
 					else if (option == 1) {
 						
 						command.deleteSet(nameOfSet.getText());
@@ -696,6 +699,17 @@ public class CustomSetCreation  {
 				else if (requirementLabel.getForeground() == Color.RED) {
 					requirementLabel.setForeground(Color.BLACK);
 				}
+				
+				
+				//Limits the name to be less than 10 characters
+				JTextField comp = (JTextField) e.getComponent();
+				int length = comp.getText().length();
+
+				//length of the JTextField must be less than 10
+				if  (length == 10) {
+
+					e.consume();
+				}
 
 
 			}
@@ -727,6 +741,7 @@ public class CustomSetCreation  {
 
 					customQuestionFrame.dispose();
 					customQuestionFrame = null;
+					new MainGUI();
 
 
 
@@ -744,6 +759,7 @@ public class CustomSetCreation  {
 
 						customQuestionFrame.dispose();
 						customQuestionFrame = null;
+						new MainGUI();
 
 
 					}
@@ -760,6 +776,7 @@ public class CustomSetCreation  {
 					if (option == 2) {
 						customQuestionFrame.dispose();
 						customQuestionFrame = null;
+						new MainGUI();
 
 					}
 
@@ -767,7 +784,8 @@ public class CustomSetCreation  {
 						BashCommands command = BashCommands.getInstance();
 						command.deleteSet(nameOfSet.getText());
 						customQuestionFrame.dispose();
-						customQuestionFrame = null;					
+						customQuestionFrame = null;		
+						new MainGUI();
 					}
 
 				}

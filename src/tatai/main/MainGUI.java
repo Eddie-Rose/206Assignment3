@@ -303,8 +303,8 @@ public class MainGUI extends JFrame {
 		
 		usernameInput.setBounds(22, 663,275, 28);
 		passwordInput.setBounds(330, 663, 275, 28);
-		btnLogIn.setBounds(630, 663, 137, 35);
-		btnSignUp.setBounds(780, 663, 137, 35);
+		btnLogIn.setBounds(770, 663, 137, 35);
+		btnSignUp.setBounds(924, 663, 137, 35);
 		
 		
 
@@ -361,8 +361,7 @@ public class MainGUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			@SuppressWarnings("unused")
-			HelpPanel help = new HelpPanel();
+			HelpPanel.getInstance();
 
 		}
 

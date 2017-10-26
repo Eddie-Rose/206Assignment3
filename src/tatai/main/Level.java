@@ -57,7 +57,7 @@ public abstract class Level extends JFrame {
 	protected JButton btnBegin = new JButton("Start");
 	protected JButton btnRecord = new JButton("");
 	protected JButton btnBack;
-	protected JLabel lblAdvancedLevel;
+	protected JLabel lblMainTitle;
 	protected JLabel lblNewLabel = new JLabel();
 	protected JLabel correct = new JLabel();
 	protected JLabel lblHearPreviousRecording;
@@ -66,7 +66,7 @@ public abstract class Level extends JFrame {
 	protected JLabel lblPersonalBest;
 	protected JLabel lblAttempts;
 	protected JButton btnPlay;
-	protected JLabel txtrWelcomeToThe = new JLabel();
+	protected JLabel txtMainLevelDescription = new JLabel();
 	protected JButton mainMenu = new JButton("Main Menu");
 	protected JButton skip;
 	protected JTextArea answerField = new JTextArea();
@@ -109,11 +109,11 @@ public abstract class Level extends JFrame {
 		
 		
 		//Sets the main label title
-		lblAdvancedLevel = new JLabel(name);
-		lblAdvancedLevel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAdvancedLevel.setFont(new Font("DejaVu Sans", Font.BOLD, 50));
-		lblAdvancedLevel.setBounds(373, 41, 335, 70);
-		getContentPane().add(lblAdvancedLevel);
+		lblMainTitle = new JLabel(name);
+		lblMainTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMainTitle.setFont(new Font("DejaVu Sans", Font.BOLD, 50));
+		lblMainTitle.setBounds(373, 41, 335, 70);
+		getContentPane().add(lblMainTitle);
 		
 		
 		//Sets the scroll pane for the log at the end of the session 
@@ -128,14 +128,14 @@ public abstract class Level extends JFrame {
 
 		
 		//Sets the main description of the level
-		txtrWelcomeToThe.setFont(new Font("Dialog", Font.PLAIN, 20));
-		txtrWelcomeToThe.setText("<html>Welcome to the "+name+" level,\nNumbers asked are from "+ minNum+" to "+ maxNum + " ,\nPress \"Start\" to begin.</html>");
-		txtrWelcomeToThe.setBounds(237, 241, 561, 119);
-		getContentPane().add(txtrWelcomeToThe);
+		txtMainLevelDescription.setFont(new Font("Dialog", Font.PLAIN, 20));
+		txtMainLevelDescription.setText("<html>Welcome to the "+name+" level,\nNumbers asked are from "+ minNum+" to "+ maxNum + " ,\nPress \"Start\" to begin.</html>");
+		txtMainLevelDescription.setBounds(260, 241, 561, 119);
+		getContentPane().add(txtMainLevelDescription);
 		
 		
 		//Initialises the begin button
-		btnBegin.setBounds(250, 433, 531, 60);
+		btnBegin.setBounds(260, 433, 531, 60);
 		getContentPane().add(btnBegin);
 		
 		
@@ -287,9 +287,9 @@ public abstract class Level extends JFrame {
 		resizableComp[5] = new Resizable(lblPersonalBest, frameWidth, frameHeight);
 		resizableComp[6] = new Resizable(lblhighScore, frameWidth, frameHeight);
 		resizableComp[7] = new Resizable(lblAttempts, frameWidth, frameHeight);
-		resizableComp[8] = new Resizable(lblAdvancedLevel, frameWidth, frameHeight);
+		resizableComp[8] = new Resizable(lblMainTitle, frameWidth, frameHeight);
 		resizableComp[9] = new Resizable(correct, frameWidth, frameHeight);
-		resizableComp[10] = new Resizable(txtrWelcomeToThe, frameWidth, frameHeight);
+		resizableComp[10] = new Resizable(txtMainLevelDescription, frameWidth, frameHeight);
 		resizableComp[11] = new Resizable(btnPlay, frameWidth, frameHeight);
 		resizableComp[12] = new Resizable(lblHearPreviousRecording, frameWidth, frameHeight);
 		resizableComp[13] = new Resizable(progressBar, frameWidth, frameHeight);
@@ -331,7 +331,7 @@ public abstract class Level extends JFrame {
 		maoriNumber.setNumber(testNumber);
 		
 		btnBegin.setVisible(false);
-		txtrWelcomeToThe.setVisible(false);
+		txtMainLevelDescription.setVisible(false);
 		correct.setVisible(false);
 		btnPlay.setVisible(false);
 		lblHearPreviousRecording.setVisible(false);

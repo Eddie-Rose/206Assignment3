@@ -28,7 +28,7 @@ public class BeginnerMath extends Level {
 	
 	public BeginnerMath(String name, int num , int num1) {
 		super (name, num, num1);
-		txtrWelcomeToThe.setText("<html>Welcome to the "+name+" level,\nSimple addition and subtraction questions are asked  ,\nPress \"Start\" to begin.</html>");
+		txtMainLevelDescription.setText("<html>Welcome to the "+name+" level,\nSimple addition and subtraction questions are asked  ,\nPress \"Start\" to begin.</html>");
 
 		
 		

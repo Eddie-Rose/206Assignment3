@@ -10,8 +10,8 @@ import tatai.main.Number;
  * 
  * This is the advanced math level where the questions
  * vary from additional, subtraction, division and multiplication
- * additon/ subtraction answers vary from 1 - 99
- * divison asks you to divide numbers from 1 - 99
+ * Addition/ subtraction answers vary from 1 - 99
+ * Division asks you to divide numbers from 1 - 99
  * multiplicaton questions range from 1 - 12
  *
  * This class extends from the abstract class "Level" to avoid 
@@ -34,7 +34,7 @@ public class AdvancedMath extends Level{
 		super(name, num, num1);
 		
 		//Overrides the Title of the Level frame
-		txtrWelcomeToThe.setText("<html>Welcome to the "+name+" level,\nAdvanced addition, subtraction, multiplication and division questions are asked  ,\nPress \"Start\" to begin.</html>");
+		txtMainLevelDescription.setText("<html>Welcome to the "+name+" level,\nAdvanced addition, subtraction, multiplication and division questions are asked  ,\nPress \"Start\" to begin.</html>");
 
 	
 	}

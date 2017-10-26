@@ -19,11 +19,11 @@ public class CustomMath extends Level{
 		
 		super(lvlName, 0, 0 );
 		questionMap = qMap;
-		txtrWelcomeToThe.setText("<html>Welcome to your Custom Set of questions named: " + lvlName + "here your questions you have genertate are asked to you in a random order."
+		txtMainLevelDescription.setText("<html>Welcome to your Custom Set of questions named: " + lvlName + " here, the questions you have generated are asked to you in a random order."
 				+ " If your custom set contains less than 10 questions, random equations will be generated to fill up the space. Press Start to begin.</html>");
 		
 	
-		lblAdvancedLevel.setText("Custom Set: " + lvlName);
+		lblMainTitle.setText("Custom Set");
 		
 	}
 	

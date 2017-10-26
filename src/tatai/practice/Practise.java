@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import tatai.main.Level;
 import tatai.main.MainGUI;
@@ -66,12 +67,14 @@ public class Practise extends JFrame {
 
 		//Sets the main practice label 
 		lblPractise = new JLabel("Practice");
+		lblPractise.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPractise.setFont(new Font("DejaVu Sans", Font.BOLD, 50));
 		getContentPane().add(lblPractise);
 
 
 		//Sets the frames description
 		lblPractiseIntro = new JLabel("<html>Welcome to the Practice menu,\nHere you can practice your māori number pronounciation. \nSelect a level to start.</html>");
+		lblPractiseIntro.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPractiseIntro.setFont(new Font("Dialog", Font.PLAIN, 20));
 		getContentPane().add(lblPractiseIntro);
 
@@ -95,8 +98,8 @@ public class Practise extends JFrame {
 
 
 		//Sets the bounds for all the components
-		lblPractise.setBounds(384, 60, 289, 140);
-		lblPractiseIntro.setBounds(220 , 140, 680, 279);
+		lblPractise.setBounds(0, 60, 1100, 140);
+		lblPractiseIntro.setBounds(200 , 140, 700, 279);
 		btnBeginner.setBounds(147, 400, 281, 76);
 		btnAdvanced.setBounds(625, 400, 275, 76);
 		btnMenu.setBounds(384, 516, 289, 76);
