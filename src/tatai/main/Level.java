@@ -327,8 +327,6 @@ public abstract class Level extends JFrame {
 	//Sets up the question display frame by setting some components to be visible
 	//and some to be in visible and refreshing some labels
 	public void QuestionDisplay() {
-		testNumber = setNum();
-		maoriNumber.setNumber(testNumber);
 		
 		btnBegin.setVisible(false);
 		txtMainLevelDescription.setVisible(false);
@@ -515,7 +513,8 @@ public abstract class Level extends JFrame {
 			//If this button is pressed at the beginning stage it will 
 			//set up the question display 
 			if (btnBegin.getText().equals("Start")) {
-
+				testNumber = setNum();
+				maoriNumber.setNumber(testNumber);
 				QuestionDisplay();
 				
 				
@@ -648,6 +647,7 @@ public abstract class Level extends JFrame {
 				finalDisplay();
 			} else {
 				testNumber = setNum();
+				wrongAttempt = 0;
 				maoriNumber.setNumber(testNumber);
 				displayAttempts = totalAttempts+1;
 				lblAttempts.setText("Question# " + displayAttempts);
