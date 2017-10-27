@@ -42,7 +42,7 @@ import tatai.practice.Practise;
  * 
  * Button listeners are written here as well.
  * 
- * Authors Edwin Roesli and Harpreet Singh
+ * Authors Edwin Roesli (eroe303) and Harpreet Singh (hsin612)
  *
  */
 
