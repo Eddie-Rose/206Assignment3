@@ -200,7 +200,7 @@ public class StatsPanel extends JFrame {
         }
 	}
 	
-	public static String getHighScore() {
+	public static String getHighScore(String level) {
 		 String highScore = "0";
 		 String username = MainGUI.getUsername();
 		try
@@ -209,7 +209,9 @@ public class StatsPanel extends JFrame {
 			FileReader fr = new FileReader("./User/"+username+"/stats.txt");
 			BufferedReader br = new BufferedReader(fr);
 			if((line = br.readLine()) != null) {
-				highScore = line.split(" ")[5];
+				if(level.equals(line.split(" ")[4])) {
+					highScore = line.split(" ")[5];
+				}
 			}
             br.close();
             return highScore;
