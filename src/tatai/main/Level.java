@@ -109,10 +109,10 @@ public abstract class Level extends JFrame {
 		
 		
 		//Sets the main label title
-		lblMainTitle = new JLabel(name);
+		lblMainTitle = new JLabel("<html><div style='text-align: center;'>" + name +"</div></html>");
 		lblMainTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMainTitle.setFont(new Font("DejaVu Sans", Font.BOLD, 50));
-		lblMainTitle.setBounds(373, 41, 335, 70);
+		lblMainTitle.setBounds(250, 41, 555, 70);
 		getContentPane().add(lblMainTitle);
 		
 		
@@ -130,7 +130,7 @@ public abstract class Level extends JFrame {
 		//Sets the main description of the level
 		txtMainLevelDescription.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtMainLevelDescription.setText("<html>Welcome to the "+name+" level,\nNumbers asked are from "+ minNum+" to "+ maxNum + " ,\nPress \"Start\" to begin.</html>");
-		txtMainLevelDescription.setBounds(260, 241, 561, 119);
+		txtMainLevelDescription.setBounds(260, 241, 561, 170);
 		getContentPane().add(txtMainLevelDescription);
 		
 		
@@ -173,7 +173,7 @@ public abstract class Level extends JFrame {
 		lblScore = new JLabel("Score: "+correctAttempt+"/10");
 		lblScore.setFont(new Font("Dialog", Font.BOLD, 17));
 		lblScore.setVisible(false);
-		lblScore.setBounds(798, 41, 128, 25);
+		lblScore.setBounds(900, 41, 128, 25);
 		getContentPane().add(lblScore);
 
 		
@@ -188,7 +188,7 @@ public abstract class Level extends JFrame {
 		lblPersonalBest.setForeground(Color.RED);
 		lblPersonalBest.setFont(new Font("Dialog", Font.BOLD, 17));
 		lblPersonalBest.setVisible(false);
-		lblPersonalBest.setBounds(938, 41, 150, 25);
+		lblPersonalBest.setBounds(900, 20, 150, 25);
 		getContentPane().add(lblPersonalBest);
 
 		
@@ -196,7 +196,7 @@ public abstract class Level extends JFrame {
 		lblhighScore = new JLabel("High Score: "+high);
 		lblhighScore.setFont(new Font("Dialog", Font.BOLD, 17));
 		lblhighScore.setVisible(false);
-		lblhighScore.setBounds(760, 83, 166, 36);
+		lblhighScore.setBounds(900, 83, 166, 36);
 		getContentPane().add(lblhighScore);
 
 		

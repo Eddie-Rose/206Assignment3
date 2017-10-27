@@ -143,6 +143,7 @@ public class UserHandler {
 
 				//checks whether creating the new user is valid or not
 				boolean validUserName = true;
+				boolean validFullName = true;
 
 				//Cannot have spaces in the username
 				for ( int i = 0; i < txtUsername.getText().length(); i++) {
@@ -153,11 +154,20 @@ public class UserHandler {
 					}
 				}
 				
+				//Cannot have spaces in Name
+				for ( int i = 0; i < txtFullName.getText().length(); i++) {
+					if (txtFullName.getText().charAt(i) == ' ' ) {
+
+						validFullName = false;
+
+					}
+				}
+				
 				//Checks if the password is alphaNumeric
 				boolean isPasswordAlphanumeric = true;
 				char[] passWord =  txtPassword.getPassword();
 				for(char c : passWord) {
-					if((!Character.isLetter(c)) || (!Character.isDigit(c))) {
+					if((!Character.isLetter(c)) && (!Character.isDigit(c))) {
 						isPasswordAlphanumeric = false;
 					}
 				}
@@ -167,7 +177,7 @@ public class UserHandler {
 				boolean isUserNameAlphanumeric = true;
 				char[] userName =  txtUsername.getText().toCharArray();
 				for(char c : userName) {
-					if((!Character.isLetter(c)) || (!Character.isDigit(c))) {
+					if((!Character.isLetter(c)) && (!Character.isDigit(c))) {
 						isUserNameAlphanumeric = false;
 					}
 				}
@@ -177,7 +187,7 @@ public class UserHandler {
 				boolean isFullNameAlphanumeric = true;
 				char[] fullName =  txtFullName.getText().toCharArray();
 				for(char c : fullName) {
-					if((!Character.isLetter(c)) || (!Character.isDigit(c))) {
+					if((!Character.isLetter(c)) && (!Character.isDigit(c))) {
 						isFullNameAlphanumeric = false;
 					}
 				}
@@ -192,6 +202,12 @@ public class UserHandler {
 				else if (validUserName == false) {
 					JOptionPane.showMessageDialog(null, "Not a valid UserName, no spaces allowed");
 				}
+				
+				
+				//Checks if the full name has spaces
+				else if (validFullName == false) {
+					JOptionPane.showMessageDialog(null, "Not a valid Name, no spaces allowed");
+				}
 
 				//Checks if the 2 password fields are the same
 				else if (!(Arrays.equals(txtPassword.getPassword(), txtConfirmPassword.getPassword()))) {
@@ -202,6 +218,7 @@ public class UserHandler {
 				
 				//checks if the fields is alphanumeric
 				else if (!(isFullNameAlphanumeric && isPasswordAlphanumeric && isUserNameAlphanumeric)) {
+					
 
 					JOptionPane.showMessageDialog(null, "Fields must be alphaNumerical");
 

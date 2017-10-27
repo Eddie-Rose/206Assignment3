@@ -82,35 +82,45 @@ public class HelpPanel {
 	String c1 = "<html><div style='text-align: center;'>The custom math section is responsible for representing all the custom sets of questions. In this menu you can either play or delete a pre exisiting set or you can create your very own set.</div></html>";
 	String c2 = "<html><div style='text-align: center;'>When creating your own set there are some conditions that must be followed. These conditons are the name of the set must have less than 11 characters and the characters used must be alphanumerical </div></html>";
 	String c3 = "<html><div style='text-align: center;'>When creating your own questions you will see 2 text boxes which are editable, you will only be allowed too input digits and the character limit is 2. You must click 1 operation. When you press next the appplication will check if your question is a suitable one or else it will output an error message. </div></html>";
-	String c4 = "<html><div style='text-align: center;'>If you exit before completeing all 10 questions, an option frame will pop up saking you if you want to delete your custom set or save it. If you save it the application will randomly generate 2 extra  </div></html>";
-	
+	String c4 = "<html><div style='text-align: center;'>If you exit before completeing all 10 questions, an option frame will pop up asking you if you want to delete your custom set or save it. If you save it the application will randomly generate 2 extra  </div></html>";
+	String c5 = "<html><div style='text-align: center;'>When you play your custom set, your set will be randomised so you will not be asked questions in the same order in which you implemented them </div></html>";
+
 	
 	//String represents the help texts in the "User" part of the help frame
-	String u1 = null;
-	
+	String u1 = "<html><div style='text-align: center;'> The user implementation is found in the menu of the application with this you will be able to log in or create a user, if you play the game without logging in, your name in the score board will be \"anonymous\" </div></html>";
+	String u2 = "<html><div style='text-align: center;'> When sigining up, you will be prompted to fill in 4 fields, your display name, username, password and the confirm password field. These fields must only contain alphaNumeric characters  </div></html>";
+	String u3 = "<html><div style='text-align: center;'> Upon logging in, a welcoming message will be shown with your given name in the bottom left hand corner, now whenever you complete a level it will be recorded in the statistics frame</div></html>";
+
 	
 	//String representing the help texts in the "recording" part of the help frame
-	String r1 = null;
+	String r1 = "<html><div style='text-align: center;'> When you hit the record button, most of the buttons will be disabled and the timer will start to fill up. The timer represents how much time you have to pronounce the number </div></html>";
+	String r2 = "<html><div style='text-align: center;'> When the record button has finished, you will see the result for this question. If you get it correct you can move on to the next question, but if you get it wrong or no recording was hear you will be given 1 more chance to get it right. You are also given the chance to review your recording  </div></html>";
+
 	
+	
+	//
 	String[] practiceLabel = {p1, p2, p3, p4, p5, p6, p7};
 	String[] mathLabel = {m1, m2, m3, m4, m5 };
 	String[] statisticLabel = {s1};
-	String[] customLabel = {c1};
-	String[] userLabel = {u1};
-	String[] recordingLabel = {r1};
+	String[] customLabel = {c1, c2, c3, c4, c5};
+	String[] userLabel = {u1, u2, u3};
+	String[] recordingLabel = {r1, r2};
 
 
 	private int imageNumber = 1;
 	private int totalPages = 0;
-	private String beginnerURL = "./206Assignment3Images/Beginner/";
-	private String advanceURL = "./206Assignment3Images/Advanced/";
+	private String practiceURL = "./206Assignment3Images/Practice/";
+	private String mathURL = "./206Assignment3Images/Math/";
 	private String statisticURL = "./206Assignment3Images/Statistic/";
-	private String[] practiceImages = {beginnerURL+"1.png", beginnerURL+"2.png", beginnerURL+"3.png", beginnerURL+"4.png", beginnerURL+"5.png", beginnerURL+"6.png", beginnerURL+"6.png"};
-	private String[] mathImages = {advanceURL+"1.png", advanceURL+"2.png", advanceURL+"3.png", advanceURL+"4.png", advanceURL+"5.png"};
+	private String UserURL = "./206Assignment3Images/User/";
+	private String customURL = "./206Assignment3Images/Custom/";
+	private String recordingURL = "./206Assignment3Images/Recording/";
+	private String[] practiceImages = {practiceURL+"1.png", practiceURL+"2.png", practiceURL+"3.png", practiceURL+"4.png", practiceURL+"5.png", practiceURL+"6.png", practiceURL+"7.png"};
+	private String[] mathImages = {mathURL+"1.png", mathURL+"2.png", mathURL+"3.png", mathURL+"4.png", mathURL+"5.png"};
 	private String[] statisticImages = {statisticURL+"1.png"};
-	private String[] customImages = {statisticURL+"1.png"};
-	private String[] userImages = {statisticURL+"1.png"};
-	private String[] recordingImages = {statisticURL+"1.png"};
+	private String[] customImages = {customURL+"1.png", customURL+"2.png", customURL+"3.png", customURL+"4.png", customURL+"5.png"};
+	private String[] userImages = {UserURL+"1.png", UserURL+"2.png", UserURL+"3.png"};
+	private String[] recordingImages = {recordingURL+"1.png", recordingURL+"2.png"};
 	
 
 	private String state = "";
@@ -138,10 +148,12 @@ public class HelpPanel {
 		}
 	}
 
+	
+	//Sets up the help frame
 	private HelpPanel() {
 
 
-
+		//Sets up the main components
 		helpFrame.setTitle("Help");
 		helpFrame.setResizable(false);
 		helpFrame.setBounds(100, 100, 700, 400);
@@ -150,20 +162,21 @@ public class HelpPanel {
 		helpFrame.getContentPane().setLayout(null);
 
 
-
+		//Sets the label of the title
 		lblHelp.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHelp.setFont(new Font("DejaVu Sans", Font.BOLD, 50));
 		lblHelp.setBounds(170, 05, 335, 70);
 		helpFrame.getContentPane().add(lblHelp);
 
 
-
+		//Sets the introductory label
 		introductoryLabel.setBounds(205, 100, 271, 17);
 		introductoryLabel.setFont(new Font(null, Font.PLAIN, 15));
 		introductoryLabel.setText("Select which field you need help with");
 		helpFrame.getContentPane().add(introductoryLabel);
 
-
+		
+		//Sets all the buttons bounds/ sizes
 		btnPractice.setBounds(180, 130, 150, 40);
 		btnMaths.setBounds(180, 175, 150, 40);
 		btnScoreBoard.setBounds(180, 225, 150, 40);
@@ -171,8 +184,10 @@ public class HelpPanel {
 		btnCustom.setBounds(355, 130, 150, 40);
 		btnUser.setBounds(355, 175, 150, 40 );
 		btnRecording.setBounds(355, 225, 150, 40);
-
-
+		
+		
+		
+		//Adds all the components into the content pane
 		helpFrame.getContentPane().add(btnCustom);
 		helpFrame.getContentPane().add(btnUser);
 		helpFrame.getContentPane().add(btnPractice);
@@ -181,13 +196,12 @@ public class HelpPanel {
 		helpFrame.getContentPane().add(btnMainMenu);
 		helpFrame.getContentPane().add(btnRecording);
 
-
+		
+		//Sets the other bounds 
 		back.setBounds(50, 150, 70, 30);
 		next.setBounds(570, 150, 70, 30);
 		helpMenu.setBounds(275, 350, 120, 20);
 		thumb.setBounds(165, 70, 350, 170);
-		thumb.setOpaque(true);
-		thumb.setBackground(Color.BLACK);
 		helpTxt.setBounds(20, 260, 650, 70);
 		helpTxt.setOpaque(true);
 		helpTxt.setBackground(Color.WHITE);
@@ -197,14 +211,17 @@ public class HelpPanel {
 		page.setBounds(600, 20, 100, 20);
 
 
-
+		
+		//Adds the other labels and buttons to the content pane
 		helpFrame.getContentPane().add(page);
 		helpFrame.getContentPane().add(thumb);
 		helpFrame.getContentPane().add(next);
 		helpFrame.getContentPane().add(back);
 		helpFrame.getContentPane().add(helpMenu);
 		helpFrame.getContentPane().add(helpTxt);
-
+		
+		
+		//Initially set some of the buttons and labels to be false
 		thumb.setVisible(false);
 		page.setVisible(false);
 		next.setVisible(false);
@@ -217,7 +234,7 @@ public class HelpPanel {
 
 
 
-
+		//Adds all the button listeners
 		btnPractice.addActionListener(new ButtonPracticeListener());
 		btnRecording.addActionListener(new ButtonRecordingListener());
 		btnMaths.addActionListener(new ButtonMathListener());
@@ -230,12 +247,14 @@ public class HelpPanel {
 		back.addActionListener(new ButtonBackListener());
 
 
-
+		
+		//Set the frame to be visible
 		helpFrame.setVisible(true);
 
 
 	}
-
+	
+	//Sets the next button , if we are at the last image, set the next button to be disabled
 	private class ButtonNextListener implements ActionListener {
 		@Override
 		public void actionPerformed (ActionEvent e) {
@@ -254,11 +273,21 @@ public class HelpPanel {
 			else if (state.equals("scoreBoard")){
 				scoreBoardHelpInitialisation();
 			}
+			else if (state.equals("custom")){
+				customHelpFrameInitialisation();
+			}
+			else if (state.equals("user")){
+				userHelpFrameInitialisation();
+			}
+			else if (state.equals("recording")){
+				recordingHelpFrameInitialisation();
+			}
 
 
 		}
 	}
-
+	
+	//Sets the back button, if we are at the first image, set the back button to be disabled
 	private class ButtonBackListener implements ActionListener {
 		@Override
 		public void actionPerformed (ActionEvent e) {
@@ -280,11 +309,21 @@ public class HelpPanel {
 			else if (state.equals("scoreBoard")){
 				scoreBoardHelpInitialisation();
 			}
+			else if (state.equals("custom")){
+				customHelpFrameInitialisation();
+			}
+			else if (state.equals("user")){
+				userHelpFrameInitialisation();
+			}
+			else if (state.equals("recording")){
+				recordingHelpFrameInitialisation();
+			}
 
 
 		}
 	}
 
+	//sets up the button so that it will reset the main menu
 	private class ButtonHelpMenuListener implements ActionListener {
 		@Override
 		public void actionPerformed (ActionEvent e) {
@@ -293,7 +332,8 @@ public class HelpPanel {
 			setHelpMenu();
 		}
 	}
-
+	
+	//Sets up the button so that it will dispose of the frame and return to the main menu
 	private class ButtonMainMenuListener implements ActionListener {
 
 		@Override
@@ -304,7 +344,8 @@ public class HelpPanel {
 		}
 	}
 
-
+	
+	//Sets up the custom listener so it will bring up the custom help 
 	private class ButtonCustomListener implements ActionListener {
 
 		@Override
@@ -318,7 +359,7 @@ public class HelpPanel {
 	}
 
 
-
+	//Sets up the user listener so it will bring up the user help 
 	private class ButtonUserListener implements ActionListener {
 
 		@Override
@@ -332,6 +373,7 @@ public class HelpPanel {
 
 
 	}
+	//Sets up the practice listener so it will bring up the practice help 
 	private class ButtonPracticeListener implements ActionListener {
 
 		@Override
@@ -345,14 +387,14 @@ public class HelpPanel {
 
 	}
 
-	
+	//Sets up the recording listener so it will bring up the recording help 
 	private class ButtonRecordingListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			setScreen();
-			practiceHelpFrameInitialisation();
-			state = "practice";
+			recordingHelpFrameInitialisation();
+			state = "recording";
 
 		}
 
@@ -360,6 +402,7 @@ public class HelpPanel {
 	}
 	
 	
+	//Sets up the math listener so it will bring up the math help 
 	private class ButtonMathListener implements ActionListener {
 
 		@Override
@@ -372,7 +415,8 @@ public class HelpPanel {
 
 
 	}
-
+	
+	//Sets up the scoreboard listener so it will bring up the scoreboard help 
 	private class ButtonScoreBoardListener implements ActionListener {
 
 		@Override
@@ -385,7 +429,8 @@ public class HelpPanel {
 
 
 	}
-
+	
+	//Sets up the initial menu
 	private void setHelpMenu() {
 		introductoryLabel.setVisible(true);
 		btnMainMenu.setVisible(true);
@@ -406,7 +451,9 @@ public class HelpPanel {
 		helpTxt.setVisible(false);
 		page.setVisible(false);
 	}
-
+	
+	
+	//Sets up the help dcreen with an image pane, 2 buttons to indicate next or back and a return to menu button
 	private void setScreen() {
 		introductoryLabel.setVisible(false);
 		btnMainMenu.setVisible(false);
@@ -432,7 +479,8 @@ public class HelpPanel {
 		helpMenu.setVisible(true);
 		helpTxt.setVisible(true);
 	}
-
+	
+	//practice initialisation 
 	private void practiceHelpFrameInitialisation() {
 
 
@@ -446,7 +494,8 @@ public class HelpPanel {
 
 
 	}
-
+	
+	//math initialisation 
 	private void mathHelpFrameInitialisation() {
 		totalPages = 5;
 		page.setText("Page: " + imageNumber + "/" + totalPages);
@@ -458,6 +507,7 @@ public class HelpPanel {
 
 	}
 
+	//scoreboard initialisation 
 	private void scoreBoardHelpInitialisation() {
 		totalPages = 1;
 		page.setText("Page: " + imageNumber + "/" + totalPages);
@@ -473,10 +523,10 @@ public class HelpPanel {
 	
 	//Initialises the image and the help text of the User help frame
 	private void userHelpFrameInitialisation() {
-		totalPages = 1;
+		totalPages = 3;
 		page.setText("Page: " + imageNumber + "/" + totalPages);
 		helpTxt.setText(userLabel[imageNumber-1]);
-		next.setEnabled(false);
+		
 
 		imageLoader = new SwingLoader(userImages[imageNumber-1]);
 		imageLoader.execute();
@@ -487,10 +537,10 @@ public class HelpPanel {
 	
 	//Initialises the image and the help text of the custom help frame
 	private void customHelpFrameInitialisation() {
-		totalPages = 1;
+		totalPages = 5;
 		page.setText("Page: " + imageNumber + "/" + totalPages);
 		helpTxt.setText(customLabel[imageNumber-1]);
-		next.setEnabled(false);
+		
 
 		imageLoader = new SwingLoader(customImages[imageNumber-1]);
 		imageLoader.execute();
@@ -501,10 +551,10 @@ public class HelpPanel {
 	
 	//Initialises the image and the help text of the recording help frame
 		private void recordingHelpFrameInitialisation() {
-			totalPages = 1;
+			totalPages = 2;
 			page.setText("Page: " + imageNumber + "/" + totalPages);
 			helpTxt.setText(recordingLabel[imageNumber-1]);
-			next.setEnabled(false);
+			
 
 			imageLoader = new SwingLoader(recordingImages[imageNumber-1]);
 			imageLoader.execute();
@@ -524,8 +574,8 @@ public class HelpPanel {
 
 		@Override
 		protected Void doInBackground() throws Exception {
-			//ImageIcon icon = new ImageIcon(name); 
-			//thumb.setIcon(icon);
+			ImageIcon icon = new ImageIcon(name); 
+			thumb.setIcon(icon);
 			return null;
 		}
 
