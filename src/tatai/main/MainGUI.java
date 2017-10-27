@@ -302,8 +302,8 @@ public class MainGUI extends JFrame {
 		
 		usernameInput.setBounds(22, 663,275, 28);
 		passwordInput.setBounds(330, 663, 275, 28);
-		btnLogIn.setBounds(770, 663, 137, 35);
-		btnSignUp.setBounds(924, 663, 137, 35);
+		btnLogIn.setBounds(620, 660, 137, 35);
+		btnSignUp.setBounds(770, 660, 137, 35);
 		
 		
 

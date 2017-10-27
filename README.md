@@ -12,7 +12,8 @@ Included in this ZIP file:
 	3) A 'Src' folder which includes the source code for the application
 
 	4) A 'MaoriNumbers' folder which includes a script file called 'Go.sh' run by our application
-	   'MaoriNumbers' folder has been taken from the Virtual Box and provided it with our script to make       	      execution easier
+	  'MaoriNumbers' folder has been taken from the Virtual Box and provided it with our script to make
+    	   execution easier
 	
 	5)'206Assignment3Images' folder which contains necessary images
 	

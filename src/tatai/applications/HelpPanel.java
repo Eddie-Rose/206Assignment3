@@ -75,8 +75,9 @@ public class HelpPanel {
 	
 	
 	//String s represents the help texts in the "statistic" part of the help frame
-	String s1 = "<html><div style='text-align: center;'>Shows your saved scores for beginner and advanced level. You have the option to clear the field.</div></html>";
-	
+	String s1 = "<html><div style='text-align: center;'>When you go into the statistics page you will first see all your personal statistics, if you are not logged in then your info will be stored under the name \"anonymous\". You also have the option to clear your personal statsitics</div></html>";
+	String s2 = "<html><div style='text-align: center;'>The leader board sorts the statistics by score. You can not clear your data when in leader board since you see everyone's statistics </div></html>";
+
 	
 	//String c represents the help texts of the "custom" part of the help frame 
 	String c1 = "<html><div style='text-align: center;'>The custom math section is responsible for representing all the custom sets of questions. In this menu you can either play or delete a pre exisiting set or you can create your very own set.</div></html>";
@@ -101,7 +102,7 @@ public class HelpPanel {
 	//
 	String[] practiceLabel = {p1, p2, p3, p4, p5, p6, p7};
 	String[] mathLabel = {m1, m2, m3, m4, m5 };
-	String[] statisticLabel = {s1};
+	String[] statisticLabel = {s1, s2};
 	String[] customLabel = {c1, c2, c3, c4, c5};
 	String[] userLabel = {u1, u2, u3};
 	String[] recordingLabel = {r1, r2};
@@ -117,7 +118,7 @@ public class HelpPanel {
 	private String recordingURL = "./206Assignment3Images/Recording/";
 	private String[] practiceImages = {practiceURL+"1.png", practiceURL+"2.png", practiceURL+"3.png", practiceURL+"4.png", practiceURL+"5.png", practiceURL+"6.png", practiceURL+"7.png"};
 	private String[] mathImages = {mathURL+"1.png", mathURL+"2.png", mathURL+"3.png", mathURL+"4.png", mathURL+"5.png"};
-	private String[] statisticImages = {statisticURL+"1.png"};
+	private String[] statisticImages = {statisticURL+"1.png", statisticURL+"2.png"};
 	private String[] customImages = {customURL+"1.png", customURL+"2.png", customURL+"3.png", customURL+"4.png", customURL+"5.png"};
 	private String[] userImages = {UserURL+"1.png", UserURL+"2.png", UserURL+"3.png"};
 	private String[] recordingImages = {recordingURL+"1.png", recordingURL+"2.png"};
@@ -453,7 +454,7 @@ public class HelpPanel {
 	}
 	
 	
-	//Sets up the help dcreen with an image pane, 2 buttons to indicate next or back and a return to menu button
+	//Sets up the help screen with an image pane, 2 buttons to indicate next or back and a return to menu button
 	private void setScreen() {
 		introductoryLabel.setVisible(false);
 		btnMainMenu.setVisible(false);
@@ -509,10 +510,10 @@ public class HelpPanel {
 
 	//scoreboard initialisation 
 	private void scoreBoardHelpInitialisation() {
-		totalPages = 1;
+		totalPages = 2;
 		page.setText("Page: " + imageNumber + "/" + totalPages);
 		helpTxt.setText(statisticLabel[imageNumber-1]);
-		next.setEnabled(false);
+	
 
 		imageLoader = new SwingLoader(statisticImages[imageNumber-1]);
 		imageLoader.execute();
