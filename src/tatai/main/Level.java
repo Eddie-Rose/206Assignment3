@@ -179,7 +179,7 @@ public abstract class Level extends JFrame {
 		
 		
 		//Gets the current highScore of a level 
-		String high = StatsPanel.getHighScore();
+		String high = StatsPanel.getHighScore(name);
 		highScore = Integer.parseInt(high.split("/")[0]);
 
 		

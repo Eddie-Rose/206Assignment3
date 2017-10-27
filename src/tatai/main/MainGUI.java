@@ -277,7 +277,6 @@ public class MainGUI extends JFrame {
 			btnDeleteUser.setVisible(true);
 			btnLogOut.setVisible(true);
 			
-			System.out.println(displayName);
 			lblUsernameWelcome.setText("Welcome " + displayName);
 			lblUsernameWelcome.setVisible(true);
 
