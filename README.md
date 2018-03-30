@@ -32,7 +32,9 @@ Excecuting instructions:
 
 
 	1) Open the terminal in the directory where you unzipped the zipped file.
-	2) Type the following commands:
+	2)Ensure you have java installed on your linux machine, if not run this command:
+		*sudo apt install openjdk-8-jre
+	3) Type the following commands:
 		i)chmod +x run.sh
 		ii)./run.sh
 
